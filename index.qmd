@@ -1,5 +1,5 @@
 ---
-title: "ISSS608-demo"
+title: "ISSS608-Coursework"
 ---
 
 welcome to **ISSS608 Visual Analytics and Applications**.
