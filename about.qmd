@@ -1,0 +1,38 @@
+---
+title: "About"
+author: "Your Name"
+date: "January 2025"
+format: html
+---
+
+# About Me
+
+Hello! My name is **Your Name**, and I am currently pursuing a master's degree in **Business Data Analytics** at **Singapore Management University (SMU)**. I am passionate about data visualization, analytics, and leveraging insights for real-world applications.
+
+This page serves as a repository for my coursework and projects related to **Visual Analytics and Applications**. It highlights my skills, experience, and achievements, which I aim to use to contribute to a data-driven organization.
+
+## My Background
+
+-   **Undergraduate Degree**: Accounting
+-   **Skills**: Data analysis, web scraping, data visualization, SQL, Python, SAS, and Tableau.
+-   **Experience**:
+    -   Conducted sentiment analysis and comparative financial analysis.
+    -   Presented group projects with a focus on post-merger financial synergy.
+    -   Earned second place in academic evaluations for group work.
+
+## Visual Analytics and Applications
+
+I am using this page to document my journey in the **Visual Analytics and Applications** course, where I explore advanced data visualization techniques and their applications in business decision-making. Here, you will find:
+
+1.  **Assignments**: In-depth analysis and visualization tasks.
+2.  **Projects**: Group work and individual contributions.
+3.  **Insights**: Key takeaways and lessons learned during the course.
+
+## Contact Me
+
+Feel free to connect with me on LinkedIn or via email for further collaboration or opportunities:
+
+-   **Email**: your.email\@example.com
+-   **LinkedIn**: [Your LinkedIn Profile](https://www.linkedin.com/in/yourprofile)
+
+Thank you for visiting my page!
