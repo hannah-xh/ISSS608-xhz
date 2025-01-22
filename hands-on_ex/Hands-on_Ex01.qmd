@@ -91,7 +91,9 @@ Before we getting started using ggplot2, it is important for us to understand th
 
 Grammar of Graphics is a general scheme for data visualization which breaks up graphs into semantic components such as scales and layers. It was introduced by Leland Wilkinson (1999) **Grammar of Graphics**, Springer. The grammar of graphics is an answer to a question:
 
+::: {style="font-size: 1.25em; text-align: center"}
 What is a statistical graphic?
+:::
 
 In the nutshell, Grammar of Graphics defines the rules of structuring mathematical and aesthetic elements into a meaningful graph.
 
