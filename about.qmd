@@ -1,38 +1,52 @@
 ---
-title: "About"
-author: "Your Name"
-date: "January 2025"
+title: "About Me"
+author: "xh.zhang"
+date-modified: "last-modified"
+execute:
+  echo: true
+  eval: true
+  warning: false
+  freeze: true
 format: html
 ---
 
-# About Me
+# Hello, I'm Xiaohan Zhang! 👋
 
-Hello! My name is **Your Name**, and I am currently pursuing a master's degree in **Business Data Analytics** at **Singapore Management University (SMU)**. I am passionate about data visualization, analytics, and leveraging insights for real-world applications.
+I'm an aspiring data analytics professional currently pursuing my Master of IT in Business (Analytics Track) at Singapore Management University. With a background in Management from Beijing Normal University, I bridge the gap between business insights and technical solutions.
 
-This page serves as a repository for my coursework and projects related to **Visual Analytics and Applications**. It highlights my skills, experience, and achievements, which I aim to use to contribute to a data-driven organization.
+## My Journey
 
-## My Background
+My analytics journey started during my undergraduate years, where I discovered my passion for using data to solve real-world problems. This led me to participate in the Mathematical Contest in Modeling, where my team and I developed a predictive model for drought-resistant agriculture, earning recognition as Meritorious Winners (top 7% globally).
 
--   **Undergraduate Degree**: Accounting
--   **Skills**: Data analysis, web scraping, data visualization, SQL, Python, SAS, and Tableau.
--   **Experience**:
-    -   Conducted sentiment analysis and comparative financial analysis.
-    -   Presented group projects with a focus on post-merger financial synergy.
-    -   Earned second place in academic evaluations for group work.
+## What I Do
 
-## Visual Analytics and Applications
+I'm developing my skills in: - Data Analysis and Visualization - Predictive Modeling - Machine Learning Applications - Business Intelligence - Query Optimization
 
-I am using this page to document my journey in the **Visual Analytics and Applications** course, where I explore advanced data visualization techniques and their applications in business decision-making. Here, you will find:
+## Recent Projects
 
-1.  **Assignments**: In-depth analysis and visualization tasks.
-2.  **Projects**: Group work and individual contributions.
-3.  **Insights**: Key takeaways and lessons learned during the course.
+I've worked on diverse projects that demonstrate my analytical capabilities:
 
-## Contact Me
+-   Conducted comprehensive analysis of Singapore's HDB resale market, studying price trends during and after COVID-19
+-   Developed market segmentation strategies for an international retailer in the Philippines
+-   Created an innovative Obesity Risk Prediction model for South American health data
+-   Optimized database query performance, achieving 50% faster execution times
 
-Feel free to connect with me on LinkedIn or via email for further collaboration or opportunities:
+## Technical Expertise
 
--   **Email**: your.email\@example.com
--   **LinkedIn**: [Your LinkedIn Profile](https://www.linkedin.com/in/yourprofile)
+I'm continuously learning and developing my skills in: - Programming: Python, R, MATLAB - Database: MySQL, SQL - Analytics Tools: SAS Viya, SPSS, Tableau - Business Tools: Excel (Advanced)
 
-Thank you for visiting my page!
+## Beyond the Numbers
+
+I believe in using technology for social good. I've volunteered at schools for special needs children, and as a debate team leader, I've coordinated events involving multiple colleges and over 100 participants. This experience has taught me the importance of clear communication and leadership in bringing people together.
+
+## Looking Forward
+
+I'm currently seeking opportunities to apply my analytical skills in real-world business scenarios. With work authorization in both Singapore (for internships) and China, I'm ready to take on new challenges and contribute to innovative projects.
+
+## Let's Connect!
+
+Feel free to reach out to me at xh.zhang.2024\@mitb.smu.edu.sg or connect with me on [LinkedIn](linkedin.com/in/guagua-xiaohan-zhang). I'm always excited to discuss data analytics, technology, and potential collaborations!
+
+------------------------------------------------------------------------
+
+*"Learning to tell stories through data, one analysis at a time."*

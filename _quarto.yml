@@ -1,25 +1,34 @@
 project:
   type: website
 website:
-  title: "ISSS608-Coursework"
+  title: "Hannah's visual analytics diary"
   navbar:
     left:
       - text: "Hands-on Exercise"
         menu:
-          - text: "Hands-on Exercise 0"
+          - text: "A Rough First Attempt"
             href: hands-on_ex/Hands-on_Ex00.html
-          - text: "Hands-on Exercise 1"
+          - text: "1 A Layered Grammar of Graphics: ggplot2 methods"
             href: hands-on_ex/Hands-on_Ex01.html
-          - text: "Hands-on Exercise 2"
+          - text: "2 Beyond ggplot2 Fundamentals"
             href: hands-on_ex/Hands-on_Ex02.html
-      - text: "In-class Exercise"
+          - text: "3a Programming Interactive Data Visualisation with R"
+            href: hands-on_ex/Hands-on_Ex03a.html
+          - text: "3b Programming Animated Statistical Graphics with R"
+            href: hands-on_ex/Hands-on_Ex03b.html
+      - text: "In-Class Exercise"
         menu:
-          - text: "In-class Exercise 1"
+          - text: "to be continue"
             href: In-Class_Ex1.html
       - text: "Take-home Exercise"
         menu:
-          - text: "Take-home Exercise 1"
+          - text: "to be continue"
             href: Take-home_Ex1.html
+      - text: "Team Project"
+        menu:
+          - text: "to be continue"
+            href: Take-home_Ex1.html
+            
     right:
       - href: index.qmd
         text: Home

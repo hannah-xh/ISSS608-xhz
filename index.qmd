@@ -1,7 +1,7 @@
 ---
-title: "ISSS608-Coursework"
+title: "Hannah's visual analytics diary"
 ---
 
-welcome to **ISSS608 Visual Analytics and Applications**.
+Welcome to Hannah's visual analytics diary, this is my coursework for ISSS608 Visual Analytics and Applications in SMU.
 
-![](images/P1001417.JPG)
+![](images/微信图片_20250130232703.png)
