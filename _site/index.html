@@ -30,6 +30,8 @@ ul.task-list li input[type="checkbox"] {
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
+<script src="site_libs/quarto-listing/list.min.js"></script>
+<script src="site_libs/quarto-listing/quarto-listing.js"></script>
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -66,7 +68,65 @@ ul.task-list li input[type="checkbox"] {
     "search-label": "Search"
   }
 }</script>
+<script>
 
+  window.document.addEventListener("DOMContentLoaded", function (_event) {
+    const listingTargetEl = window.document.querySelector('#listing-listing .list');
+    if (!listingTargetEl) {
+      // No listing discovered, do not attach.
+      return; 
+    }
+
+    const options = {
+      valueNames: ['listing-title','listing-author','listing-image','listing-description',{ data: ['index'] },{ data: ['categories'] },{ data: ['listing-date-sort'] },{ data: ['listing-file-modified-sort'] }],
+      
+      searchColumns: ["listing-title","listing-author","listing-image","listing-description"],
+    };
+
+    window['quarto-listings'] = window['quarto-listings'] || {};
+    window['quarto-listings']['listing-listing'] = new List('listing-listing', options);
+
+    if (window['quarto-listing-loaded']) {
+      window['quarto-listing-loaded']();
+    }
+  });
+
+  window.addEventListener('hashchange',() => {
+    if (window['quarto-listing-loaded']) {
+      window['quarto-listing-loaded']();
+    }
+  })
+  </script>
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
 
 <link rel="stylesheet" href="styles.css">
 </head>
@@ -94,23 +154,23 @@ ul.task-list li input[type="checkbox"] {
     </a>
     <ul class="dropdown-menu" aria-labelledby="nav-menu-hands-on-exercise">    
         <li>
-    <a class="dropdown-item" href="./hands-on_ex/Hands-on_Ex00.html">
+    <a class="dropdown-item" href="./Hands-on_Ex/Hands-on_Ex00.html">
  <span class="dropdown-text">A Rough First Attempt</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="./hands-on_ex/Hands-on_Ex01.html">
+    <a class="dropdown-item" href="./Hands-on_Ex/Hands-on_Ex01.html">
  <span class="dropdown-text">1 A Layered Grammar of Graphics: ggplot2 methods</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="./hands-on_ex/Hands-on_Ex02.html">
+    <a class="dropdown-item" href="./Hands-on_Ex/Hands-on_Ex02.html">
  <span class="dropdown-text">2 Beyond ggplot2 Fundamentals</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="./hands-on_ex/Hands-on_Ex03a.html">
+    <a class="dropdown-item" href="./Hands-on_Ex/Hands-on_Ex03a.html">
  <span class="dropdown-text">3a Programming Interactive Data Visualisation with R</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="./hands-on_ex/Hands-on_Ex03b.html">
+    <a class="dropdown-item" href="./Hands-on_Ex/Hands-on_Ex03b.html">
  <span class="dropdown-text">3b Programming Animated Statistical Graphics with R</span></a>
   </li>  
     </ul>
@@ -132,8 +192,8 @@ ul.task-list li input[type="checkbox"] {
     </a>
     <ul class="dropdown-menu" aria-labelledby="nav-menu-take-home-exercise">    
         <li>
-    <a class="dropdown-item" href="./Take-home_Ex1.html">
- <span class="dropdown-text">to be continue</span></a>
+    <a class="dropdown-item" href="./Take-home_Ex/Take-home_Ex1/Take-home_Ex1.html">
+ <span class="dropdown-text">Take-home Exercise 1</span></a>
   </li>  
     </ul>
   </li>
@@ -199,7 +259,114 @@ ul.task-list li input[type="checkbox"] {
 
 
 
-</main> <!-- /main -->
+
+<div class="quarto-listing quarto-listing-container-grid" id="listing-listing">
+<div class="list grid quarto-listing-cols-3">
+<div class="g-col-1" data-index="0" data-listing-file-modified-sort="1737530203823" data-listing-reading-time-sort="2" data-listing-word-count-sort="295">
+<a href="./Hands-on_Ex/Hands-on_Ex00.html" class="quarto-grid-link">
+<div class="quarto-grid-item card h-100 card-left">
+<div class="listing-item-img-placeholder card-img-top" style="height: 150px;">&nbsp;</div>
+<div class="card-body post-contents">
+<h5 class="no-anchor card-title listing-title">
+Hands-on Exercise 00: Working with tidyverse
+</h5>
+<div class="card-text listing-description">
+Load tidyverse onto r environment by using the code chunk below.
+</div>
+<div class="card-attribution card-text-small start">
+<div class="listing-author">
+xh.zhang
+</div>
+</div>
+</div>
+</div>
+</a>
+</div>
+<div class="g-col-1" data-index="1" data-listing-file-modified-sort="1738247917403" data-listing-reading-time-sort="12" data-listing-word-count-sort="2337">
+<a href="./Hands-on_Ex/Hands-on_Ex03b.html" class="quarto-grid-link">
+<div class="quarto-grid-item card h-100 card-left">
+<p class="card-img-top"><img src="Hands-on_Ex\Hands-on_Ex03b_files\figure-html\unnamed-chunk-5-1.png" style="height: 150px;"  class="thumbnail-image card-img"/></p>
+<div class="card-body post-contents">
+<h5 class="no-anchor card-title listing-title">
+3b Programming Animated Statistical Graphics with R
+</h5>
+<div class="card-text listing-description">
+When telling a visually-driven data story, animated graphics tends to attract the interest of the audience and make deeper impression than static graphics. In this hands-on…<strong></strong><strong></strong><strong></strong><strong></strong>
+</div>
+<div class="card-attribution card-text-small start">
+<div class="listing-author">
+xh.zhang
+</div>
+</div>
+</div>
+</div>
+</a>
+</div>
+<div class="g-col-1" data-index="2" data-listing-file-modified-sort="1738246082462" data-listing-reading-time-sort="37" data-listing-word-count-sort="7303">
+<a href="./Hands-on_Ex/Hands-on_Ex03a.html" class="quarto-grid-link">
+<div class="quarto-grid-item card h-100 card-left">
+<div class="listing-item-img-placeholder card-img-top" style="height: 150px;">&nbsp;</div>
+<div class="card-body post-contents">
+<h5 class="no-anchor card-title listing-title">
+3a Programming Interactive Data Visualisation with R
+</h5>
+<div class="card-text listing-description">
+In this hands-on exercise, you will learn how to create interactive data visualisation by using functions provided by <strong>ggiraph</strong> and <strong>plotlyr</strong> packages.
+</div>
+<div class="card-attribution card-text-small start">
+<div class="listing-author">
+xh.zhang
+</div>
+</div>
+</div>
+</div>
+</a>
+</div>
+<div class="g-col-1" data-index="3" data-listing-file-modified-sort="1737557750870" data-listing-reading-time-sort="11" data-listing-word-count-sort="2012">
+<a href="./Hands-on_Ex/Hands-on_Ex02.html" class="quarto-grid-link">
+<div class="quarto-grid-item card h-100 card-left">
+<div class="listing-item-img-placeholder card-img-top" style="height: 150px;">&nbsp;</div>
+<div class="card-body post-contents">
+<h5 class="no-anchor card-title listing-title">
+2 Beyond ggplot2 Fundamentals
+</h5>
+<div class="card-text listing-description">
+In this chapter, you will be introduced to several ggplot2 extensions for creating more elegant and effective statistical graphics. By the end of this exercise, you will be…
+</div>
+<div class="card-attribution card-text-small start">
+<div class="listing-author">
+xh.zhang
+</div>
+</div>
+</div>
+</div>
+</a>
+</div>
+<div class="g-col-1" data-index="4" data-listing-file-modified-sort="1737531288534" data-listing-reading-time-sort="17" data-listing-word-count-sort="3231">
+<a href="./Hands-on_Ex/Hands-on_Ex01.html" class="quarto-grid-link">
+<div class="quarto-grid-item card h-100 card-left">
+<p class="card-img-top"><img src="Hands-on_Ex\Hands-on_Ex01_files\figure-html\unnamed-chunk-3-1.png" style="height: 150px;"  class="thumbnail-image card-img"/></p>
+<div class="card-body post-contents">
+<h5 class="no-anchor card-title listing-title">
+1 A Layered Grammar of Graphics: ggplot2 methods
+</h5>
+<div class="card-text listing-description">
+In this chapter, you will learn the basic principles and essential components of ggplot2. At the same time, you will gain hands-on experience on using these components to…
+</div>
+<div class="card-attribution card-text-small start">
+<div class="listing-author">
+xh.zhang
+</div>
+</div>
+</div>
+</div>
+</a>
+</div>
+</div>
+<div class="listing-no-matching d-none">
+No matching items
+</div>
+</div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {

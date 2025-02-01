@@ -7,23 +7,23 @@ website:
       - text: "Hands-on Exercise"
         menu:
           - text: "A Rough First Attempt"
-            href: hands-on_ex/Hands-on_Ex00.html
+            href: Hands-on_Ex/Hands-on_Ex00.html
           - text: "1 A Layered Grammar of Graphics: ggplot2 methods"
-            href: hands-on_ex/Hands-on_Ex01.html
+            href: Hands-on_Ex/Hands-on_Ex01.html
           - text: "2 Beyond ggplot2 Fundamentals"
-            href: hands-on_ex/Hands-on_Ex02.html
+            href: Hands-on_Ex/Hands-on_Ex02.html
           - text: "3a Programming Interactive Data Visualisation with R"
-            href: hands-on_ex/Hands-on_Ex03a.html
+            href: Hands-on_Ex/Hands-on_Ex03a.html
           - text: "3b Programming Animated Statistical Graphics with R"
-            href: hands-on_ex/Hands-on_Ex03b.html
+            href: Hands-on_Ex/Hands-on_Ex03b.html
       - text: "In-Class Exercise"
         menu:
           - text: "to be continue"
             href: In-Class_Ex1.html
       - text: "Take-home Exercise"
         menu:
-          - text: "to be continue"
-            href: Take-home_Ex1.html
+          - text: "Take-home Exercise 1"
+            href: Take-home_Ex/Take-home_Ex1/Take-home_Ex1.html
       - text: "Team Project"
         menu:
           - text: "to be continue"

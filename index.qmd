@@ -1,5 +1,13 @@
 ---
 title: "Hannah's visual analytics diary"
+listing:
+    contents:
+    - "Hands-on_Ex/*.qmd"
+    - "Take-home_Ex/*.qmd"
+    type: grid
+    sort:
+    - "date desc"
+    - "title desc"
 ---
 
 Welcome to Hannah's visual analytics diary, this is my coursework for ISSS608 Visual Analytics and Applications in SMU.
