@@ -293,6 +293,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
+<p><img src="images/clipboard-3675709045.png" class="img-fluid"></p>
 <section id="quick-look-of-the-structure" class="level2">
 <h2 class="anchored" data-anchor-id="quick-look-of-the-structure">Quick look of the structure</h2>
 <div class="tabset-margin-container"></div><div class="panel-tabset">
@@ -303,98 +304,68 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <div id="tabset-1-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-1-2-tab">
 <div class="cell" data-layout-align="default">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode default code-with-copy"><code class="sourceCode default"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>flowchart TD</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>    subgraph Process["Statistical Analysis Process"]</span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>        A[Data Analysis] --&gt; B[Model Building]</span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>        B --&gt; C[Model Diagnostics]</span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>        C --&gt; D{Issues Found?}</span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>        D --&gt;|Yes| E[Model Adjustment]</span>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode default code-with-copy"><code class="sourceCode default"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>graph TD;</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>    subgraph "Statistical Analysis Process"</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>        A["Data Analysis"] --&gt; B["Model Building"]</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>        B --&gt; C["Model Diagnostics"]</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>        C --&gt; D{"Issues Found?"}</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>        D -- Yes --&gt; E["Model Adjustment"]</span>
 <span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>        E --&gt; C</span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>        D --&gt;|No| F[Result Visualization]</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>        D -- No --&gt; F["Result Visualization"]</span>
 <span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>    end</span>
 <span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>    subgraph Tools["Tools Used"]</span>
-<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>        T1[ggstatsplot]</span>
-<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>        T2[R regression methods]</span>
-<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>        T3[performance package]</span>
-<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>        T4[parameters package]</span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>    subgraph "Tools Used"</span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>        T1["ggstatsplot"]</span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>        T2["R regression methods"]</span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>        T3["performance package"]</span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>        T4["parameters package"]</span>
 <span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>    end</span>
 <span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>    subgraph Steps["Detailed Steps"]</span>
-<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a>        S1["Statistical Tests:</span>
-<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a>        - t-tests</span>
-<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a>        - ANOVA</span>
-<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a>        - Bayes factor tests"]</span>
-<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a>        S2["Model Creation:</span>
-<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a>        - Regression model</span>
-<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a>        - Parameter estimation"]</span>
-<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a>        S3["Assumption Checks:</span>
-<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a>        - Multicollinearity</span>
-<span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a>        - Normality</span>
-<span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a>        - Homoscedasticity"]</span>
-<span id="cb1-30"><a href="#cb1-30" aria-hidden="true" tabindex="-1"></a>        S4["Visualization:</span>
-<span id="cb1-31"><a href="#cb1-31" aria-hidden="true" tabindex="-1"></a>        - Diagnostic plots</span>
-<span id="cb1-32"><a href="#cb1-32" aria-hidden="true" tabindex="-1"></a>        - Parameter estimates</span>
-<span id="cb1-33"><a href="#cb1-33" aria-hidden="true" tabindex="-1"></a>        - Statistical results"]</span>
-<span id="cb1-34"><a href="#cb1-34" aria-hidden="true" tabindex="-1"></a>    end</span>
-<span id="cb1-35"><a href="#cb1-35" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-36"><a href="#cb1-36" aria-hidden="true" tabindex="-1"></a>    A --&gt; S1</span>
-<span id="cb1-37"><a href="#cb1-37" aria-hidden="true" tabindex="-1"></a>    B --&gt; S2</span>
-<span id="cb1-38"><a href="#cb1-38" aria-hidden="true" tabindex="-1"></a>    C --&gt; S3</span>
-<span id="cb1-39"><a href="#cb1-39" aria-hidden="true" tabindex="-1"></a>    F --&gt; S4</span>
-<span id="cb1-40"><a href="#cb1-40" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-41"><a href="#cb1-41" aria-hidden="true" tabindex="-1"></a>    T1 -.-&gt; S1</span>
-<span id="cb1-42"><a href="#cb1-42" aria-hidden="true" tabindex="-1"></a>    T2 -.-&gt; S2</span>
-<span id="cb1-43"><a href="#cb1-43" aria-hidden="true" tabindex="-1"></a>    T3 -.-&gt; S3</span>
-<span id="cb1-44"><a href="#cb1-44" aria-hidden="true" tabindex="-1"></a>    T4 -.-&gt; S3</span>
-<span id="cb1-45"><a href="#cb1-45" aria-hidden="true" tabindex="-1"></a>    T1 -.-&gt; S4</span>
-<span id="cb1-46"><a href="#cb1-46" aria-hidden="true" tabindex="-1"></a>    T3 -.-&gt; S4</span>
-<span id="cb1-47"><a href="#cb1-47" aria-hidden="true" tabindex="-1"></a>    T4 -.-&gt; S4</span>
-<span id="cb1-48"><a href="#cb1-48" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-49"><a href="#cb1-49" aria-hidden="true" tabindex="-1"></a>    classDef process fill:#f5f5f5,stroke:#333,stroke-width:2px;</span>
-<span id="cb1-50"><a href="#cb1-50" aria-hidden="true" tabindex="-1"></a>    classDef tools fill:#e1f5fe,stroke:#0288d1,stroke-width:2px;</span>
-<span id="cb1-51"><a href="#cb1-51" aria-hidden="true" tabindex="-1"></a>    classDef steps fill:#f3e5f5,stroke:#7b1fa2,stroke-width:2px;</span>
-<span id="cb1-52"><a href="#cb1-52" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb1-53"><a href="#cb1-53" aria-hidden="true" tabindex="-1"></a>    class A,B,C,D,E,F process;</span>
-<span id="cb1-54"><a href="#cb1-54" aria-hidden="true" tabindex="-1"></a>    class T1,T2,T3,T4 tools;</span>
-<span id="cb1-55"><a href="#cb1-55" aria-hidden="true" tabindex="-1"></a>    class S1,S2,S3,S4 steps;</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>    subgraph "Detailed Steps"</span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a>        S1["Statistical Tests:\n- t-tests\n- ANOVA\n- Bayes factor tests"]</span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a>        S2["Model Creation:\n- Regression model\n- Parameter estimation"]</span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a>        S3["Assumption Checks:\n- Multicollinearity\n- Normality\n- Homoscedasticity"]</span>
+<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a>        S4["Visualization:\n- Diagnostic plots\n- Parameter estimates\n- Statistical results"]</span>
+<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a>    end</span>
+<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a>    A --&gt; S1</span>
+<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a>    B --&gt; S2</span>
+<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a>    C --&gt; S3</span>
+<span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a>    F --&gt; S4</span>
+<span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-30"><a href="#cb1-30" aria-hidden="true" tabindex="-1"></a>    T1 -.-&gt; S1</span>
+<span id="cb1-31"><a href="#cb1-31" aria-hidden="true" tabindex="-1"></a>    T2 -.-&gt; S2</span>
+<span id="cb1-32"><a href="#cb1-32" aria-hidden="true" tabindex="-1"></a>    T3 -.-&gt; S3</span>
+<span id="cb1-33"><a href="#cb1-33" aria-hidden="true" tabindex="-1"></a>    T4 -.-&gt; S3</span>
+<span id="cb1-34"><a href="#cb1-34" aria-hidden="true" tabindex="-1"></a>    T1 -.-&gt; S4</span>
+<span id="cb1-35"><a href="#cb1-35" aria-hidden="true" tabindex="-1"></a>    T3 -.-&gt; S4</span>
+<span id="cb1-36"><a href="#cb1-36" aria-hidden="true" tabindex="-1"></a>    T4 -.-&gt; S4</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <p></p><figure class="figure"><p></p>
 <div>
-<pre class="mermaid mermaid-js">flowchart TD
-    subgraph Process["Statistical Analysis Process"]
-        A[Data Analysis] --&gt; B[Model Building]
-        B --&gt; C[Model Diagnostics]
-        C --&gt; D{Issues Found?}
-        D --&gt;|Yes| E[Model Adjustment]
+<pre class="mermaid mermaid-js">graph TD;
+    subgraph "Statistical Analysis Process"
+        A["Data Analysis"] --&gt; B["Model Building"]
+        B --&gt; C["Model Diagnostics"]
+        C --&gt; D{"Issues Found?"}
+        D -- Yes --&gt; E["Model Adjustment"]
         E --&gt; C
-        D --&gt;|No| F[Result Visualization]
+        D -- No --&gt; F["Result Visualization"]
     end
 
-    subgraph Tools["Tools Used"]
-        T1[ggstatsplot]
-        T2[R regression methods]
-        T3[performance package]
-        T4[parameters package]
+    subgraph "Tools Used"
+        T1["ggstatsplot"]
+        T2["R regression methods"]
+        T3["performance package"]
+        T4["parameters package"]
     end
 
-    subgraph Steps["Detailed Steps"]
-        S1["Statistical Tests:
-        - t-tests
-        - ANOVA
-        - Bayes factor tests"]
-        S2["Model Creation:
-        - Regression model
-        - Parameter estimation"]
-        S3["Assumption Checks:
-        - Multicollinearity
-        - Normality
-        - Homoscedasticity"]
-        S4["Visualization:
-        - Diagnostic plots
-        - Parameter estimates
-        - Statistical results"]
+    subgraph "Detailed Steps"
+        S1["Statistical Tests:\n- t-tests\n- ANOVA\n- Bayes factor tests"]
+        S2["Model Creation:\n- Regression model\n- Parameter estimation"]
+        S3["Assumption Checks:\n- Multicollinearity\n- Normality\n- Homoscedasticity"]
+        S4["Visualization:\n- Diagnostic plots\n- Parameter estimates\n- Statistical results"]
     end
 
     A --&gt; S1
@@ -410,13 +381,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     T3 -.-&gt; S4
     T4 -.-&gt; S4
 
-    classDef process fill:#f5f5f5,stroke:#333,stroke-width:2px;
-    classDef tools fill:#e1f5fe,stroke:#0288d1,stroke-width:2px;
-    classDef steps fill:#f3e5f5,stroke:#7b1fa2,stroke-width:2px;
-    
-    class A,B,C,D,E,F process;
-    class T1,T2,T3,T4 tools;
-    class S1,S2,S3,S4 steps;
 </pre>
 </div>
 <p></p></figure><p></p>
@@ -616,10 +580,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>Table 2: Effect sizes and confidence intervals available for each type of test</p>
 <table class="caption-top table">
 <colgroup>
-<col style="width: 22%">
+<col style="width: 23%">
 <col style="width: 29%">
-<col style="width: 24%">
-<col style="width: 22%">
+<col style="width: 23%">
+<col style="width: 23%">
 </colgroup>
 <thead>
 <tr class="header">

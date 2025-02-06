@@ -10,7 +10,7 @@ execute:
   freeze: true
 ---
 
-![](images/Pasted image 20250206230450.png)
+![](images/Pasted%20image%2020250206230450.png)
 
 ## 12.1 Overview
 
