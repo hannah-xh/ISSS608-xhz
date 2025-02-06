@@ -16,6 +16,14 @@ website:
             href: Hands-on_Ex/Hands-on_Ex03a.html
           - text: "3b Programming Animated Statistical Graphics with R"
             href: Hands-on_Ex/Hands-on_Ex03b.html
+          - text: "4a Visualising Distribution"
+            href: Hands-on_Ex/Hands-on_Ex04a.html
+          - text: "4b Visual Statistical Analysis"
+            href: Hands-on_Ex/Hands-on_Ex04b.html
+          - text: "4c Visualising Uncertainty"
+            href: Hands-on_Ex/Hands-on_Ex04c.html
+          - text: "4d Building Funnel Plot with R"
+            href: Hands-on_Ex/Hands-on_Ex04d.html
       - text: "In-Class Exercise"
         menu:
           - text: "to be continue"
