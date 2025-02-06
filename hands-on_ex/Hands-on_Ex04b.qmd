@@ -10,6 +10,8 @@ execute:
   freeze: true
 ---
 
+![](images/clipboard-3675709045.png)
+
 ## Quick look of the structure
 
 ::: panel-tabset
@@ -184,7 +186,7 @@ Table 1: Multiple pairwise comparison tests supported in ggbetweenstats
 Table 2: Effect sizes and confidence intervals available for each type of test
 
 | Type | No. of groups | Effect size | CI? |
-|-----------------|----------------------|------------------|-----------------|
+|-----------------|---------------------|-----------------|-----------------|
 | Parametric | \> 2 | η²p, η², ω²p, ω² | Yes |
 | Non-parametric | \> 2 | η²H (H-statistic based eta-squared) | Yes |
 | Robust | \> 2 | ξ (Explanatory measure of effect size) | Yes |

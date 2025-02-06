@@ -10,6 +10,8 @@ execute:
   freeze: true
 ---
 
+![](images/clipboard-912089616.png)
+
 ## **9.1 Learning Outcome**
 
 Visualising distribution is not new in statistical analysis. In chapter 1 we have shared with you some of the popular statistical graphics methods for visualising distribution are histogram, probability density curve (pdf), boxplot, notch plot and violin plot and how they can be created by using ggplot2. In this chapter, we are going to share with you two relatively new statistical graphic methods for visualising distribution, namely ridgeline plot and raincloud plot by using ggplot2 and its extensions.
@@ -458,7 +460,7 @@ ggplot(exam,
 # 9.5 Ridgeline Plot vs. Raincloud Plot
 
 | Aspect | Ridgeline Plot | Raincloud Plot |
-|----|----|----|
+|------------------------|------------------------|------------------------|
 | Visualization Style | Overlapping density curves (KDE or ECDF) | KDE + boxplot + scatter (multiple visualizations combined) |
 | Displays Individual Data Points? | ❌ No | ✅ Yes |
 | Suitable Data Type | Continuous data, large datasets | Small to medium datasets, including discrete or non-normal data |

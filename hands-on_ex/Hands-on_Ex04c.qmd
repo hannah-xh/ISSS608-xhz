@@ -10,6 +10,8 @@ execute:
   freeze: true
 ---
 
+![](images/clipboard-1283848075.png)
+
 ## **11.1 Learning Outcome**
 
 Visualising uncertainty is relatively new in statistical graphics. In this chapter, you will gain hands-on experience on creating statistical graphics for visualising uncertainty. By the end of this chapter you will be able:
@@ -341,7 +343,7 @@ bscols(widths = c(4,8),
 
 ![](https://r4va.netlify.app/chap10/img/ggdist.png)
 
-### **11.4.1 Visualizing the uncertainty of point estimates: ggdist methods**
+### **11.4.1 Displaying Uncertainty in Point Estimates: Using ggdist Methods**
 
 In the code chunk below, [`stat_pointinterval()`](https://mjskay.github.io/ggdist/reference/stat_pointinterval.html) of **ggdist** is used to build a visual for displaying distribution of maths scores by race.
 
@@ -378,7 +380,7 @@ exam %>%
     subtitle = "Median Point + Multiple-interval plot")
 ```
 
-### **11.4.2 Visualizing the uncertainty of point estimates: ggdist methods**
+### **11.4.2 Plotting 95% and 99% Confidence Intervals for Point Estimates**
 
 95% and 99% confidence intervals:
 
@@ -448,7 +450,7 @@ bscols(
 
 ```
 
-### **11.4.3 Visualizing the uncertainty of point estimates: ggdist methods**
+### **11.4.3 Visualizing Uncertainty with Gradient Intervals: A ggdist Method**
 
 In the code chunk below, [`stat_gradientinterval()`](https://mjskay.github.io/ggdist/reference/stat_gradientinterval.html) of **ggdist** is used to build a visual for displaying distribution of maths scores by race.
 
@@ -464,8 +466,6 @@ exam %>%
     title = "Visualising confidence intervals of mean math score",
     subtitle = "Gradient + interval plot")
 ```
-
-Gentle advice: This function comes with many arguments, students are advised to read the syntax reference for more detail.
 
 ## **11.5 Visualising Uncertainty with Hypothetical Outcome Plots (HOPs)**
 
