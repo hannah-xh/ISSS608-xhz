@@ -1,0 +1,86 @@
+---
+title: "In-class Exercise 4"
+
+author: "xh.zhang"
+date-modified: "last-modified"
+execute:
+  echo: true
+  eval: true
+  warning: false
+  freeze: true
+---
+
+```{r}
+pacman::p_load(ggdist, ggridges, ggthemes,
+               colorspace, tidyverse, ggstatsplot, haven, SmartEDA)
+```
+
+```{r}
+exam_data <- read_csv("data/Exam_data.csv")
+```
+
+We draw a boxplot first, but it's not convenient to show the distribution.
+
+```{r}
+ggplot(data = exam_data,
+       aes(x = ENGLISH, y = CLASS))+
+  geom_boxplot()+
+  geom_point(stat="summary",        
+             fun="mean",           
+             colour="red",          
+             size=1)+
+  labs(x = 'English Score',
+       title = 'English Score by Class')+
+  theme(plot.title = element_text(hjust = 0.5))
+
+```
+
+That's where ridgeline plot shows its usefulness.
+
+```{r}
+ggplot(data = exam_data,
+       aes(x = ENGLISH, 
+           y = CLASS, 
+           fill = factor(stat(quantile))
+           )) +
+  stat_density_ridges(
+    geom = "density_ridges_gradient",
+    calc_ecdf = TRUE, 
+    quantiles = c(0.025, 0.975)
+    ) +
+  scale_fill_manual(
+    name = "Probability",
+    values = c("#FF0000A0", "#CECECE", "#0000FFA0"),
+    labels = c("(0, 0.025]", "(0.025, 0.975]", "(0.975, 1]")
+  ) +
+  labs(x = 'English Score',
+       title = 'English Score by Class')+
+  theme(plot.title = element_text(hjust = 0.5))
+
+```
+
+Next, we draw a Raincloud Plot to look into detail.
+However, if we make it look like it's really raining, the data presentation will become hard to interpret.
+
+
+```{r}
+ggplot(exam_data, 
+       aes(x = ENGLISH, 
+           y = CLASS)) +
+  stat_halfeye(adjust = 0.5,
+               justification = -0.2,
+               .width = 0,
+               point_colour = NA) +
+  geom_boxplot(width = .20,
+               outlier.shape = NA) +
+  stat_dots(side = "left", 
+            justification = 1.2, 
+            binwidth = 0.5,
+            dotsize = 1.5) +
+  coord_flip() +
+  labs(x = 'English Score',
+       title = 'English Score by Class')+
+  theme(plot.title = element_text(hjust = 0.5))
+```
+
+

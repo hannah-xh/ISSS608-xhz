@@ -460,7 +460,7 @@ ggplot(exam,
 # 9.5 Ridgeline Plot vs. Raincloud Plot
 
 | Aspect | Ridgeline Plot | Raincloud Plot |
-|------------------------|------------------------|------------------------|
+|----|----|----|
 | Visualization Style | Overlapping density curves (KDE or ECDF) | KDE + boxplot + scatter (multiple visualizations combined) |
 | Displays Individual Data Points? | ❌ No | ✅ Yes |
 | Suitable Data Type | Continuous data, large datasets | Small to medium datasets, including discrete or non-normal data |
