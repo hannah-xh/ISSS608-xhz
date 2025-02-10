@@ -1,7 +1,7 @@
 project:
   type: website
 website:
-  title: "Hannah's visual analytics diary"
+  title: "Xiaohan's visual analytics diary"
   navbar:
     left:
       - text: "Hands-on Exercise"
