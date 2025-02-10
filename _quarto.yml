@@ -26,13 +26,13 @@ website:
             href: Hands-on_Ex/Hands-on_Ex04d.html
           - text: "5a Creating Ternary Plot with R"
             href: Hands-on_Ex/Hands-on_Ex05a.html
-          - text: "5b Building Funnel Plot with R"
+          - text: "5b Visual Correlation Analysis"
             href: Hands-on_Ex/Hands-on_Ex05b.html
-          - text: "5c Building Funnel Plot with R"
+          - text: "5c Heatmap for Visualising and Analysing Multivariate Data"
             href: Hands-on_Ex/Hands-on_Ex05c.html
-          - text: "5d Building Funnel Plot with R"
+          - text: "5d Visual Multivariate Analysis with Parallel Coordinates Plot"
             href: Hands-on_Ex/Hands-on_Ex05d.html
-          - text: "5e Building Funnel Plot with R"
+          - text: "5e Treemap Visualisation with R"
             href: Hands-on_Ex/Hands-on_Ex05e.html
       - text: "In-Class Exercise"
         menu:

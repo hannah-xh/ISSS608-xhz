@@ -19,4 +19,4 @@ Welcome to **Xiaohan's** visual analytics diary, this is my coursework for ISSS6
 There are four parts here 👆
 :::
 
-# Latest posts:
+# Listing of posts:
