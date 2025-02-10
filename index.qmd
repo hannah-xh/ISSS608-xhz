@@ -1,15 +1,18 @@
 ---
-title: "Hannah's visual analytics diary"
+title: "Xiaohan's visual analytics diary"
+
 listing:
     contents:
     - "Hands-on_Ex/*.qmd"
     - "Take-home_Ex/*.qmd"
+    - "In-class_ex/*.qmd"
     type: grid
     sort:
-    - "date desc"
     - "title desc"
 ---
 
-Welcome to Hannah's visual analytics diary, this is my coursework for ISSS608 Visual Analytics and Applications in SMU.
+Welcome to Xiaohan's visual analytics diary, this is my coursework for ISSS608 Visual Analytics and Applications in SMU. Special thanks to Prof. Kam Tin Seong for his guidance, encouragement, and invaluable insights throughout this learning journey.
 
-![](images/微信图片_20250130232703.png)
+![](images/0e063c27c88059a3315640a23693bf5.png)
+
+# Latest posts:

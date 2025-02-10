@@ -1,5 +1,5 @@
 ---
-title: "A Rough First Attempt"
+title: "0 A Rough First Attempt"
 author: "xh.zhang"
 date-modified: "last-modified"
 execute:
@@ -8,6 +8,8 @@ execute:
   warning: false
   freeze: true
 ---
+
+![](images/clipboard-3277243079.png)
 
 ## Getting started
 
