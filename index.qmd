@@ -1,22 +1,24 @@
 ---
 title: "Xiaohan's visual analytics diary"
 
-listing:
-    contents:
-    - "Hands-on_Ex/*.qmd"
-    - "Take-home_Ex/*.qmd"
-    - "In-class_ex/*.qmd"
-    type: grid
-    sort:
-    - "title desc"
+listing: 
+  - id: List_of_take-home_exercises
+    contents: "Take-home_Ex1.qmd"
+    type: default
+  - id: List_of_hands-on_exercises
+    contents: "Hands-on_Ex/*.qmd"
+    type: default
+    sort: "title desc"
 ---
-::: {.callout-note appearance="simple" icon="false"}
-Welcome to **Xiaohan's** visual analytics diary, this is my coursework for ISSS608 **Visual Analytics and Applications** in SMU. Special thanks to **Prof. Kam Tin Seong** for his guidance, encouragement, and invaluable insights throughout this learning journey.
-:::
-![](images/0e063c27c88059a3315640a23693bf5.png)
 
-::: {.callout-note appearance="simple" icon="false"}
-There are four parts here 👆
+![](images/clipboard-452913385.png)
+
+## List of take-home exercises
+
+::: {#List_of_take-home_exercises}
 :::
 
-# Listing of posts:
+## List of hands-on exercises
+
+::: {#List_of_hands-on_exercises}
+:::

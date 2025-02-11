@@ -7,9 +7,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Xiaohan Zhang">
-<meta name="dcterms.date" content="2025-02-01">
+<meta name="dcterms.date" content="2025-02-16">
 
-<title>Take-home Exercise 1 – Hannah’s visual analytics diary</title>
+<title>Take-home Exercise 1 – Xiaohan’s visual analytics diary</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -81,7 +81,7 @@ ul.task-list li input[type="checkbox"] {
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
     <a class="navbar-brand" href="../../index.html">
-    <span class="navbar-title">Hannah’s visual analytics diary</span>
+    <span class="navbar-title">Xiaohan’s visual analytics diary</span>
     </a>
   </div>
             <div id="quarto-search" class="" title="Search"></div>
@@ -131,6 +131,26 @@ ul.task-list li input[type="checkbox"] {
     <a class="dropdown-item" href="../../Hands-on_Ex/Hands-on_Ex04d.html">
  <span class="dropdown-text">4d Building Funnel Plot with R</span></a>
   </li>  
+        <li>
+    <a class="dropdown-item" href="../../Hands-on_Ex/Hands-on_Ex05a.html">
+ <span class="dropdown-text">5a Creating Ternary Plot with R</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../Hands-on_Ex/Hands-on_Ex05b.html">
+ <span class="dropdown-text">5b Visual Correlation Analysis</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../Hands-on_Ex/Hands-on_Ex05c.html">
+ <span class="dropdown-text">5c Heatmap for Visualising and Analysing Multivariate Data</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../Hands-on_Ex/Hands-on_Ex05d.html">
+ <span class="dropdown-text">5d Visual Multivariate Analysis with Parallel Coordinates Plot</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../Hands-on_Ex/Hands-on_Ex05e.html">
+ <span class="dropdown-text">5e Treemap Visualisation with R</span></a>
+  </li>  
     </ul>
   </li>
   <li class="nav-item dropdown ">
@@ -139,8 +159,8 @@ ul.task-list li input[type="checkbox"] {
     </a>
     <ul class="dropdown-menu" aria-labelledby="nav-menu-in-class-exercise">    
         <li>
-    <a class="dropdown-item" href="../../In-Class_Ex1.html">
- <span class="dropdown-text">to be continue</span></a>
+    <a class="dropdown-item" href="../../In-class_Ex/In-class_exercise_4/In-class_ex4.html">
+ <span class="dropdown-text">In-class Exercise 2025-2-8</span></a>
   </li>  
     </ul>
   </li>
@@ -151,7 +171,7 @@ ul.task-list li input[type="checkbox"] {
     <ul class="dropdown-menu" aria-labelledby="nav-menu-take-home-exercise">    
         <li>
     <a class="dropdown-item" href="../../Take-home_Ex/Take-home_Ex1/Take-home_Ex1.html">
- <span class="dropdown-text">Take-home Exercise 1</span></a>
+ <span class="dropdown-text">Ship Performance</span></a>
   </li>  
     </ul>
   </li>
@@ -187,8 +207,20 @@ ul.task-list li input[type="checkbox"] {
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
-        
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#overview" id="toc-overview" class="nav-link active" data-scroll-target="#overview"><strong>1. Overview</strong></a></li>
+  <li><a href="#data-cleaning-preparation" id="toc-data-cleaning-preparation" class="nav-link" data-scroll-target="#data-cleaning-preparation"><strong>2. Data Cleaning &amp; Preparation</strong></a></li>
+  <li><a href="#visualization-strategy" id="toc-visualization-strategy" class="nav-link" data-scroll-target="#visualization-strategy"><strong>3. Visualization Strategy</strong></a></li>
+  <li><a href="#exploratory-data-analysis-eda" id="toc-exploratory-data-analysis-eda" class="nav-link" data-scroll-target="#exploratory-data-analysis-eda"><strong>4. Exploratory Data Analysis (EDA)</strong></a></li>
+  <li><a href="#creating-data-visualizations-beyond-default" id="toc-creating-data-visualizations-beyond-default" class="nav-link" data-scroll-target="#creating-data-visualizations-beyond-default"><strong>5. Creating Data Visualizations Beyond Default</strong></a></li>
+  <li><a href="#conclusion" id="toc-conclusion" class="nav-link" data-scroll-target="#conclusion"><strong>6. Conclusion</strong></a></li>
+  <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references"><strong>7. References</strong></a></li>
+  </ul>
+</nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
@@ -212,14 +244,14 @@ ul.task-list li input[type="checkbox"] {
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">February 1, 2025</p>
+      <p class="date">February 16, 2025</p>
     </div>
   </div>
   
     <div>
     <div class="quarto-title-meta-heading">Modified</div>
     <div class="quarto-title-meta-contents">
-      <p class="date-modified">February 1, 2025</p>
+      <p class="date-modified">February 11, 2025</p>
     </div>
   </div>
     
@@ -230,8 +262,152 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
+<p><img src="images/clipboard-2644673784.png" class="img-fluid"></p>
+<section id="overview" class="level3">
+<h3 class="anchored" data-anchor-id="overview"><strong>1. Overview</strong></h3>
+<ul>
+<li><strong>Background</strong>
+<ul>
+<li>An international media company plans to publish an article on <strong>ship performance</strong>.<br>
+</li>
+<li>Your role as the <strong>Graphical Editor</strong> is to design <strong>insightful visualizations</strong>, going beyond default styles.<br>
+</li>
+</ul></li>
+<li><strong>Dataset Description</strong>
+<ul>
+<li>Overview of the <strong>Ship Performance Clustering Dataset</strong>.<br>
+</li>
+<li>Explain the data sources, key variables, and data types (e.g., speed, fuel consumption, ship type).<br>
+</li>
+</ul></li>
+<li><strong>Task Description</strong>
+<ul>
+<li>Use <strong>R (tidyverse + ggplot2)</strong> for data cleaning and visualization.<br>
+</li>
+<li>Goal: Create <strong>5-10 visualizations</strong> and write <strong>150-word analyses</strong> for each.</li>
+</ul></li>
+</ul>
+<hr>
+</section>
+<section id="data-cleaning-preparation" class="level3">
+<h3 class="anchored" data-anchor-id="data-cleaning-preparation"><strong>2. Data Cleaning &amp; Preparation</strong></h3>
+<ul>
+<li><strong>Data Understanding</strong>
+<ul>
+<li>Identify key variables (e.g., ship speed, fuel consumption, voyage distance).<br>
+</li>
+<li>Perform an initial data inspection using <code>glimpse()</code> and <code>summary()</code>.<br>
+</li>
+</ul></li>
+<li><strong>Data Inspection</strong>
+<ul>
+<li>Check for missing values, data types, outliers, and duplicates.<br>
+</li>
+</ul></li>
+<li><strong>Handling Missing Values</strong>
+<ul>
+<li>Decide on strategies like imputation, deletion, or interpolation.<br>
+</li>
+</ul></li>
+<li><strong>Handling Outliers</strong>
+<ul>
+<li>Use boxplots, Z-scores, and IQR methods to detect outliers.<br>
+</li>
+</ul></li>
+<li><strong>Duplicates &amp; Standardization</strong>
+<ul>
+<li>Address duplicates and standardize units (e.g., speed, fuel consumption).<br>
+</li>
+</ul></li>
+<li><strong>Encoding Categorical Data</strong>
+<ul>
+<li>Handle categorical variables (e.g., ship type) using one-hot encoding or factors.<br>
+</li>
+</ul></li>
+<li><strong>Merging &amp; Splitting Data</strong>
+<ul>
+<li>Combine additional data sources (e.g., weather, port information) if needed.<br>
+</li>
+</ul></li>
+<li><strong>Saving Clean Data</strong>
+<ul>
+<li>Save the cleaned dataset for analysis.</li>
+</ul></li>
+</ul>
+<hr>
+</section>
+<section id="visualization-strategy" class="level3">
+<h3 class="anchored" data-anchor-id="visualization-strategy"><strong>3. Visualization Strategy</strong></h3>
+<p><strong>Key Questions:</strong><br>
+- <strong>How does ship performance change?</strong> (over time, with weather, or region)<br>
+- <strong>How efficient are different types of ships in terms of fuel consumption?</strong><br>
+- <strong>What is the relationship between speed and fuel consumption?</strong> (is there a pattern?)<br>
+- <strong>Can we identify specific groups of ships?</strong> (clustering analysis)</p>
+<p><strong>Potential Visualization Methods:</strong><br>
+- <strong>Trend Analysis</strong> → Line charts (time series plots)<br>
+- <strong>Distribution Visualization</strong> → Histograms, density plots<br>
+- <strong>Category Comparison</strong> → Boxplots, violin plots<br>
+- <strong>Relationship Analysis</strong> → Scatter plots with regression lines<br>
+- <strong>Clustering Analysis</strong> → PCA for dimensionality reduction + scatter plots, radar charts for ship clusters</p>
+<hr>
+</section>
+<section id="exploratory-data-analysis-eda" class="level3">
+<h3 class="anchored" data-anchor-id="exploratory-data-analysis-eda"><strong>4. Exploratory Data Analysis (EDA)</strong></h3>
+<ul>
+<li><strong>Univariate Analysis</strong>
+<ul>
+<li>Distribution of ship speed and fuel consumption.<br>
+</li>
+</ul></li>
+<li><strong>Bivariate/Multivariate Analysis</strong>
+<ul>
+<li>Ship speed vs.&nbsp;fuel consumption (scatter plot + correlation coefficient).<br>
+</li>
+<li>Performance differences by ship type (boxplot, violin plot).<br>
+</li>
+<li>Weather vs.&nbsp;fuel consumption (any correlations?).</li>
+</ul></li>
+</ul>
+<hr>
+</section>
+<section id="creating-data-visualizations-beyond-default" class="level3">
+<h3 class="anchored" data-anchor-id="creating-data-visualizations-beyond-default"><strong>5. Creating Data Visualizations Beyond Default</strong></h3>
+<p><strong>Core Principles:</strong><br>
+- <strong>Go Beyond Defaults</strong> → Use <strong>ggplot2 extensions</strong> (e.g., gghighlight, patchwork, ggthemes).<br>
+- <strong>Enhance Readability</strong> → Use appropriate <strong>colors, labels, annotations</strong>.<br>
+- <strong>Emphasize Insights</strong> → Use <strong>animations (gganimate)</strong> and interactive charts (plotly).</p>
+<p><strong>Example Visualizations:</strong><br>
+1. <strong>Ship Speed vs.&nbsp;Fuel Consumption</strong> (scatter plot + smooth regression line).<br>
+2. <strong>Fuel Efficiency by Ship Type</strong> (violin plot).<br>
+3. <strong>Clustering Ship Performance by Region</strong> (PCA + radar chart).<br>
+4. <strong>Voyage Time vs.&nbsp;Fuel Consumption</strong> (time series plot).<br>
+5. <strong>Anomalous Ship Performance</strong> (boxplot + gghighlight for outliers).</p>
+<p>Each visualization should be accompanied by a <strong>150-word analysis</strong>, explaining patterns, trends, and potential insights.</p>
+<hr>
+</section>
+<section id="conclusion" class="level3">
+<h3 class="anchored" data-anchor-id="conclusion"><strong>6. Conclusion</strong></h3>
+<ul>
+<li>Summarize key findings.<br>
+</li>
+<li>Highlight significant patterns and trends.<br>
+</li>
+<li>Provide potential explanations and business implications.<br>
+</li>
+<li><strong>Limitations &amp; Future Improvements</strong> (e.g., data limitations, model optimization).</li>
+</ul>
+<hr>
+</section>
+<section id="references" class="level3">
+<h3 class="anchored" data-anchor-id="references"><strong>7. References</strong></h3>
+<ul>
+<li>Data sources.<br>
+</li>
+<li>Related literature and best practices in data visualization.</li>
+</ul>
 
 
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">

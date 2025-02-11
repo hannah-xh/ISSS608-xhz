@@ -71,7 +71,35 @@ ul.task-list li input[type="checkbox"] {
 <script>
 
   window.document.addEventListener("DOMContentLoaded", function (_event) {
-    const listingTargetEl = window.document.querySelector('#listing-listing .list');
+    const listingTargetEl = window.document.querySelector('#listing-List_of_take-home_exercises .list');
+    if (!listingTargetEl) {
+      // No listing discovered, do not attach.
+      return; 
+    }
+
+    const options = {
+      valueNames: ['listing-date','listing-title','listing-author','listing-image','listing-description',{ data: ['index'] },{ data: ['categories'] },{ data: ['listing-date-sort'] },{ data: ['listing-file-modified-sort'] }],
+      
+      searchColumns: ["listing-date","listing-title","listing-author","listing-image","listing-description"],
+    };
+
+    window['quarto-listings'] = window['quarto-listings'] || {};
+    window['quarto-listings']['listing-List_of_take-home_exercises'] = new List('listing-List_of_take-home_exercises', options);
+
+    if (window['quarto-listing-loaded']) {
+      window['quarto-listing-loaded']();
+    }
+  });
+
+  window.addEventListener('hashchange',() => {
+    if (window['quarto-listing-loaded']) {
+      window['quarto-listing-loaded']();
+    }
+  })
+  
+
+  window.document.addEventListener("DOMContentLoaded", function (_event) {
+    const listingTargetEl = window.document.querySelector('#listing-List_of_hands-on_exercises .list');
     if (!listingTargetEl) {
       // No listing discovered, do not attach.
       return; 
@@ -84,7 +112,7 @@ ul.task-list li input[type="checkbox"] {
     };
 
     window['quarto-listings'] = window['quarto-listings'] || {};
-    window['quarto-listings']['listing-listing'] = new List('listing-listing', options);
+    window['quarto-listings']['listing-List_of_hands-on_exercises'] = new List('listing-List_of_hands-on_exercises', options);
 
     if (window['quarto-listing-loaded']) {
       window['quarto-listing-loaded']();
@@ -229,7 +257,7 @@ window.Quarto = {
     <ul class="dropdown-menu" aria-labelledby="nav-menu-take-home-exercise">    
         <li>
     <a class="dropdown-item" href="./Take-home_Ex/Take-home_Ex1/Take-home_Ex1.html">
- <span class="dropdown-text">Take-home Exercise 1</span></a>
+ <span class="dropdown-text">Ship Performance</span></a>
   </li>  
     </ul>
   </li>
@@ -270,7 +298,8 @@ window.Quarto = {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#listing-of-posts" id="toc-listing-of-posts" class="nav-link active" data-scroll-target="#listing-of-posts">Listing of posts:</a></li>
+  <li><a href="#list-of-take-home-exercises" id="toc-list-of-take-home-exercises" class="nav-link active" data-scroll-target="#list-of-take-home-exercises">List of take-home exercises</a></li>
+  <li><a href="#list-of-hands-on-exercises" id="toc-list-of-hands-on-exercises" class="nav-link" data-scroll-target="#list-of-hands-on-exercises">List of hands-on exercises</a></li>
   </ul>
 </nav>
     </div>
@@ -296,321 +325,413 @@ window.Quarto = {
 </header>
 
 
-<div class="callout callout-style-simple callout-note no-icon">
-<div class="callout-body d-flex">
-<div class="callout-icon-container">
-<i class="callout-icon no-icon"></i>
+<p><img src="images/clipboard-452913385.png" class="img-fluid"></p>
+<section id="list-of-take-home-exercises" class="level2">
+<h2 class="anchored" data-anchor-id="list-of-take-home-exercises">List of take-home exercises</h2>
+<div id="listing-List_of_take-home_exercises" class="quarto-listing quarto-listing-container-default">
+<div class="list quarto-listing-default">
+<div class="quarto-post image-right" data-index="0" data-listing-date-sort="1739635200000" data-listing-file-modified-sort="1739266114694" data-listing-date-modified-sort="1739266114000" data-listing-reading-time-sort="3" data-listing-word-count-sort="600">
+<div class="thumbnail">
+<p><a href="./Take-home_Ex/Take-home_Ex1/Take-home_Ex1.html" class="no-external"></a></p><a href="./Take-home_Ex/Take-home_Ex1/Take-home_Ex1.html" class="no-external">
+<p class="card-img-top"><img src="Take-home_Ex\Take-home_Ex1\images\clipboard-2644673784.png"  class="thumbnail-image card-img"/></p>
+</a><p><a href="./Take-home_Ex/Take-home_Ex1/Take-home_Ex1.html" class="no-external"></a></p>
 </div>
-<div class="callout-body-container">
-<p>Welcome to <strong>Xiaohan’s</strong> visual analytics diary, this is my coursework for ISSS608 <strong>Visual Analytics and Applications</strong> in SMU. Special thanks to <strong>Prof.&nbsp;Kam Tin Seong</strong> for his guidance, encouragement, and invaluable insights throughout this learning journey.</p>
+<div class="body">
+<h3 class="no-anchor listing-title">
+<a href="./Take-home_Ex/Take-home_Ex1/Take-home_Ex1.html" class="no-external">Take-home Exercise 1</a>
+</h3>
+<div class="listing-subtitle">
+<a href="./Take-home_Ex/Take-home_Ex1/Take-home_Ex1.html" class="no-external"></a>
+</div>
+<div class="listing-description">
+<a href="./Take-home_Ex/Take-home_Ex1/Take-home_Ex1.html" class="no-external"><strong>Key Questions:</strong><br>
+- <strong>How does ship performance change?</strong> (over time, with weather, or region)<br>
+- <strong>How efficient are different types of ships in terms of fuel consumption?</strong><br>
+- <strong>What is…</strong><br><strong></strong></a>
 </div>
 </div>
+<div class="metadata">
+<a href="./Take-home_Ex/Take-home_Ex1/Take-home_Ex1.html" class="no-external">
+<div class="listing-date">
+Feb 16, 2025
 </div>
-<p><img src="images/0e063c27c88059a3315640a23693bf5.png" class="img-fluid"></p>
-<div class="callout callout-style-simple callout-note no-icon">
-<div class="callout-body d-flex">
-<div class="callout-icon-container">
-<i class="callout-icon no-icon"></i>
-</div>
-<div class="callout-body-container">
-<p>There are four parts here 👆</p>
-</div>
-</div>
-</div>
-<section id="listing-of-posts" class="level1">
-<h1>Listing of posts:</h1>
-
-
-
-</section>
-
-<div class="quarto-listing quarto-listing-container-grid" id="listing-listing">
-<div class="list grid quarto-listing-cols-3">
-<div class="g-col-1" data-index="0" data-listing-file-modified-sort="1739168333625" data-listing-reading-time-sort="15" data-listing-word-count-sort="2850">
-<a href="./Hands-on_Ex/Hands-on_Ex05e.html" class="quarto-grid-link">
-<div class="quarto-grid-item card h-100 card-left">
-<p class="card-img-top"><img src="Hands-on_Ex\images\5.jpg" style="height: 150px;"  class="thumbnail-image card-img"/></p>
-<div class="card-body post-contents">
-<h5 class="no-anchor card-title listing-title">
-5e Treemap Visualisation with R
-</h5>
-<div class="card-text listing-description">
-In this hands-on exercise, you will gain hands-on experiences on designing treemap using appropriate R packages. The hands-on exercise consists of three main section. First…<strong></strong><strong></strong><strong></strong>
-</div>
-<div class="card-attribution card-text-small start">
 <div class="listing-author">
-xh.zhang
-</div>
-</div>
-</div>
+Xiaohan Zhang
 </div>
 </a>
 </div>
-<div class="g-col-1" data-index="1" data-listing-file-modified-sort="1739167682406" data-listing-reading-time-sort="8" data-listing-word-count-sort="1526">
-<a href="./Hands-on_Ex/Hands-on_Ex05d.html" class="quarto-grid-link">
-<div class="quarto-grid-item card h-100 card-left">
-<p class="card-img-top"><img src="Hands-on_Ex\images\4.jpg" style="height: 150px;"  class="thumbnail-image card-img"/></p>
-<div class="card-body post-contents">
-<h5 class="no-anchor card-title listing-title">
-5d Visual Multivariate Analysis with Parallel Coordinates Plot
-</h5>
-<div class="card-text listing-description">
-Parallel coordinates plot is a data visualisation specially designed for visualising and analysing multivariate, numerical data. It is ideal for comparing multiple variables…
-</div>
-<div class="card-attribution card-text-small start">
-<div class="listing-author">
-xh.zhang
-</div>
-</div>
-</div>
-</div>
-</a>
-</div>
-<div class="g-col-1" data-index="2" data-listing-file-modified-sort="1739167585506" data-listing-reading-time-sort="13" data-listing-word-count-sort="2449">
-<a href="./Hands-on_Ex/Hands-on_Ex05c.html" class="quarto-grid-link">
-<div class="quarto-grid-item card h-100 card-left">
-<p class="card-img-top"><img src="Hands-on_Ex\images\3.jpg" style="height: 150px;"  class="thumbnail-image card-img"/></p>
-<div class="card-body post-contents">
-<h5 class="no-anchor card-title listing-title">
-5c Heatmap for Visualising and Analysing Multivariate Data
-</h5>
-<div class="card-text listing-description">
-Heatmaps visualise data through variations in colouring. When applied to a tabular format, heatmaps are useful for cross-examining multivariate data, through placing…
-</div>
-<div class="card-attribution card-text-small start">
-<div class="listing-author">
-xh.zhang
-</div>
-</div>
-</div>
-</div>
-</a>
-</div>
-<div class="g-col-1" data-index="3" data-listing-file-modified-sort="1739167585396" data-listing-reading-time-sort="15" data-listing-word-count-sort="2939">
-<a href="./Hands-on_Ex/Hands-on_Ex05b.html" class="quarto-grid-link">
-<div class="quarto-grid-item card h-100 card-left">
-<p class="card-img-top"><img src="Hands-on_Ex\images\2.jpg" style="height: 150px;"  class="thumbnail-image card-img"/></p>
-<div class="card-body post-contents">
-<h5 class="no-anchor card-title listing-title">
-5b Visual Correlation Analysis
-</h5>
-<div class="card-text listing-description">
-Correlation coefficient is a popular statistic that use to measure the type and strength of the relationship between two variables. The values of a correlation coefficient…
-</div>
-<div class="card-attribution card-text-small start">
-<div class="listing-author">
-xh.zhang
-</div>
-</div>
-</div>
-</div>
-</a>
-</div>
-<div class="g-col-1" data-index="4" data-listing-file-modified-sort="1739004891830" data-listing-reading-time-sort="4" data-listing-word-count-sort="687">
-<a href="./Hands-on_Ex/Hands-on_Ex05a.html" class="quarto-grid-link">
-<div class="quarto-grid-item card h-100 card-left">
-<p class="card-img-top"><img src="Hands-on_Ex\images\1.jpg" style="height: 150px;"  class="thumbnail-image card-img"/></p>
-<div class="card-body post-contents">
-<h5 class="no-anchor card-title listing-title">
-5a Creating Ternary Plot with R
-</h5>
-<div class="card-text listing-description">
-Ternary plots are a way of displaying the distribution and variability of three-part compositional data. (For example, the proportion of aged, economy active and young…
-</div>
-<div class="card-attribution card-text-small start">
-<div class="listing-author">
-xh.zhang
-</div>
-</div>
-</div>
-</div>
-</a>
-</div>
-<div class="g-col-1" data-index="5" data-listing-file-modified-sort="1738854635170" data-listing-reading-time-sort="8" data-listing-word-count-sort="1411">
-<a href="./Hands-on_Ex/Hands-on_Ex04d.html" class="quarto-grid-link">
-<div class="quarto-grid-item card h-100 card-left">
-<p class="card-img-top"><img src="Hands-on_Ex\images\Pasted image 20250206230450.png" style="height: 150px;"  class="thumbnail-image card-img"/></p>
-<div class="card-body post-contents">
-<h5 class="no-anchor card-title listing-title">
-4d Funnel Plots for Fair Comparisons
-</h5>
-<div class="card-text listing-description">
-Funnel plot is a specially designed data visualisation for conducting unbiased comparison between outlets, stores or business entities. By the end of this hands-on exercise…
-</div>
-<div class="card-attribution card-text-small start">
-<div class="listing-author">
-xh.zhang
-</div>
-</div>
-</div>
-</div>
-</a>
-</div>
-<div class="g-col-1" data-index="6" data-listing-file-modified-sort="1738853874579" data-listing-reading-time-sort="22" data-listing-word-count-sort="4310">
-<a href="./Hands-on_Ex/Hands-on_Ex04c.html" class="quarto-grid-link">
-<div class="quarto-grid-item card h-100 card-left">
-<p class="card-img-top"><img src="Hands-on_Ex\images\clipboard-1283848075.png" style="height: 150px;"  class="thumbnail-image card-img"/></p>
-<div class="card-body post-contents">
-<h5 class="no-anchor card-title listing-title">
-4c Visualising Uncertainty
-</h5>
-<div class="card-text listing-description">
-Visualising uncertainty is relatively new in statistical graphics. In this chapter, you will gain hands-on experience on creating statistical graphics for visualising…
-</div>
-<div class="card-attribution card-text-small start">
-<div class="listing-author">
-xh.zhang
-</div>
-</div>
-</div>
-</div>
-</a>
-</div>
-<div class="g-col-1" data-index="7" data-listing-file-modified-sort="1738994430231" data-listing-reading-time-sort="8" data-listing-word-count-sort="1568">
-<a href="./Hands-on_Ex/Hands-on_Ex04b.html" class="quarto-grid-link">
-<div class="quarto-grid-item card h-100 card-left">
-<p class="card-img-top"><img src="Hands-on_Ex\images\clipboard-3675709045.png" style="height: 150px;"  class="thumbnail-image card-img"/></p>
-<div class="card-body post-contents">
-<h5 class="no-anchor card-title listing-title">
-4b Visual Statistical
-</h5>
-<div class="card-text listing-description">
-In this hands-on exercise, you will gain hands-on experience on using:
-</div>
-<div class="card-attribution card-text-small start">
-<div class="listing-author">
-xh.zhang
-</div>
-</div>
-</div>
-</div>
-</a>
-</div>
-<div class="g-col-1" data-index="8" data-listing-file-modified-sort="1738994429889" data-listing-reading-time-sort="18" data-listing-word-count-sort="3452">
-<a href="./Hands-on_Ex/Hands-on_Ex04a.html" class="quarto-grid-link">
-<div class="quarto-grid-item card h-100 card-left">
-<p class="card-img-top"><img src="Hands-on_Ex\images\clipboard-912089616.png" style="height: 150px;"  class="thumbnail-image card-img"/></p>
-<div class="card-body post-contents">
-<h5 class="no-anchor card-title listing-title">
-4a Visualising Distribution
-</h5>
-<div class="card-text listing-description">
-Visualising distribution is not new in statistical analysis. In chapter 1 we have shared with you some of the popular statistical graphics methods for visualising…
-</div>
-<div class="card-attribution card-text-small start">
-<div class="listing-author">
-xh.zhang
-</div>
-</div>
-</div>
-</div>
-</a>
-</div>
-<div class="g-col-1" data-index="9" data-listing-file-modified-sort="1738247917403" data-listing-reading-time-sort="12" data-listing-word-count-sort="2337">
-<a href="./Hands-on_Ex/Hands-on_Ex03b.html" class="quarto-grid-link">
-<div class="quarto-grid-item card h-100 card-left">
-<p class="card-img-top"><img src="Hands-on_Ex\Hands-on_Ex03b_files\figure-html\unnamed-chunk-5-1.png" style="height: 150px;"  class="thumbnail-image card-img"/></p>
-<div class="card-body post-contents">
-<h5 class="no-anchor card-title listing-title">
-3b Programming Animated Statistical Graphics with R
-</h5>
-<div class="card-text listing-description">
-When telling a visually-driven data story, animated graphics tends to attract the interest of the audience and make deeper impression than static graphics. In this hands-on…<strong></strong><strong></strong><strong></strong><strong></strong>
-</div>
-<div class="card-attribution card-text-small start">
-<div class="listing-author">
-xh.zhang
-</div>
-</div>
-</div>
-</div>
-</a>
-</div>
-<div class="g-col-1" data-index="10" data-listing-file-modified-sort="1738246082462" data-listing-reading-time-sort="37" data-listing-word-count-sort="7303">
-<a href="./Hands-on_Ex/Hands-on_Ex03a.html" class="quarto-grid-link">
-<div class="quarto-grid-item card h-100 card-left">
-<div class="listing-item-img-placeholder card-img-top" style="height: 150px;">&nbsp;</div>
-<div class="card-body post-contents">
-<h5 class="no-anchor card-title listing-title">
-3a Programming Interactive Data Visualisation with R
-</h5>
-<div class="card-text listing-description">
-In this hands-on exercise, you will learn how to create interactive data visualisation by using functions provided by <strong>ggiraph</strong> and <strong>plotlyr</strong> packages.
-</div>
-<div class="card-attribution card-text-small start">
-<div class="listing-author">
-xh.zhang
-</div>
-</div>
-</div>
-</div>
-</a>
-</div>
-<div class="g-col-1" data-index="11" data-listing-file-modified-sort="1737557750870" data-listing-reading-time-sort="11" data-listing-word-count-sort="2012">
-<a href="./Hands-on_Ex/Hands-on_Ex02.html" class="quarto-grid-link">
-<div class="quarto-grid-item card h-100 card-left">
-<div class="listing-item-img-placeholder card-img-top" style="height: 150px;">&nbsp;</div>
-<div class="card-body post-contents">
-<h5 class="no-anchor card-title listing-title">
-2 Beyond ggplot2 Fundamentals
-</h5>
-<div class="card-text listing-description">
-In this chapter, you will be introduced to several ggplot2 extensions for creating more elegant and effective statistical graphics. By the end of this exercise, you will be…
-</div>
-<div class="card-attribution card-text-small start">
-<div class="listing-author">
-xh.zhang
-</div>
-</div>
-</div>
-</div>
-</a>
-</div>
-<div class="g-col-1" data-index="12" data-listing-file-modified-sort="1737531288534" data-listing-reading-time-sort="17" data-listing-word-count-sort="3231">
-<a href="./Hands-on_Ex/Hands-on_Ex01.html" class="quarto-grid-link">
-<div class="quarto-grid-item card h-100 card-left">
-<p class="card-img-top"><img src="Hands-on_Ex\Hands-on_Ex01_files\figure-html\unnamed-chunk-3-1.png" style="height: 150px;"  class="thumbnail-image card-img"/></p>
-<div class="card-body post-contents">
-<h5 class="no-anchor card-title listing-title">
-1 A Layered Grammar of Graphics: ggplot2 methods
-</h5>
-<div class="card-text listing-description">
-In this chapter, you will learn the basic principles and essential components of ggplot2. At the same time, you will gain hands-on experience on using these components to…
-</div>
-<div class="card-attribution card-text-small start">
-<div class="listing-author">
-xh.zhang
-</div>
-</div>
-</div>
-</div>
-</a>
-</div>
-<div class="g-col-1" data-index="13" data-listing-file-modified-sort="1739170485113" data-listing-reading-time-sort="2" data-listing-word-count-sort="295">
-<a href="./Hands-on_Ex/Hands-on_Ex00.html" class="quarto-grid-link">
-<div class="quarto-grid-item card h-100 card-left">
-<p class="card-img-top"><img src="Hands-on_Ex\images\clipboard-3277243079.png" style="height: 150px;"  class="thumbnail-image card-img"/></p>
-<div class="card-body post-contents">
-<h5 class="no-anchor card-title listing-title">
-0 A Rough First Attempt
-</h5>
-<div class="card-text listing-description">
-Load tidyverse onto r environment by using the code chunk below.
-</div>
-<div class="card-attribution card-text-small start">
-<div class="listing-author">
-xh.zhang
-</div>
-</div>
-</div>
-</div>
-</a>
 </div>
 </div>
 <div class="listing-no-matching d-none">
 No matching items
 </div>
-</div></main> <!-- /main -->
+</div>
+</section>
+<section id="list-of-hands-on-exercises" class="level2">
+<h2 class="anchored" data-anchor-id="list-of-hands-on-exercises">List of hands-on exercises</h2>
+<div id="listing-List_of_hands-on_exercises" class="quarto-listing quarto-listing-container-default">
+<div class="list quarto-listing-default">
+<div class="quarto-post image-right" data-index="0" data-listing-file-modified-sort="1739168333625" data-listing-reading-time-sort="15" data-listing-word-count-sort="2850">
+<div class="thumbnail">
+<p><a href="./Hands-on_Ex/Hands-on_Ex05e.html" class="no-external"></a></p><a href="./Hands-on_Ex/Hands-on_Ex05e.html" class="no-external">
+<p class="card-img-top"><img src="Hands-on_Ex\images\5.jpg"  class="thumbnail-image card-img"/></p>
+</a><p><a href="./Hands-on_Ex/Hands-on_Ex05e.html" class="no-external"></a></p>
+</div>
+<div class="body">
+<h3 class="no-anchor listing-title">
+<a href="./Hands-on_Ex/Hands-on_Ex05e.html" class="no-external">5e Treemap Visualisation with R</a>
+</h3>
+<div class="listing-subtitle">
+<a href="./Hands-on_Ex/Hands-on_Ex05e.html" class="no-external"></a>
+</div>
+<div class="listing-description">
+<a href="./Hands-on_Ex/Hands-on_Ex05e.html" class="no-external">In this hands-on exercise, you will gain hands-on experiences on designing treemap using appropriate R packages. The hands-on exercise consists of three main section. First…<strong></strong><strong></strong><strong></strong></a>
+</div>
+</div>
+<div class="metadata">
+<p><a href="./Hands-on_Ex/Hands-on_Ex05e.html" class="no-external"></a></p><a href="./Hands-on_Ex/Hands-on_Ex05e.html" class="no-external">
+<div class="listing-author">
+xh.zhang
+</div>
+</a>
+</div>
+</div>
+<div class="quarto-post image-right" data-index="1" data-listing-file-modified-sort="1739167682406" data-listing-reading-time-sort="8" data-listing-word-count-sort="1526">
+<div class="thumbnail">
+<p><a href="./Hands-on_Ex/Hands-on_Ex05d.html" class="no-external"></a></p><a href="./Hands-on_Ex/Hands-on_Ex05d.html" class="no-external">
+<p class="card-img-top"><img src="Hands-on_Ex\images\4.jpg"  class="thumbnail-image card-img"/></p>
+</a><p><a href="./Hands-on_Ex/Hands-on_Ex05d.html" class="no-external"></a></p>
+</div>
+<div class="body">
+<h3 class="no-anchor listing-title">
+<a href="./Hands-on_Ex/Hands-on_Ex05d.html" class="no-external">5d Visual Multivariate Analysis with Parallel Coordinates Plot</a>
+</h3>
+<div class="listing-subtitle">
+<a href="./Hands-on_Ex/Hands-on_Ex05d.html" class="no-external"></a>
+</div>
+<div class="listing-description">
+<a href="./Hands-on_Ex/Hands-on_Ex05d.html" class="no-external">Parallel coordinates plot is a data visualisation specially designed for visualising and analysing multivariate, numerical data. It is ideal for comparing multiple variables…</a>
+</div>
+</div>
+<div class="metadata">
+<p><a href="./Hands-on_Ex/Hands-on_Ex05d.html" class="no-external"></a></p><a href="./Hands-on_Ex/Hands-on_Ex05d.html" class="no-external">
+<div class="listing-author">
+xh.zhang
+</div>
+</a>
+</div>
+</div>
+<div class="quarto-post image-right" data-index="2" data-listing-file-modified-sort="1739167585506" data-listing-reading-time-sort="13" data-listing-word-count-sort="2449">
+<div class="thumbnail">
+<p><a href="./Hands-on_Ex/Hands-on_Ex05c.html" class="no-external"></a></p><a href="./Hands-on_Ex/Hands-on_Ex05c.html" class="no-external">
+<p class="card-img-top"><img src="Hands-on_Ex\images\3.jpg"  class="thumbnail-image card-img"/></p>
+</a><p><a href="./Hands-on_Ex/Hands-on_Ex05c.html" class="no-external"></a></p>
+</div>
+<div class="body">
+<h3 class="no-anchor listing-title">
+<a href="./Hands-on_Ex/Hands-on_Ex05c.html" class="no-external">5c Heatmap for Visualising and Analysing Multivariate Data</a>
+</h3>
+<div class="listing-subtitle">
+<a href="./Hands-on_Ex/Hands-on_Ex05c.html" class="no-external"></a>
+</div>
+<div class="listing-description">
+<a href="./Hands-on_Ex/Hands-on_Ex05c.html" class="no-external">Heatmaps visualise data through variations in colouring. When applied to a tabular format, heatmaps are useful for cross-examining multivariate data, through placing…</a>
+</div>
+</div>
+<div class="metadata">
+<p><a href="./Hands-on_Ex/Hands-on_Ex05c.html" class="no-external"></a></p><a href="./Hands-on_Ex/Hands-on_Ex05c.html" class="no-external">
+<div class="listing-author">
+xh.zhang
+</div>
+</a>
+</div>
+</div>
+<div class="quarto-post image-right" data-index="3" data-listing-file-modified-sort="1739167585396" data-listing-reading-time-sort="15" data-listing-word-count-sort="2939">
+<div class="thumbnail">
+<p><a href="./Hands-on_Ex/Hands-on_Ex05b.html" class="no-external"></a></p><a href="./Hands-on_Ex/Hands-on_Ex05b.html" class="no-external">
+<p class="card-img-top"><img src="Hands-on_Ex\images\2.jpg"  class="thumbnail-image card-img"/></p>
+</a><p><a href="./Hands-on_Ex/Hands-on_Ex05b.html" class="no-external"></a></p>
+</div>
+<div class="body">
+<h3 class="no-anchor listing-title">
+<a href="./Hands-on_Ex/Hands-on_Ex05b.html" class="no-external">5b Visual Correlation Analysis</a>
+</h3>
+<div class="listing-subtitle">
+<a href="./Hands-on_Ex/Hands-on_Ex05b.html" class="no-external"></a>
+</div>
+<div class="listing-description">
+<a href="./Hands-on_Ex/Hands-on_Ex05b.html" class="no-external">Correlation coefficient is a popular statistic that use to measure the type and strength of the relationship between two variables. The values of a correlation coefficient…</a>
+</div>
+</div>
+<div class="metadata">
+<p><a href="./Hands-on_Ex/Hands-on_Ex05b.html" class="no-external"></a></p><a href="./Hands-on_Ex/Hands-on_Ex05b.html" class="no-external">
+<div class="listing-author">
+xh.zhang
+</div>
+</a>
+</div>
+</div>
+<div class="quarto-post image-right" data-index="4" data-listing-file-modified-sort="1739004891830" data-listing-reading-time-sort="4" data-listing-word-count-sort="687">
+<div class="thumbnail">
+<p><a href="./Hands-on_Ex/Hands-on_Ex05a.html" class="no-external"></a></p><a href="./Hands-on_Ex/Hands-on_Ex05a.html" class="no-external">
+<p class="card-img-top"><img src="Hands-on_Ex\images\1.jpg"  class="thumbnail-image card-img"/></p>
+</a><p><a href="./Hands-on_Ex/Hands-on_Ex05a.html" class="no-external"></a></p>
+</div>
+<div class="body">
+<h3 class="no-anchor listing-title">
+<a href="./Hands-on_Ex/Hands-on_Ex05a.html" class="no-external">5a Creating Ternary Plot with R</a>
+</h3>
+<div class="listing-subtitle">
+<a href="./Hands-on_Ex/Hands-on_Ex05a.html" class="no-external"></a>
+</div>
+<div class="listing-description">
+<a href="./Hands-on_Ex/Hands-on_Ex05a.html" class="no-external">Ternary plots are a way of displaying the distribution and variability of three-part compositional data. (For example, the proportion of aged, economy active and young…</a>
+</div>
+</div>
+<div class="metadata">
+<p><a href="./Hands-on_Ex/Hands-on_Ex05a.html" class="no-external"></a></p><a href="./Hands-on_Ex/Hands-on_Ex05a.html" class="no-external">
+<div class="listing-author">
+xh.zhang
+</div>
+</a>
+</div>
+</div>
+<div class="quarto-post image-right" data-index="5" data-listing-file-modified-sort="1738854635170" data-listing-reading-time-sort="8" data-listing-word-count-sort="1411">
+<div class="thumbnail">
+<p><a href="./Hands-on_Ex/Hands-on_Ex04d.html" class="no-external"></a></p><a href="./Hands-on_Ex/Hands-on_Ex04d.html" class="no-external">
+<p class="card-img-top"><img src="Hands-on_Ex\images\Pasted image 20250206230450.png"  class="thumbnail-image card-img"/></p>
+</a><p><a href="./Hands-on_Ex/Hands-on_Ex04d.html" class="no-external"></a></p>
+</div>
+<div class="body">
+<h3 class="no-anchor listing-title">
+<a href="./Hands-on_Ex/Hands-on_Ex04d.html" class="no-external">4d Funnel Plots for Fair Comparisons</a>
+</h3>
+<div class="listing-subtitle">
+<a href="./Hands-on_Ex/Hands-on_Ex04d.html" class="no-external"></a>
+</div>
+<div class="listing-description">
+<a href="./Hands-on_Ex/Hands-on_Ex04d.html" class="no-external">Funnel plot is a specially designed data visualisation for conducting unbiased comparison between outlets, stores or business entities. By the end of this hands-on exercise…</a>
+</div>
+</div>
+<div class="metadata">
+<p><a href="./Hands-on_Ex/Hands-on_Ex04d.html" class="no-external"></a></p><a href="./Hands-on_Ex/Hands-on_Ex04d.html" class="no-external">
+<div class="listing-author">
+xh.zhang
+</div>
+</a>
+</div>
+</div>
+<div class="quarto-post image-right" data-index="6" data-listing-file-modified-sort="1738853874579" data-listing-reading-time-sort="22" data-listing-word-count-sort="4310">
+<div class="thumbnail">
+<p><a href="./Hands-on_Ex/Hands-on_Ex04c.html" class="no-external"></a></p><a href="./Hands-on_Ex/Hands-on_Ex04c.html" class="no-external">
+<p class="card-img-top"><img src="Hands-on_Ex\images\clipboard-1283848075.png"  class="thumbnail-image card-img"/></p>
+</a><p><a href="./Hands-on_Ex/Hands-on_Ex04c.html" class="no-external"></a></p>
+</div>
+<div class="body">
+<h3 class="no-anchor listing-title">
+<a href="./Hands-on_Ex/Hands-on_Ex04c.html" class="no-external">4c Visualising Uncertainty</a>
+</h3>
+<div class="listing-subtitle">
+<a href="./Hands-on_Ex/Hands-on_Ex04c.html" class="no-external"></a>
+</div>
+<div class="listing-description">
+<a href="./Hands-on_Ex/Hands-on_Ex04c.html" class="no-external">Visualising uncertainty is relatively new in statistical graphics. In this chapter, you will gain hands-on experience on creating statistical graphics for visualising…</a>
+</div>
+</div>
+<div class="metadata">
+<p><a href="./Hands-on_Ex/Hands-on_Ex04c.html" class="no-external"></a></p><a href="./Hands-on_Ex/Hands-on_Ex04c.html" class="no-external">
+<div class="listing-author">
+xh.zhang
+</div>
+</a>
+</div>
+</div>
+<div class="quarto-post image-right" data-index="7" data-listing-file-modified-sort="1738994430231" data-listing-reading-time-sort="8" data-listing-word-count-sort="1568">
+<div class="thumbnail">
+<p><a href="./Hands-on_Ex/Hands-on_Ex04b.html" class="no-external"></a></p><a href="./Hands-on_Ex/Hands-on_Ex04b.html" class="no-external">
+<p class="card-img-top"><img src="Hands-on_Ex\images\clipboard-3675709045.png"  class="thumbnail-image card-img"/></p>
+</a><p><a href="./Hands-on_Ex/Hands-on_Ex04b.html" class="no-external"></a></p>
+</div>
+<div class="body">
+<h3 class="no-anchor listing-title">
+<a href="./Hands-on_Ex/Hands-on_Ex04b.html" class="no-external">4b Visual Statistical</a>
+</h3>
+<div class="listing-subtitle">
+<a href="./Hands-on_Ex/Hands-on_Ex04b.html" class="no-external"></a>
+</div>
+<div class="listing-description">
+<a href="./Hands-on_Ex/Hands-on_Ex04b.html" class="no-external">In this hands-on exercise, you will gain hands-on experience on using:</a>
+</div>
+</div>
+<div class="metadata">
+<p><a href="./Hands-on_Ex/Hands-on_Ex04b.html" class="no-external"></a></p><a href="./Hands-on_Ex/Hands-on_Ex04b.html" class="no-external">
+<div class="listing-author">
+xh.zhang
+</div>
+</a>
+</div>
+</div>
+<div class="quarto-post image-right" data-index="8" data-listing-file-modified-sort="1738994429889" data-listing-reading-time-sort="18" data-listing-word-count-sort="3452">
+<div class="thumbnail">
+<p><a href="./Hands-on_Ex/Hands-on_Ex04a.html" class="no-external"></a></p><a href="./Hands-on_Ex/Hands-on_Ex04a.html" class="no-external">
+<p class="card-img-top"><img src="Hands-on_Ex\images\clipboard-912089616.png"  class="thumbnail-image card-img"/></p>
+</a><p><a href="./Hands-on_Ex/Hands-on_Ex04a.html" class="no-external"></a></p>
+</div>
+<div class="body">
+<h3 class="no-anchor listing-title">
+<a href="./Hands-on_Ex/Hands-on_Ex04a.html" class="no-external">4a Visualising Distribution</a>
+</h3>
+<div class="listing-subtitle">
+<a href="./Hands-on_Ex/Hands-on_Ex04a.html" class="no-external"></a>
+</div>
+<div class="listing-description">
+<a href="./Hands-on_Ex/Hands-on_Ex04a.html" class="no-external">Visualising distribution is not new in statistical analysis. In chapter 1 we have shared with you some of the popular statistical graphics methods for visualising…</a>
+</div>
+</div>
+<div class="metadata">
+<p><a href="./Hands-on_Ex/Hands-on_Ex04a.html" class="no-external"></a></p><a href="./Hands-on_Ex/Hands-on_Ex04a.html" class="no-external">
+<div class="listing-author">
+xh.zhang
+</div>
+</a>
+</div>
+</div>
+<div class="quarto-post image-right" data-index="9" data-listing-file-modified-sort="1738247917403" data-listing-reading-time-sort="12" data-listing-word-count-sort="2337">
+<div class="thumbnail">
+<p><a href="./Hands-on_Ex/Hands-on_Ex03b.html" class="no-external"></a></p><a href="./Hands-on_Ex/Hands-on_Ex03b.html" class="no-external">
+<p class="card-img-top"><img src="Hands-on_Ex\Hands-on_Ex03b_files\figure-html\unnamed-chunk-5-1.png"  class="thumbnail-image card-img"/></p>
+</a><p><a href="./Hands-on_Ex/Hands-on_Ex03b.html" class="no-external"></a></p>
+</div>
+<div class="body">
+<h3 class="no-anchor listing-title">
+<a href="./Hands-on_Ex/Hands-on_Ex03b.html" class="no-external">3b Programming Animated Statistical Graphics with R</a>
+</h3>
+<div class="listing-subtitle">
+<a href="./Hands-on_Ex/Hands-on_Ex03b.html" class="no-external"></a>
+</div>
+<div class="listing-description">
+<a href="./Hands-on_Ex/Hands-on_Ex03b.html" class="no-external">When telling a visually-driven data story, animated graphics tends to attract the interest of the audience and make deeper impression than static graphics. In this hands-on…<strong></strong><strong></strong><strong></strong><strong></strong></a>
+</div>
+</div>
+<div class="metadata">
+<p><a href="./Hands-on_Ex/Hands-on_Ex03b.html" class="no-external"></a></p><a href="./Hands-on_Ex/Hands-on_Ex03b.html" class="no-external">
+<div class="listing-author">
+xh.zhang
+</div>
+</a>
+</div>
+</div>
+<div class="quarto-post image-right" data-index="10" data-listing-file-modified-sort="1738246082462" data-listing-reading-time-sort="37" data-listing-word-count-sort="7303">
+<div class="thumbnail">
+<p><a href="./Hands-on_Ex/Hands-on_Ex03a.html" class="no-external"></a></p><a href="./Hands-on_Ex/Hands-on_Ex03a.html" class="no-external">
+<div class="listing-item-img-placeholder card-img-top" >&nbsp;</div>
+</a><p><a href="./Hands-on_Ex/Hands-on_Ex03a.html" class="no-external"></a></p>
+</div>
+<div class="body">
+<h3 class="no-anchor listing-title">
+<a href="./Hands-on_Ex/Hands-on_Ex03a.html" class="no-external">3a Programming Interactive Data Visualisation with R</a>
+</h3>
+<div class="listing-subtitle">
+<a href="./Hands-on_Ex/Hands-on_Ex03a.html" class="no-external"></a>
+</div>
+<div class="listing-description">
+<a href="./Hands-on_Ex/Hands-on_Ex03a.html" class="no-external">In this hands-on exercise, you will learn how to create interactive data visualisation by using functions provided by <strong>ggiraph</strong> and <strong>plotlyr</strong> packages.</a>
+</div>
+</div>
+<div class="metadata">
+<p><a href="./Hands-on_Ex/Hands-on_Ex03a.html" class="no-external"></a></p><a href="./Hands-on_Ex/Hands-on_Ex03a.html" class="no-external">
+<div class="listing-author">
+xh.zhang
+</div>
+</a>
+</div>
+</div>
+<div class="quarto-post image-right" data-index="11" data-listing-file-modified-sort="1737557750870" data-listing-reading-time-sort="11" data-listing-word-count-sort="2012">
+<div class="thumbnail">
+<p><a href="./Hands-on_Ex/Hands-on_Ex02.html" class="no-external"></a></p><a href="./Hands-on_Ex/Hands-on_Ex02.html" class="no-external">
+<div class="listing-item-img-placeholder card-img-top" >&nbsp;</div>
+</a><p><a href="./Hands-on_Ex/Hands-on_Ex02.html" class="no-external"></a></p>
+</div>
+<div class="body">
+<h3 class="no-anchor listing-title">
+<a href="./Hands-on_Ex/Hands-on_Ex02.html" class="no-external">2 Beyond ggplot2 Fundamentals</a>
+</h3>
+<div class="listing-subtitle">
+<a href="./Hands-on_Ex/Hands-on_Ex02.html" class="no-external"></a>
+</div>
+<div class="listing-description">
+<a href="./Hands-on_Ex/Hands-on_Ex02.html" class="no-external">In this chapter, you will be introduced to several ggplot2 extensions for creating more elegant and effective statistical graphics. By the end of this exercise, you will be…</a>
+</div>
+</div>
+<div class="metadata">
+<p><a href="./Hands-on_Ex/Hands-on_Ex02.html" class="no-external"></a></p><a href="./Hands-on_Ex/Hands-on_Ex02.html" class="no-external">
+<div class="listing-author">
+xh.zhang
+</div>
+</a>
+</div>
+</div>
+<div class="quarto-post image-right" data-index="12" data-listing-file-modified-sort="1737531288534" data-listing-reading-time-sort="17" data-listing-word-count-sort="3231">
+<div class="thumbnail">
+<p><a href="./Hands-on_Ex/Hands-on_Ex01.html" class="no-external"></a></p><a href="./Hands-on_Ex/Hands-on_Ex01.html" class="no-external">
+<p class="card-img-top"><img src="Hands-on_Ex\Hands-on_Ex01_files\figure-html\unnamed-chunk-3-1.png"  class="thumbnail-image card-img"/></p>
+</a><p><a href="./Hands-on_Ex/Hands-on_Ex01.html" class="no-external"></a></p>
+</div>
+<div class="body">
+<h3 class="no-anchor listing-title">
+<a href="./Hands-on_Ex/Hands-on_Ex01.html" class="no-external">1 A Layered Grammar of Graphics: ggplot2 methods</a>
+</h3>
+<div class="listing-subtitle">
+<a href="./Hands-on_Ex/Hands-on_Ex01.html" class="no-external"></a>
+</div>
+<div class="listing-description">
+<a href="./Hands-on_Ex/Hands-on_Ex01.html" class="no-external">In this chapter, you will learn the basic principles and essential components of ggplot2. At the same time, you will gain hands-on experience on using these components to…</a>
+</div>
+</div>
+<div class="metadata">
+<p><a href="./Hands-on_Ex/Hands-on_Ex01.html" class="no-external"></a></p><a href="./Hands-on_Ex/Hands-on_Ex01.html" class="no-external">
+<div class="listing-author">
+xh.zhang
+</div>
+</a>
+</div>
+</div>
+<div class="quarto-post image-right" data-index="13" data-listing-file-modified-sort="1739170485113" data-listing-reading-time-sort="2" data-listing-word-count-sort="295">
+<div class="thumbnail">
+<p><a href="./Hands-on_Ex/Hands-on_Ex00.html" class="no-external"></a></p><a href="./Hands-on_Ex/Hands-on_Ex00.html" class="no-external">
+<p class="card-img-top"><img src="Hands-on_Ex\images\clipboard-3277243079.png"  class="thumbnail-image card-img"/></p>
+</a><p><a href="./Hands-on_Ex/Hands-on_Ex00.html" class="no-external"></a></p>
+</div>
+<div class="body">
+<h3 class="no-anchor listing-title">
+<a href="./Hands-on_Ex/Hands-on_Ex00.html" class="no-external">0 A Rough First Attempt</a>
+</h3>
+<div class="listing-subtitle">
+<a href="./Hands-on_Ex/Hands-on_Ex00.html" class="no-external"></a>
+</div>
+<div class="listing-description">
+<a href="./Hands-on_Ex/Hands-on_Ex00.html" class="no-external">Load tidyverse onto r environment by using the code chunk below.</a>
+</div>
+</div>
+<div class="metadata">
+<p><a href="./Hands-on_Ex/Hands-on_Ex00.html" class="no-external"></a></p><a href="./Hands-on_Ex/Hands-on_Ex00.html" class="no-external">
+<div class="listing-author">
+xh.zhang
+</div>
+</a>
+</div>
+</div>
+</div>
+<div class="listing-no-matching d-none">
+No matching items
+</div>
+</div>
+
+
+
+</section>
+
+</main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {
