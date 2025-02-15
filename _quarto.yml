@@ -3,7 +3,7 @@ project:
 website:
   title: "Xiaohan's visual analytics diary"
   navbar:
-    style: "docked"
+    style: "collapsible"
     search: true
     left:
       - text: "Hands-on Exercise"

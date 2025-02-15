@@ -1,173 +1,336 @@
-/* css styles */
-/* 默认背景颜色保持为白色 */
+/* Base Styles */
 body {
   background-color: white;
   font-family: 'Marcellus', Arial, sans-serif;
   color: #333;
   margin: 0;
   padding: 0;
-}
-
-/* 所有标题（h1, h2, h3, h4, h5, h6）都遵循h1格式，字体大小不同 */
-h1, h2, h3, h4, h5, h6 {
-  text-align: left;
-  color: #0077BE;
-  text-shadow: 1.5px 1.5px 3px rgba(0, 119, 190, 0.5); /* 给标题加点水母般的朦胧感 */
-}
-
-h1 {
-  font-size: 36px;
-}
-
-h2 {
-  font-size: 30px;
-}
-
-h3 {
-  font-size: 24px;
-}
-
-h4 {
-  font-size: 20px;
-}
-
-h5 {
-  font-size: 18px;
-}
-
-h6 {
-  font-size: 16px;
-}
-
-/* 页面中的段落 */
-p {
-  font-size: 18px;
-  color: #333;
-  line-height: 1.6;
-  margin: 20px;
-}
-
-/* 水母主题的按钮样式 */
-button {
-  background: linear-gradient(45deg, #7CB9E8, #FFB6C1);
-  color: white;
-  border: none;
-  border-radius: 4px;
-  padding: 6px 13px;
-  font-size: 9px;
-  cursor: pointer;
-  transition: background 0.5s ease;
-}
-
-button:hover {
-  background: linear-gradient(45deg, #0077BE, #6F00FF);
-}
-
-/* 类别状态背景色：水母的不同状态 */
-.profitable {
-  background-color: #7CB9E8;
-  color: white;
-  padding: 10px;
-  border-radius: 5px;
-  text-align: center;
-  margin: 10px 0;
-}
-
-.loss {
-  background-color: #FFB6C1;
-  color: white;
-  padding: 10px;
-  border-radius: 5px;
-  text-align: center;
-  margin: 10px 0;
-}
-
-
-
-navbar {
-  background-color: #0077BE; /* 让导航栏变成水母蓝色 */
-  padding: 10px 0;
-  border-bottom: 2px solid #0077BE;
-}
-
-
-nav a {
-  color: white;
-  text-decoration: none;
-  padding: 10px 20px;
-  font-size: 18px;
-  display: inline-block;
-}
-
-nav a:hover {
-  background-color: #B8B8FF;
-  color: #6F00FF;
-  border-radius: 5px;
-}
-
-b, strong {
-  color: #0077BE; /* 例如，把加粗的文字改成深紫色 */
-}
-
-
-
-/* 卡片式布局（类似水母漂浮的效果） */
-.card {
-  background-color: #FFE5B4;
-  padding: 20px;
-  margin: 20px auto;
-  border-radius: 10px;
-  width: 90%;
-  max-width: 400px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-  transition: transform 0.3s ease;
-}
-
-.card:hover {
-  transform: translateY(-10px);
-}
-
-/* 页面底部 */
-footer {
-  background-color: #0077BE;
-  color: white;
-  text-align: center;
-  padding: 15px 0;
-  font-size: 16px;
-}
-
-/* 水母图标和图形元素 */
-.jellyfish {
-  background: radial-gradient(circle, #7CB9E8, #B8B8FF);
-  width: 100px;
-  height: 100px;
-  border-radius: 50%;
-  margin: 10px auto;
+  min-height: 100vh;
   position: relative;
 }
 
-.jellyfish:after {
+/* Navigation Bar - Now consistent across all pages */
+.navbar {
+  background: linear-gradient(45deg, #0077BE, #4CA1D8);
+  padding: 15px 0;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  box-shadow: 0 2px 10px rgba(0, 119, 190, 0.2);
+  width: 100%;
+}
+
+.navbar-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.navbar-title {
+  color: white;
+  font-size: 20px;
+  white-space: nowrap;
+  overflow: visible;
+  margin-right: 20px;
+}
+
+.nav-links {
+  display: flex;
+  gap: 20px;
+  flex-wrap: nowrap;
+  overflow-x: auto;
+}
+
+.nav-links a {
+  color: white;
+  text-decoration: none;
+  padding: 10px 15px;
+  font-size: 16px;
+  position: relative;
+  transition: all 0.3s ease;
+  white-space: nowrap;
+}
+
+.nav-links a::after {
   content: '';
   position: absolute;
   bottom: 0;
   left: 50%;
+  width: 0;
+  height: 2px;
+  background: #FFE5B4;
+  transition: all 0.3s ease;
   transform: translateX(-50%);
-  width: 10px;
-  height: 40px;
-  background: linear-gradient(180deg, rgba(124, 185, 232, 0.8), rgba(184, 184, 255, 0.8)); /* 渐变 */
-  border-radius: 5px;
 }
 
+.nav-links a:hover::after {
+  width: 80%;
+}
 
-/* 水母主题的边框 */
-.border-light {
-  border: 3px solid #7CB9E8;
-  border-radius: 5px;
+.nav-links a:hover {
+  color: #FFE5B4;
+  transform: translateY(-2px);
+}
+
+/* Enhanced Headings */
+h1, h2, h3, h4, h5, h6 {
+  text-align: left;
+  color: #0077BE;
+  text-shadow: 2px 2px 4px rgba(0, 119, 190, 0.3);
+  position: relative;
+  padding-left: 15px;
+}
+
+h1::before, h2::before, h3::before, h4::before, h5::before, h6::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 5px;
+  height: 70%;
+  background: linear-gradient(180deg, #7CB9E8, #B8B8FF);
+  border-radius: 2px;
+}
+
+h1 { font-size: 36px; }
+h2 { font-size: 30px; }
+h3 { font-size: 24px; }
+h4 { font-size: 20px; }
+h5 { font-size: 18px; }
+h6 { font-size: 16px; }
+
+/* Enhanced Cards */
+.card {
+  background: linear-gradient(135deg, #fff, #f8f9fa);
+  padding: 25px;
+  margin: 25px auto;
+  border-radius: 15px;
+  width: 90%;
+  max-width: 400px;
+  box-shadow: 0 8px 16px rgba(0, 119, 190, 0.1);
+  transition: all 0.4s ease;
+  border: 1px solid rgba(124, 185, 232, 0.2);
+  position: relative;
+  overflow: hidden;
+}
+
+.card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(45deg, rgba(124, 185, 232, 0.1), rgba(184, 184, 255, 0.1));
+  clip-path: circle(0% at 0 0);
+  transition: all 0.5s ease;
+}
+
+.card:hover::before {
+  clip-path: circle(150% at 0 0);
+}
+
+.card:hover {
+  transform: translateY(-15px) scale(1.02);
+  box-shadow: 0 12px 24px rgba(0, 119, 190, 0.15);
+}
+
+/* Enhanced Buttons */
+button {
+  background: linear-gradient(45deg, #7CB9E8, #B8B8FF);
+  color: white;
+  border: none;
+  border-radius: 4px;
+  padding: 4px 8px;
+  font-size: 12px;
+  cursor: pointer;
+  transition: all 0.4s ease;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 2px 4px rgba(0, 119, 190, 0.2);
+}
+
+button::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+  transition: all 0.5s ease;
+}
+
+button:hover::before {
+  left: 100%;
+}
+
+button:hover {
+  background: linear-gradient(45deg, #0077BE, #7CB9E8);
+  transform: translateY(-1px);
+  box-shadow: 0 3px 6px rgba(0, 119, 190, 0.3);
+}
+
+/* Status Classes with Animation */
+.profitable, .loss {
   padding: 15px;
+  border-radius: 8px;
+  text-align: center;
+  margin: 15px 0;
+  position: relative;
+  overflow: hidden;
+  animation: pulseBackground 2s infinite;
 }
 
-/* 水母主题的轮廓效果 */
+.profitable {
+  background: linear-gradient(45deg, #7CB9E8, #4CA1D8);
+  color: white;
+}
+
+.loss {
+  background: linear-gradient(45deg, #FFB6C1, #FF69B4);
+  color: white;
+}
+
+@keyframes pulseBackground {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* Enhanced Footer */
+footer {
+  background: linear-gradient(45deg, #0077BE, #4CA1D8);
+  color: white;
+  text-align: center;
+  padding: 25px 0;
+  position: relative;
+  overflow: hidden;
+}
+
+footer::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 5px;
+  background: linear-gradient(90deg, #FFE5B4, #B8B8FF, #FFE5B4);
+  animation: shimmer 2s infinite linear;
+}
+
+@keyframes shimmer {
+  0% { background-position: -200% 50%; }
+  100% { background-position: 200% 50%; }
+}
+
+/* Enhanced Jellyfish Icon */
+.jellyfish {
+  background: radial-gradient(circle, #7CB9E8, #B8B8FF);
+  width: 120px;
+  height: 120px;
+  border-radius: 60% 60% 50% 50%;
+  margin: 20px auto;
+  position: relative;
+  animation: float 4s ease-in-out infinite;
+}
+
+.jellyfish::before {
+  content: '';
+  position: absolute;
+  bottom: -20px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 80px;
+  height: 40px;
+  background: linear-gradient(180deg, rgba(124, 185, 232, 0.8), transparent);
+  border-radius: 40px 40px 0 0;
+  filter: blur(5px);
+}
+
+.jellyfish::after {
+  content: '';
+  position: absolute;
+  bottom: -30px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 2px;
+  height: 40px;
+  background: linear-gradient(180deg, #7CB9E8, transparent);
+  box-shadow: -10px 0 #7CB9E8, 10px 0 #7CB9E8, -20px 0 #7CB9E8, 20px 0 #7CB9E8;
+  animation: tentacles 2s ease-in-out infinite;
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-20px); }
+}
+
+@keyframes tentacles {
+  0%, 100% { height: 40px; }
+  50% { height: 50px; }
+}
+
+/* Text Enhancements */
+p {
+  font-size: 18px;
+  line-height: 1.8;
+  color: #333;
+  margin: 20px;
+  position: relative;
+  padding-left: 20px;
+}
+
+p::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 3px;
+  height: 100%;
+  background: linear-gradient(180deg, #7CB9E8, transparent);
+  border-radius: 3px;
+}
+
+/* Bold Text Enhancement */
+b, strong {
+  color: #0077BE;
+}
+
+/* Enhanced Borders and Outlines */
+.border-light {
+  border: 3px solid transparent;
+  border-image: linear-gradient(45deg, #7CB9E8, #B8B8FF) 1;
+  border-radius: 8px;
+  padding: 20px;
+  position: relative;
+}
+
 .outline {
-  outline: 3px solid #FFE5B4;
-  outline-offset: 4px;
+  outline: none;
+  position: relative;
+  padding: 20px;
+}
+
+.outline::before {
+  content: '';
+  position: absolute;
+  top: -3px;
+  left: -3px;
+  right: -3px;
+  bottom: -3px;
+  background: linear-gradient(45deg, #FFE5B4, #7CB9E8, #FFE5B4);
+  border-radius: 8px;
+  z-index: -1;
+  animation: outlineGlow 2s infinite linear;
+}
+
+@keyframes outlineGlow {
+  0% { opacity: 0.5; }
+  50% { opacity: 1; }
+  100% { opacity: 0.5; }
 }
