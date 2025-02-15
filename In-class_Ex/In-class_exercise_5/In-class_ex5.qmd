@@ -12,7 +12,7 @@ execute:
 # Loading Packages
 
 ```{r}
-pacman::p_load(tidyverse, readxl, SmartEDA, easystats, gtsummary)
+pacman::p_load(tidyverse, readxl, SmartEDA, easystats, gtsummary, ggstatsplot)
 ```
 # Importing Data
 
@@ -107,11 +107,13 @@ car_resale %>%
 [easystats](https://easystats.github.io/easystats/)
 
 # Checking for Multicollinearity
-
+```{r}
+model <- lm(Price ~ Age_08_04 + Mfg_Year + KM + Weight + Guarantee_Period, data = car_resale)
+model
+```
 
 ```{r}
 check_collinearity(model)
-
 ```
 
 ```{r}
@@ -120,10 +122,7 @@ plot(check_c)
 ```
 
 
-```{r}
-model <- lm(Price ~ Age_08_04 + Mfg_Year + KM + Weight + Guarantee_Period, data = car_resale)
-model
-```
+
 
 ```{r}
 model1 <- lm(Price ~ Age_08_04 + KM + Weight + Guarantee_Period, data = car_resale)
