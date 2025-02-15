@@ -47,7 +47,7 @@ library(tidyr)
 ```
 
 | **Category** | **Package** | **Description** |
-|------------------|------------------|------------------------------------|
+|------------------|------------------|-----------------------------------------------------------------|
 | **Data Manipulation** | **dplyr** | Provides a set of functions for data manipulation, including filtering (`filter()`), selecting columns (`select()`), creating new variables (`mutate()`), and summarizing data (`group_by()` + `summarize()`). |
 |  | **tidyr** | Helps reshape and clean data, offering functions like `pivot_longer()` and `pivot_wider()` for restructuring data, and `separate()` and `unite()` for splitting and merging columns. |
 | **Data Visualization** | **ggplot2** | One of the most powerful visualization packages in R, based on the "grammar of graphics" concept. It supports various chart types such as scatter plots, bar charts, line charts, and more. |
@@ -91,9 +91,22 @@ ship_data <- read_csv("data/Ship_Performance_Dataset.csv")
 
 Use [glimpse()](https://dplyr.tidyverse.org/reference/glimpse.html) to get an initial overview of the data.
 
-```{r}
+::: panel-tabset
+## The Code
+
+```{r echo=TRUE,eval=FALSE}
 glimpse(ship_data)
 ```
+
+
+## The Output
+```{r echo=FALSE,eval=TRUE}
+glimpse(ship_data)
+```
+
+
+:::
+
 
 The dataset contains shipping operations data with 2,736 rows and 18 columns. It tracks various ship metrics including dates (from June 2023), vessel characteristics (ship types like Container Ships and Fish Carriers), and operational parameters (route types ranging from short-haul to transoceanic). The data includes technical specifications such as engine types (HFO, Steam Turbine, Diesel) and maintenance status.
 
