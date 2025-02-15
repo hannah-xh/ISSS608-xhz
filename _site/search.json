@@ -228,56 +228,96 @@
     "href": "about.html",
     "title": "About Me",
     "section": "",
-    "text": "I’m an aspiring data analytics professional currently pursuing my Master of IT in Business (Analytics Track) at Singapore Management University. With a background in Management from Beijing Normal University, I bridge the gap between business insights and technical solutions.\n\n\nMy analytics journey started during my undergraduate years, where I discovered my passion for using data to solve real-world problems. This led me to participate in the Mathematical Contest in Modeling, where my team and I developed a predictive model for drought-resistant agriculture, earning recognition as Meritorious Winners (top 7% globally).\n\n\n\nI’m developing my skills in: - Data Analysis and Visualization - Predictive Modeling - Machine Learning Applications - Business Intelligence - Query Optimization\n\n\n\nI’ve worked on diverse projects that demonstrate my analytical capabilities:\n\nConducted comprehensive analysis of Singapore’s HDB resale market, studying price trends during and after COVID-19\nDeveloped market segmentation strategies for an international retailer in the Philippines\nCreated an innovative Obesity Risk Prediction model for South American health data\nOptimized database query performance, achieving 50% faster execution times\n\n\n\n\nI’m continuously learning and developing my skills in: - Programming: Python, R, MATLAB - Database: MySQL, SQL - Analytics Tools: SAS Viya, SPSS, Tableau - Business Tools: Excel (Advanced)\n\n\n\nI believe in using technology for social good. I’ve volunteered at schools for special needs children, and as a debate team leader, I’ve coordinated events involving multiple colleges and over 100 participants. This experience has taught me the importance of clear communication and leadership in bringing people together.\n\n\n\nI’m currently seeking opportunities to apply my analytical skills in real-world business scenarios. With work authorization in both Singapore (for internships) and China, I’m ready to take on new challenges and contribute to innovative projects.\n\n\n\nFeel free to reach out to me at xh.zhang.2024@mitb.smu.edu.sg or connect with me on LinkedIn. I’m always excited to discuss data analytics, technology, and potential collaborations!\n\n“Learning to tell stories through data, one analysis at a time.”"
+    "text": "I’m an aspiring data analytics professional currently pursuing my Master of IT in Business (Analytics Track) at Singapore Management University. With a background in Management from Beijing Normal University, I bridge the gap between business insights and technical solutions.\n\n\nMy analytics journey started during my undergraduate years, where I discovered my passion for using data to solve real-world problems. This led me to participate in the Mathematical Contest in Modeling, where my team and I developed a predictive model for drought-resistant agriculture, earning recognition as Meritorious Winners (top 7% globally).\n\n\n\nI’m developing my skills in: - Data Analysis and Visualization - Predictive Modeling - Machine Learning Applications - Business Intelligence - Query Optimization\n\n\n\nI’ve worked on diverse projects that demonstrate my analytical capabilities:\n\nConducted comprehensive analysis of Singapore’s HDB resale market, studying price trends during and after COVID-19\nDeveloped market segmentation strategies for an international retailer in the Philippines\nCreated an innovative Obesity Risk Prediction model for South American health data\nOptimized database query performance, achieving 50% faster execution times\n\n\n\n\nI’m continuously learning and developing my skills in: - Programming: Python, R, MATLAB - Database: MySQL, SQL - Analytics Tools: SAS Viya, SPSS, Tableau - Business Tools: Excel (Advanced)\n\n\n\nI believe in using technology for social good. I’ve volunteered at schools for special needs children, and as a debate team leader, I’ve coordinated events involving multiple colleges and over 100 participants. This experience has taught me the importance of clear communication and leadership in bringing people together.\n\n\n\nI’m currently seeking opportunities to apply my analytical skills in real-world business scenarios. With work authorization in both Singapore (for internships) and China, I’m ready to take on new challenges and contribute to innovative projects.\n\n\n\nFeel free to reach out to me at xh.zhang.2024@mitb.smu.edu.sg or connect with me on LinkedIn. I’m always excited to discuss data analytics, technology, and potential collaborations!\n\n“Learning to tell stories through data, one analysis at a time.”",
+    "crumbs": [
+      "Home",
+      "Basics",
+      "About Me"
+    ]
   },
   {
     "objectID": "about.html#my-journey",
     "href": "about.html#my-journey",
     "title": "About Me",
     "section": "",
-    "text": "My analytics journey started during my undergraduate years, where I discovered my passion for using data to solve real-world problems. This led me to participate in the Mathematical Contest in Modeling, where my team and I developed a predictive model for drought-resistant agriculture, earning recognition as Meritorious Winners (top 7% globally)."
+    "text": "My analytics journey started during my undergraduate years, where I discovered my passion for using data to solve real-world problems. This led me to participate in the Mathematical Contest in Modeling, where my team and I developed a predictive model for drought-resistant agriculture, earning recognition as Meritorious Winners (top 7% globally).",
+    "crumbs": [
+      "Home",
+      "Basics",
+      "About Me"
+    ]
   },
   {
     "objectID": "about.html#what-i-do",
     "href": "about.html#what-i-do",
     "title": "About Me",
     "section": "",
-    "text": "I’m developing my skills in: - Data Analysis and Visualization - Predictive Modeling - Machine Learning Applications - Business Intelligence - Query Optimization"
+    "text": "I’m developing my skills in: - Data Analysis and Visualization - Predictive Modeling - Machine Learning Applications - Business Intelligence - Query Optimization",
+    "crumbs": [
+      "Home",
+      "Basics",
+      "About Me"
+    ]
   },
   {
     "objectID": "about.html#recent-projects",
     "href": "about.html#recent-projects",
     "title": "About Me",
     "section": "",
-    "text": "I’ve worked on diverse projects that demonstrate my analytical capabilities:\n\nConducted comprehensive analysis of Singapore’s HDB resale market, studying price trends during and after COVID-19\nDeveloped market segmentation strategies for an international retailer in the Philippines\nCreated an innovative Obesity Risk Prediction model for South American health data\nOptimized database query performance, achieving 50% faster execution times"
+    "text": "I’ve worked on diverse projects that demonstrate my analytical capabilities:\n\nConducted comprehensive analysis of Singapore’s HDB resale market, studying price trends during and after COVID-19\nDeveloped market segmentation strategies for an international retailer in the Philippines\nCreated an innovative Obesity Risk Prediction model for South American health data\nOptimized database query performance, achieving 50% faster execution times",
+    "crumbs": [
+      "Home",
+      "Basics",
+      "About Me"
+    ]
   },
   {
     "objectID": "about.html#technical-expertise",
     "href": "about.html#technical-expertise",
     "title": "About Me",
     "section": "",
-    "text": "I’m continuously learning and developing my skills in: - Programming: Python, R, MATLAB - Database: MySQL, SQL - Analytics Tools: SAS Viya, SPSS, Tableau - Business Tools: Excel (Advanced)"
+    "text": "I’m continuously learning and developing my skills in: - Programming: Python, R, MATLAB - Database: MySQL, SQL - Analytics Tools: SAS Viya, SPSS, Tableau - Business Tools: Excel (Advanced)",
+    "crumbs": [
+      "Home",
+      "Basics",
+      "About Me"
+    ]
   },
   {
     "objectID": "about.html#beyond-the-numbers",
     "href": "about.html#beyond-the-numbers",
     "title": "About Me",
     "section": "",
-    "text": "I believe in using technology for social good. I’ve volunteered at schools for special needs children, and as a debate team leader, I’ve coordinated events involving multiple colleges and over 100 participants. This experience has taught me the importance of clear communication and leadership in bringing people together."
+    "text": "I believe in using technology for social good. I’ve volunteered at schools for special needs children, and as a debate team leader, I’ve coordinated events involving multiple colleges and over 100 participants. This experience has taught me the importance of clear communication and leadership in bringing people together.",
+    "crumbs": [
+      "Home",
+      "Basics",
+      "About Me"
+    ]
   },
   {
     "objectID": "about.html#looking-forward",
     "href": "about.html#looking-forward",
     "title": "About Me",
     "section": "",
-    "text": "I’m currently seeking opportunities to apply my analytical skills in real-world business scenarios. With work authorization in both Singapore (for internships) and China, I’m ready to take on new challenges and contribute to innovative projects."
+    "text": "I’m currently seeking opportunities to apply my analytical skills in real-world business scenarios. With work authorization in both Singapore (for internships) and China, I’m ready to take on new challenges and contribute to innovative projects.",
+    "crumbs": [
+      "Home",
+      "Basics",
+      "About Me"
+    ]
   },
   {
     "objectID": "about.html#lets-connect",
     "href": "about.html#lets-connect",
     "title": "About Me",
     "section": "",
-    "text": "Feel free to reach out to me at xh.zhang.2024@mitb.smu.edu.sg or connect with me on LinkedIn. I’m always excited to discuss data analytics, technology, and potential collaborations!\n\n“Learning to tell stories through data, one analysis at a time.”"
+    "text": "Feel free to reach out to me at xh.zhang.2024@mitb.smu.edu.sg or connect with me on LinkedIn. I’m always excited to discuss data analytics, technology, and potential collaborations!\n\n“Learning to tell stories through data, one analysis at a time.”",
+    "crumbs": [
+      "Home",
+      "Basics",
+      "About Me"
+    ]
   },
   {
     "objectID": "Hands-on_Ex/Hands-on_Ex01.html",

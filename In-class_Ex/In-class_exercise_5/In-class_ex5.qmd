@@ -154,4 +154,14 @@ tbl_regression(model1, intercept = TRUE) %>%
 summary(model1)
 ```
 
+```{r}
+plot(parameters(model1))
+```
+
+```{r}
+
+ggcoefstats(model1,
+            output = "plot")
+```
+
 

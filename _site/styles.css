@@ -82,17 +82,12 @@ button:hover {
   margin: 10px 0;
 }
 
-/* 水母主题的导航栏 */
-nav {
-  background-color: white;
-  padding: 10px 0;
-  border-bottom: 2px solid #6F00FF;
-}
+
 
 navbar {
   background-color: #0077BE; /* 让导航栏变成水母蓝色 */
   padding: 10px 0;
-  border-bottom: 2px solid #6F00FF;
+  border-bottom: 2px solid #0077BE;
 }
 
 
@@ -111,8 +106,9 @@ nav a:hover {
 }
 
 b, strong {
-  color: #6F00FF; /* 例如，把加粗的文字改成深紫色 */
+  color: #0077BE; /* 例如，把加粗的文字改成深紫色 */
 }
+
 
 
 /* 卡片式布局（类似水母漂浮的效果） */
@@ -146,7 +142,7 @@ footer {
   width: 100px;
   height: 100px;
   border-radius: 50%;
-  margin: 20px auto;
+  margin: 10px auto;
   position: relative;
 }
 
