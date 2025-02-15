@@ -1,1 +1,165 @@
 /* css styles */
+/* 默认背景颜色保持为白色 */
+body {
+  background-color: white;
+  font-family: 'Marcellus', Arial, sans-serif;
+  color: #333;
+  margin: 0;
+  padding: 0;
+}
+
+/* 所有标题（h1, h2, h3, h4, h5, h6）都遵循h1格式，字体大小不同 */
+h1, h2, h3, h4, h5, h6 {
+  text-align: left;
+  color: #0077BE;
+  text-shadow: 1.5px 1.5px 3px rgba(0, 119, 190, 0.5); /* 给标题加点水母般的朦胧感 */
+}
+
+h1 {
+  font-size: 36px;
+}
+
+h2 {
+  font-size: 30px;
+}
+
+h3 {
+  font-size: 24px;
+}
+
+h4 {
+  font-size: 20px;
+}
+
+h5 {
+  font-size: 18px;
+}
+
+h6 {
+  font-size: 16px;
+}
+
+/* 页面中的段落 */
+p {
+  font-size: 18px;
+  color: #333;
+  line-height: 1.6;
+  margin: 20px;
+}
+
+/* 水母主题的按钮样式 */
+button {
+  background: linear-gradient(45deg, #7CB9E8, #FFB6C1);
+  color: white;
+  border: none;
+  border-radius: 4px;
+  padding: 6px 13px;
+  font-size: 9px;
+  cursor: pointer;
+  transition: background 0.5s ease;
+}
+
+button:hover {
+  background: linear-gradient(45deg, #0077BE, #6F00FF);
+}
+
+/* 类别状态背景色：水母的不同状态 */
+.profitable {
+  background-color: #7CB9E8;
+  color: white;
+  padding: 10px;
+  border-radius: 5px;
+  text-align: center;
+  margin: 10px 0;
+}
+
+.loss {
+  background-color: #FFB6C1;
+  color: white;
+  padding: 10px;
+  border-radius: 5px;
+  text-align: center;
+  margin: 10px 0;
+}
+
+/* 水母主题的导航栏 */
+nav {
+  background-color: white;
+  padding: 10px 0;
+  border-bottom: 2px solid #6F00FF;
+}
+
+nav a {
+  color: white;
+  text-decoration: none;
+  padding: 10px 20px;
+  font-size: 18px;
+  display: inline-block;
+}
+
+nav a:hover {
+  background-color: #B8B8FF;
+  color: #6F00FF;
+  border-radius: 5px;
+}
+
+/* 卡片式布局（类似水母漂浮的效果） */
+.card {
+  background-color: #FFE5B4;
+  padding: 20px;
+  margin: 20px auto;
+  border-radius: 10px;
+  width: 90%;
+  max-width: 400px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  transition: transform 0.3s ease;
+}
+
+.card:hover {
+  transform: translateY(-10px);
+}
+
+/* 页面底部 */
+footer {
+  background-color: #0077BE;
+  color: white;
+  text-align: center;
+  padding: 15px 0;
+  font-size: 16px;
+}
+
+/* 水母图标和图形元素 */
+.jellyfish {
+  background: radial-gradient(circle, #7CB9E8, #B8B8FF);
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  margin: 20px auto;
+  position: relative;
+}
+
+.jellyfish:after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 10px;
+  height: 40px;
+  background: linear-gradient(180deg, rgba(124, 185, 232, 0.8), rgba(184, 184, 255, 0.8)); /* 渐变 */
+  border-radius: 5px;
+}
+
+
+/* 水母主题的边框 */
+.border-light {
+  border: 3px solid #7CB9E8;
+  border-radius: 5px;
+  padding: 15px;
+}
+
+/* 水母主题的轮廓效果 */
+.outline {
+  outline: 3px solid #FFE5B4;
+  outline-offset: 4px;
+}
