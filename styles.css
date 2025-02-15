@@ -90,10 +90,58 @@ h1::before, h2::before, h3::before, h4::before, h5::before, h6::before {
   left: 0;
   top: 50%;
   transform: translateY(-50%);
-  width: 5px;
-  height: 70%;
-  background: linear-gradient(180deg, #7CB9E8, #B8B8FF);
-  border-radius: 2px;
+  width: 25px;
+  height: 25px;
+  background: 
+    radial-gradient(circle at 50% 40%, 
+      rgba(124, 185, 232, 0.9),
+      rgba(184, 184, 255, 0.7) 45%,
+      transparent 70%);
+  border-radius: 50% 50% 45% 45%;
+  filter: blur(0.5px);
+  animation: float 2.5s ease-in-out infinite,
+             pulse 2s ease-in-out infinite;
+  overflow: visible;
+}
+
+@keyframes float {
+  0% {
+    transform: translateY(-50%) translateX(0) translateY(0);
+  }
+  25% {
+    transform: translateY(-50%) translateX(5px) translateY(-2px);
+  }
+  50% {
+    transform: translateY(-50%) translateX(0) translateY(2px);
+  }
+  75% {
+    transform: translateY(-50%) translateX(-5px) translateY(-2px);
+  }
+  100% {
+    transform: translateY(-50%) translateX(0) translateY(0);
+  }
+}
+
+@keyframes pulse {
+  0% {
+    transform: translateY(-50%) scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: translateY(-50%) scale(0.85);
+    opacity: 0.8;
+  }
+  100% {
+    transform: translateY(-50%) scale(1);
+    opacity: 1;
+  }
+}
+
+/* Ensure headers have proper positioning for pseudo-elements */
+h1, h2, h3, h4, h5, h6 {
+  position: relative;
+  padding-left: 35px;
+  margin: 1em 0;
 }
 
 h1 { font-size: 36px; }

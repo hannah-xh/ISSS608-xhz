@@ -246,7 +246,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#overview" id="toc-overview" class="nav-link active" data-scroll-target="#overview">1. Overview</a>
+  <li><a href="#section" id="toc-section" class="nav-link active" data-scroll-target="#section"><img src="images/clipboard-3460206385.png" class="img-fluid"></a></li>
+  <li><a href="#overview" id="toc-overview" class="nav-link" data-scroll-target="#overview">1. Overview</a>
   <ul class="collapse">
   <li><a href="#background" id="toc-background" class="nav-link" data-scroll-target="#background">1.1 Background</a></li>
   <li><a href="#dataset-description" id="toc-dataset-description" class="nav-link" data-scroll-target="#dataset-description">1.2 Dataset Description</a></li>
@@ -271,10 +272,18 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#time-series-analysis" id="toc-time-series-analysis" class="nav-link" data-scroll-target="#time-series-analysis">5.2 Time Series Analysis</a></li>
   <li><a href="#profit-analysis" id="toc-profit-analysis" class="nav-link" data-scroll-target="#profit-analysis">5.3 Profit Analysis</a>
   <ul class="collapse">
-  <li><a href="#profit-distribution-analysis" id="toc-profit-distribution-analysis" class="nav-link" data-scroll-target="#profit-distribution-analysis">Profit Distribution Analysis</a></li>
-  <li><a href="#profit-analysis-under-different-combinations" id="toc-profit-analysis-under-different-combinations" class="nav-link" data-scroll-target="#profit-analysis-under-different-combinations">5.4 Profit Analysis under Different Combinations</a></li>
+  <li><a href="#profit-distribution-analysis" id="toc-profit-distribution-analysis" class="nav-link" data-scroll-target="#profit-distribution-analysis">5.3.1 Profit Distribution Analysis</a></li>
+  <li><a href="#profit-analysis-under-different-combinations" id="toc-profit-analysis-under-different-combinations" class="nav-link" data-scroll-target="#profit-analysis-under-different-combinations">5.3.2 Profit Analysis under Different Combinations</a></li>
   </ul></li>
   <li><a href="#efficiency-analysis" id="toc-efficiency-analysis" class="nav-link" data-scroll-target="#efficiency-analysis">5.5 Efficiency Analysis</a></li>
+  </ul></li>
+  <li><a href="#conclusion-the-art-of-balancing-efficiency-and-profit" id="toc-conclusion-the-art-of-balancing-efficiency-and-profit" class="nav-link" data-scroll-target="#conclusion-the-art-of-balancing-efficiency-and-profit">6. Conclusion: The Art of Balancing Efficiency and Profit</a>
+  <ul class="collapse">
+  <li><a href="#the-subtle-dance-of-efficiency-and-profit" id="toc-the-subtle-dance-of-efficiency-and-profit" class="nav-link" data-scroll-target="#the-subtle-dance-of-efficiency-and-profit">6.1 The Subtle Dance of Efficiency and Profit</a></li>
+  <li><a href="#the-symphony-of-fleet-composition" id="toc-the-symphony-of-fleet-composition" class="nav-link" data-scroll-target="#the-symphony-of-fleet-composition">6.2 The Symphony of Fleet Composition</a></li>
+  <li><a href="#strategic-route-selection-beyond-simple-geography" id="toc-strategic-route-selection-beyond-simple-geography" class="nav-link" data-scroll-target="#strategic-route-selection-beyond-simple-geography">6.3 Strategic Route Selection: Beyond Simple Geography</a></li>
+  <li><a href="#the-maintenance-paradox" id="toc-the-maintenance-paradox" class="nav-link" data-scroll-target="#the-maintenance-paradox">6.4 The Maintenance Paradox</a></li>
+  <li><a href="#looking-to-the-future" id="toc-looking-to-the-future" class="nav-link" data-scroll-target="#looking-to-the-future">6.5 Looking to the Future</a></li>
   </ul></li>
   <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references">7. References</a></li>
   </ul>
@@ -309,7 +318,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <div>
     <div class="quarto-title-meta-heading">Modified</div>
     <div class="quarto-title-meta-contents">
-      <p class="date-modified">February 15, 2025</p>
+      <p class="date-modified">February 16, 2025</p>
     </div>
   </div>
     
@@ -320,7 +329,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
-<p><img src="images/clipboard-188576035.png" class="img-fluid"></p>
+<section id="section" class="level1">
+<h1><img src="images/clipboard-3460206385.png" class="img-fluid"></h1>
+</section>
 <section id="overview" class="level1">
 <h1>1. Overview</h1>
 <section id="background" class="level2">
@@ -342,6 +353,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h2 class="anchored" data-anchor-id="environment-setting">2.1 Environment Setting</h2>
 <p>First, install and load the required R packages.</p>
 <div class="cell">
+<details class="code-fold">
+<summary>Show the code</summary>
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>pacman<span class="sc">::</span><span class="fu">p_load</span>(ggplot2, tidyverse)</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
@@ -350,12 +363,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggridges)</span>
 <span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(patchwork)</span>
 <span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyr)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 </div>
 <table class="caption-top table">
 <colgroup>
-<col style="width: 33%">
-<col style="width: 33%">
-<col style="width: 33%">
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 50%">
 </colgroup>
 <thead>
 <tr class="header">
@@ -516,7 +530,7 @@ $ Average_Load_Percentage &lt;dbl&gt; 93.76925, 93.89537, 96.21824, 66.19370, 80
 <p>Therefore, we will further investigate the occurrences of “None.”</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>none_counts <span class="ot">&lt;-</span> ship_data <span class="sc">%&gt;%</span></span>
-<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="fu">where</span>(is.character)) <span class="sc">%&gt;%</span>  <span class="co"># Only select character columns</span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="fu">where</span>(is.character)) <span class="sc">%&gt;%</span>  </span>
 <span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="fu">across</span>(<span class="fu">everything</span>(), <span class="sc">~</span> <span class="fu">sum</span>(. <span class="sc">==</span> <span class="st">"None"</span>, <span class="at">na.rm =</span> <span class="cn">TRUE</span>))) <span class="sc">%&gt;%</span></span>
 <span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_longer</span>(<span class="at">cols =</span> <span class="fu">everything</span>(), <span class="at">names_to =</span> <span class="st">"Variable"</span>, <span class="at">values_to =</span> <span class="st">"Count"</span>) <span class="sc">%&gt;%</span></span>
 <span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(Count <span class="sc">&gt;</span> <span class="dv">0</span>)  </span>
@@ -538,12 +552,15 @@ $ Average_Load_Percentage &lt;dbl&gt; 93.76925, 93.89537, 96.21824, 66.19370, 80
 </section>
 <section id="encoding-data" class="level2">
 <h2 class="anchored" data-anchor-id="encoding-data">3.4 Encoding Data</h2>
-<p>Perform the following four data processing steps:</p>
-<p><strong>Remove rows containing <code>"None"</code></strong>: Clean the dataset by eliminating records that cannot be classified or have missing values. <strong>Create time-related features and a profit variable</strong>: Extract year, month, and year-month information, and calculate the profit for each voyage. <strong>Delete rows with missing values</strong>: Ensure that the dataset contains only complete records. <strong>Add a profit status column and convert it to a factor</strong>: Determine whether a ship is profitable based on its profit value and convert the result into a factor type for easier analysis.</p>
+<p>Perform the following four data processing steps to achieve:</p>
+<p><strong>Remove rows containing <code>"None"</code></strong>: Clean the dataset by eliminating records that cannot be classified or have missing values.</p>
+<p><strong>Create time-related features and a profit variable</strong>: Extract year, month, and year-month information, and calculate the profit for each voyage.</p>
+<p><strong>Delete rows with missing values</strong>: Ensure that the dataset contains only complete records.</p>
+<p><strong>Add a profit status column and convert it to a factor</strong>: Determine whether a ship is profitable based on its profit value and convert the result into a factor type for easier analysis.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>ship_data_clean <span class="ot">&lt;-</span> ship_data <span class="sc">%&gt;%</span></span>
 <span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(</span>
-<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>    <span class="sc">!</span><span class="fu">if_any</span>(<span class="fu">where</span>(is.character), <span class="sc">~</span> . <span class="sc">==</span> <span class="st">"None"</span>)  <span class="co"># Filter out rows where any character column has "None"</span></span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>    <span class="sc">!</span><span class="fu">if_any</span>(<span class="fu">where</span>(is.character), <span class="sc">~</span> . <span class="sc">==</span> <span class="st">"None"</span>)  </span>
 <span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span></span>
 <span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
 <span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">Year =</span> <span class="fu">year</span>(Date),</span>
@@ -551,7 +568,7 @@ $ Average_Load_Percentage &lt;dbl&gt; 93.76925, 93.89537, 96.21824, 66.19370, 80
 <span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">YearMonth =</span> <span class="fu">format</span>(Date, <span class="st">"%Y-%m"</span>),</span>
 <span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">Profit_USD =</span> Revenue_per_Voyage_USD <span class="sc">-</span> Operational_Cost_USD</span>
 <span id="cb14-10"><a href="#cb14-10" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span></span>
-<span id="cb14-11"><a href="#cb14-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="fu">complete.cases</span>(.))  <span class="co"># Remove rows with NA values</span></span>
+<span id="cb14-11"><a href="#cb14-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="fu">complete.cases</span>(.)) </span>
 <span id="cb14-12"><a href="#cb14-12" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb14-13"><a href="#cb14-13" aria-hidden="true" tabindex="-1"></a>ship_data_clean <span class="ot">&lt;-</span> ship_data_clean <span class="sc">%&gt;%</span></span>
 <span id="cb14-14"><a href="#cb14-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Profit_Status =</span> <span class="fu">ifelse</span>(Profit_USD <span class="sc">&gt;=</span> <span class="dv">0</span>, <span class="st">"Profitable"</span>, <span class="st">"Loss"</span>)) <span class="sc">%&gt;%</span></span>
@@ -562,8 +579,23 @@ $ Average_Load_Percentage &lt;dbl&gt; 93.76925, 93.89537, 96.21824, 66.19370, 80
 <section id="visualization-strategy" class="level1">
 <h1>4. Visualization Strategy</h1>
 <p>Based on the dataset, here are potential analysis directions:</p>
-<p><strong>Trend Analysis → Line Graph (Time Series Chart)</strong>: Use a time series plot to visualize how the ship’s performance changes over time, helping to identify long-term trends or cyclical fluctuations. <strong>Distribution Visualization → Histogram, Density Plot</strong>: These can be used to show the distribution of the data, helping to understand the central tendency and variability. <strong>Category Comparison → Box Plot, Violin Plot</strong>: These plots allow for comparisons between different categories, highlighting differences in distributions or key metrics across groups. <strong>Relationship Analysis → Scatter Plot with Regression Line</strong>: Use scatter plots to analyze relationships between two variables, helping to uncover potential correlations or trends.</p>
+<p><strong>Trend Analysis → Line Graph (Time Series Chart)</strong>: Use a time series plot to visualize how the ship’s performance changes over time, helping to identify long-term trends or cyclical fluctuations.</p>
+<p><strong>Distribution Visualization → Histogram, Density Plot</strong>: These can be used to show the distribution of the data, helping to understand the central tendency and variability.</p>
+<p><strong>Category Comparison → Box Plot, Violin Plot</strong>: These plots allow for comparisons between different categories, highlighting differences in distributions or key metrics across groups.</p>
+<p><strong>Relationship Analysis → Scatter Plot with Regression Line</strong>: Use scatter plots to analyze relationships between two variables, helping to uncover potential correlations or trends.</p>
+<div class="callout callout-style-default callout-important callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Important
+</div>
+</div>
+<div class="callout-body-container callout-body">
 <p><strong>Note</strong>: Since the data represents individual voyage records, for example, different types of ships might have varying frequencies in the dataset. It’s important to avoid assuming that the initial data quantities for each category (e.g., ship type) are the same. This is crucial to prevent Simpson’s Paradox from affecting the analysis.</p>
+</div>
+</div>
 </section>
 <section id="exploratory-data-analysis-eda" class="level1">
 <h1>5. Exploratory Data Analysis (EDA)</h1>
@@ -571,6 +603,8 @@ $ Average_Load_Percentage &lt;dbl&gt; 93.76925, 93.89537, 96.21824, 66.19370, 80
 <h2 class="anchored" data-anchor-id="distribution-analysis">5.1 Distribution Analysis</h2>
 <p>We will first perform a quantitative distribution visualization analysis on the categorical variables in the dataset.</p>
 <div class="cell">
+<details class="code-fold">
+<summary>Show the code</summary>
 <div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>p1 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(ship_data_clean, <span class="fu">aes</span>(<span class="at">x =</span> Maintenance_Status)) <span class="sc">+</span></span>
 <span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="at">fill =</span> <span class="st">"#7CB9E8"</span>, <span class="at">color =</span> <span class="st">"white"</span>) <span class="sc">+</span></span>
 <span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>  theme_custom <span class="sc">+</span></span>
@@ -613,6 +647,7 @@ $ Average_Load_Percentage &lt;dbl&gt; 93.76925, 93.89537, 96.21824, 66.19370, 80
 <span id="cb15-40"><a href="#cb15-40" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb15-41"><a href="#cb15-41" aria-hidden="true" tabindex="-1"></a>p1 <span class="sc">+</span> p2 <span class="sc">+</span> p3 <span class="sc">+</span> p4 <span class="sc">+</span> </span>
 <span id="cb15-42"><a href="#cb15-42" aria-hidden="true" tabindex="-1"></a>  <span class="fu">plot_layout</span>(<span class="at">ncol =</span> <span class="dv">2</span>) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -621,7 +656,6 @@ $ Average_Load_Percentage &lt;dbl&gt; 93.76925, 93.89537, 96.21824, 66.19370, 80
 </div>
 </div>
 </div>
-<p>Here’s a concise analysis of the shipping fleet data shown in the four distribution charts (148 words):</p>
 <p>The data reveals interesting patterns across maintenance status, engine types, ship types, and route types:</p>
 <p>Maintenance Status shows an almost even distribution, with Critical (716), Fair (713), and Good (698) conditions having similar counts. This suggests consistent wear patterns across the fleet but also indicates that about one-third of vessels require urgent attention.</p>
 <p>Engine Type distribution is also relatively balanced between Diesel (721), Heavy Fuel Oil (702), and Steam Turbine (704) engines, showing no strong preference for any particular propulsion technology.</p>
@@ -632,6 +666,8 @@ $ Average_Load_Percentage &lt;dbl&gt; 93.76925, 93.89537, 96.21824, 66.19370, 80
 <h2 class="anchored" data-anchor-id="time-series-analysis">5.2 Time Series Analysis</h2>
 <p>First, let’s take a look at how income and cost change over time.</p>
 <div class="cell">
+<details class="code-fold">
+<summary>Show the code</summary>
 <div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>time_analysis <span class="ot">&lt;-</span> ship_data_clean <span class="sc">%&gt;%</span></span>
 <span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(YearMonth) <span class="sc">%&gt;%</span></span>
 <span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(</span>
@@ -656,6 +692,7 @@ $ Average_Load_Percentage &lt;dbl&gt; 93.76925, 93.89537, 96.21824, 66.19370, 80
 <span id="cb16-22"><a href="#cb16-22" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
 <span id="cb16-23"><a href="#cb16-23" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">labels =</span> scales<span class="sc">::</span><span class="fu">dollar_format</span>()) <span class="sc">+</span></span>
 <span id="cb16-24"><a href="#cb16-24" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_text</span>(<span class="fu">aes</span>(<span class="at">label =</span> scales<span class="sc">::</span><span class="fu">dollar</span>(Amount),<span class="at">colour =</span> <span class="st">"black"</span>), <span class="at">vjust =</span> <span class="sc">-</span><span class="fl">1.5</span>, <span class="at">size =</span> <span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -664,9 +701,12 @@ $ Average_Load_Percentage &lt;dbl&gt; 93.76925, 93.89537, 96.21824, 66.19370, 80
 </div>
 </div>
 </div>
-<p>Revenue (blue line) has experienced significant fluctuations, with peaks around $551,000 in February-March 2024 and lows near $489,000 in December 2023. The overall trend shows a slight decline from early 2024 to June 2024. Costs (pink line) have remained relatively stable, ranging between $235,000-$285,000, with a notable spike in October 2023 at approximately $285,000. The gap between revenue and costs (profit margin) was largest in February-March 2024 and smallest in December 2023, indicating varying business performance throughout the year. Despite fluctuations, both revenue and costs show a general stabilizing trend in the most recent months of 2024.</p>
+<p>Revenue (blue line) has experienced significant fluctuations, with peaks around $551,000 in February-March 2024 and lows near $489,000 in December 2023. The overall trend shows a slight decline from early 2024 to June 2024. Costs (pink line) have remained relatively stable, ranging between $235,000-$285,000, with a notable spike in October 2023 at approximately $285,000.</p>
+<p>The gap between revenue and costs (profit margin) was largest in February-March 2024 and smallest in December 2023, indicating varying business performance throughout the year. Despite fluctuations, both revenue and costs show a general stabilizing trend in the most recent months of 2024.</p>
 <p>Next, let’s examine the time series variation of profit across different ship types.</p>
 <div class="cell">
+<details class="code-fold">
+<summary>Show the code</summary>
 <div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(ship_data_clean <span class="sc">%&gt;%</span></span>
 <span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>         <span class="fu">group_by</span>(YearMonth, Ship_Type) <span class="sc">%&gt;%</span></span>
 <span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>         <span class="fu">summarise</span>(<span class="at">avg_profit =</span> <span class="fu">mean</span>(Profit_USD), <span class="at">.groups =</span> <span class="st">"drop"</span>), </span>
@@ -682,6 +722,7 @@ $ Average_Load_Percentage &lt;dbl&gt; 93.76925, 93.89537, 96.21824, 66.19370, 80
 <span id="cb17-13"><a href="#cb17-13" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"Average Profit (USD)"</span></span>
 <span id="cb17-14"><a href="#cb17-14" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
 <span id="cb17-15"><a href="#cb17-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">labels =</span> scales<span class="sc">::</span><span class="fu">dollar_format</span>()) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -690,15 +731,21 @@ $ Average_Load_Percentage &lt;dbl&gt; 93.76925, 93.89537, 96.21824, 66.19370, 80
 </div>
 </div>
 </div>
-<p>This line graph displays monthly profit trends for four different ship types from June 2023 to June 2024. Key insights:</p>
-<p>Market Volatility: Bulk Carriers offer the highest profit potential but also the greatest risk, suggesting they’re best for risk-tolerant investors. Their dramatic swings ($150K to $400K) indicate high market sensitivity. Stable Returns: Fish Carriers consistently perform around $250K-$300K, making them the most reliable choice for stable returns. Market Recovery: After a collective downturn in late 2023, all ship types showed recovery in early 2024, indicating overall market improvement. Seasonal Patterns: Container Ships and Fish Carriers show opposing cycles, suggesting a potential diversification strategy to balance portfolio risks.</p>
+<p>This line graph displays monthly profit trends for four different ship types from June 2023 to June 2024.</p>
+<p>Bulk Carriers offer the highest profit potential but also the greatest risk, suggesting they’re best for risk-tolerant investors. Their dramatic swings ($150K to $400K) indicate high market sensitivity. Fish Carriers consistently perform around $250K-$300K, making them the most reliable choice for stable returns. After a collective downturn in late 2023, all ship types showed recovery in early 2024, indicating overall market improvement. Container Ships and Fish Carriers show opposing cycles, suggesting a potential diversification strategy to balance portfolio risks.</p>
 </section>
 <section id="profit-analysis" class="level2">
 <h2 class="anchored" data-anchor-id="profit-analysis">5.3 Profit Analysis</h2>
-<p>In this step, we will analyze profit to explore trends or patterns related to profit.</p>
+<p>In this step, I will analyze profit to explore trends or patterns related to profit.</p>
 <section id="profit-distribution-analysis" class="level3">
-<h3 class="anchored" data-anchor-id="profit-distribution-analysis">Profit Distribution Analysis</h3>
+<h3 class="anchored" data-anchor-id="profit-distribution-analysis">5.3.1 Profit Distribution Analysis</h3>
+<div class="tabset-margin-container"></div><div class="panel-tabset">
+<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-1-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-1" role="tab" aria-controls="tabset-1-1" aria-selected="true">Ship Type</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-2" role="tab" aria-controls="tabset-1-2" aria-selected="false">Engine Type</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-3-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-3" role="tab" aria-controls="tabset-1-3" aria-selected="false">Route Type</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-4-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-4" role="tab" aria-controls="tabset-1-4" aria-selected="false">Maintenance Status</a></li></ul>
+<div class="tab-content">
+<div id="tabset-1-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-1-1-tab">
 <div class="cell">
+<details class="code-fold">
+<summary>Show the code</summary>
 <div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(ship_data_clean, <span class="fu">aes</span>(<span class="at">x =</span> Ship_Type, <span class="at">y =</span> Profit_USD, <span class="at">fill =</span> Profit_Status)) <span class="sc">+</span></span>
 <span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_violin</span>(<span class="fu">aes</span>(<span class="at">fill =</span> Profit_Status),</span>
 <span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>              <span class="at">adjust =</span> <span class="fl">1.2</span>, </span>
@@ -729,7 +776,8 @@ $ Average_Load_Percentage &lt;dbl&gt; 93.76925, 93.89537, 96.21824, 66.19370, 80
 <span id="cb18-28"><a href="#cb18-28" aria-hidden="true" tabindex="-1"></a>             <span class="at">vjust =</span> <span class="sc">-</span><span class="fl">0.2</span>, <span class="at">color =</span> <span class="st">"black"</span>, <span class="at">size =</span> <span class="dv">2</span>, </span>
 <span id="cb18-29"><a href="#cb18-29" aria-hidden="true" tabindex="-1"></a>             <span class="at">label.padding =</span> <span class="fu">unit</span>(<span class="fl">0.1</span>, <span class="st">"lines"</span>),             </span>
 <span id="cb18-30"><a href="#cb18-30" aria-hidden="true" tabindex="-1"></a>             <span class="at">alpha =</span> <span class="fl">0.6</span>,                         </span>
-<span id="cb18-31"><a href="#cb18-31" aria-hidden="true" tabindex="-1"></a>             <span class="at">label.size =</span> <span class="dv">0</span>)  </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb18-31"><a href="#cb18-31" aria-hidden="true" tabindex="-1"></a>             <span class="at">label.size =</span> <span class="dv">0</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -737,6 +785,27 @@ $ Average_Load_Percentage &lt;dbl&gt; 93.76925, 93.89537, 96.21824, 66.19370, 80
 </figure>
 </div>
 </div>
+</div>
+<div class="callout callout-style-simple callout-note">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-body-container">
+<ul>
+<li><p>All ship types show both profitable (blue) and loss-making (pink) periods, with potential profits generally outweighing losses. The median profit (center line) is consistently around $300,000-$350,000 across all types.</p></li>
+<li><p>Bulk Carriers show the widest profit distribution, indicating highest volatility. Container Ships have more concentrated profit ranges, suggesting more stable returns. Fish Carriers and Tankers show similar distribution patterns, with moderate volatility.</p></li>
+<li><p>The loss distributions (pink) are generally smaller than profit distributions (blue), suggesting the shipping industry has better upside potential than downside risk across all vessel types.</p></li>
+<li><p>The data suggests Container Ships might be the safest choice for risk-averse investors, while Bulk Carriers offer higher profit potential with greater risk.</p></li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<div id="tabset-1-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-1-2-tab">
+<div class="cell">
+<details class="code-fold">
+<summary>Show the code</summary>
 <div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(ship_data_clean, <span class="fu">aes</span>(<span class="at">x =</span> Engine_Type, <span class="at">y =</span> Profit_USD, <span class="at">fill =</span> Profit_Status)) <span class="sc">+</span></span>
 <span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_violin</span>(<span class="fu">aes</span>(<span class="at">fill =</span> Profit_Status),</span>
 <span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>              <span class="at">adjust =</span> <span class="fl">1.2</span>, </span>
@@ -767,14 +836,36 @@ $ Average_Load_Percentage &lt;dbl&gt; 93.76925, 93.89537, 96.21824, 66.19370, 80
 <span id="cb19-28"><a href="#cb19-28" aria-hidden="true" tabindex="-1"></a>             <span class="at">vjust =</span> <span class="sc">-</span><span class="fl">0.2</span>, <span class="at">color =</span> <span class="st">"black"</span>, <span class="at">size =</span> <span class="dv">2</span>, </span>
 <span id="cb19-29"><a href="#cb19-29" aria-hidden="true" tabindex="-1"></a>             <span class="at">label.padding =</span> <span class="fu">unit</span>(<span class="fl">0.1</span>, <span class="st">"lines"</span>),             </span>
 <span id="cb19-30"><a href="#cb19-30" aria-hidden="true" tabindex="-1"></a>             <span class="at">alpha =</span> <span class="fl">0.6</span>,                         </span>
-<span id="cb19-31"><a href="#cb19-31" aria-hidden="true" tabindex="-1"></a>             <span class="at">label.size =</span> <span class="dv">0</span>)  </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb19-31"><a href="#cb19-31" aria-hidden="true" tabindex="-1"></a>             <span class="at">label.size =</span> <span class="dv">0</span>) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="Take-home_Ex1_files/figure-html/unnamed-chunk-11-2.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="Take-home_Ex1_files/figure-html/unnamed-chunk-12-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
+</div>
+<div class="callout callout-style-simple callout-note">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-body-container">
+<ul>
+<li><p>All three engine types (Diesel, HFO, Steam Turbine) show remarkably similar profit distributions, with median profits around $320,000-$370,000.</p></li>
+<li><p>All engine types have comparable profit potential, reaching up to $1,000,000. Loss risks are also similar, with maximum losses around -$500,000. The symmetrical distributions suggest balanced risk-reward ratios</p></li>
+<li><p>Steam Turbine shows slightly higher median profits ($370,777). HFO engines demonstrate the most concentrated profit distribution. Diesel engines show marginally wider variation in profitable scenarios</p></li>
+<li><p>The similar distributions suggest engine choice might be better based on factors like fuel costs and maintenance requirements rather than profit potential alone.</p></li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<div id="tabset-1-3" class="tab-pane" role="tabpanel" aria-labelledby="tabset-1-3-tab">
+<div class="cell">
+<details class="code-fold">
+<summary>Show the code</summary>
 <div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(ship_data_clean, <span class="fu">aes</span>(<span class="at">x =</span> Route_Type, <span class="at">y =</span> Profit_USD, <span class="at">fill =</span> Profit_Status)) <span class="sc">+</span></span>
 <span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_violin</span>(<span class="fu">aes</span>(<span class="at">fill =</span> Profit_Status),</span>
 <span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>              <span class="at">adjust =</span> <span class="fl">1.2</span>, </span>
@@ -805,14 +896,35 @@ $ Average_Load_Percentage &lt;dbl&gt; 93.76925, 93.89537, 96.21824, 66.19370, 80
 <span id="cb20-28"><a href="#cb20-28" aria-hidden="true" tabindex="-1"></a>             <span class="at">vjust =</span> <span class="sc">-</span><span class="fl">0.2</span>, <span class="at">color =</span> <span class="st">"black"</span>, <span class="at">size =</span> <span class="dv">2</span>, </span>
 <span id="cb20-29"><a href="#cb20-29" aria-hidden="true" tabindex="-1"></a>             <span class="at">label.padding =</span> <span class="fu">unit</span>(<span class="fl">0.1</span>, <span class="st">"lines"</span>),             </span>
 <span id="cb20-30"><a href="#cb20-30" aria-hidden="true" tabindex="-1"></a>             <span class="at">alpha =</span> <span class="fl">0.6</span>,                         </span>
-<span id="cb20-31"><a href="#cb20-31" aria-hidden="true" tabindex="-1"></a>             <span class="at">label.size =</span> <span class="dv">0</span>)  </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb20-31"><a href="#cb20-31" aria-hidden="true" tabindex="-1"></a>             <span class="at">label.size =</span> <span class="dv">0</span>) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="Take-home_Ex1_files/figure-html/unnamed-chunk-11-3.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="Take-home_Ex1_files/figure-html/unnamed-chunk-13-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
+</div>
+<div class="callout callout-style-simple callout-note">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-body-container">
+<ul>
+<li><p>Long-haul routes show highest median profits ($379,042). Transoceanic routes follow closely ($373,077). Coastal and Short-haul routes show slightly lower medians ($337,844 and $364,042).</p></li>
+<li><p>All routes share similar maximum profit potential (around $1,000,000). Loss risks are comparable across routes (around -$500,000). Profit distributions are more concentrated in Long-haul and Transoceanic routes.</p></li>
+<li><p>Long-haul routes offer best risk-adjusted returns. Coastal routes show widest profit variation, suggesting higher operational uncertainty. Short-haul routes demonstrate balanced risk-reward profile.</p></li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<div id="tabset-1-4" class="tab-pane" role="tabpanel" aria-labelledby="tabset-1-4-tab">
+<div class="cell">
+<details class="code-fold">
+<summary>Show the code</summary>
 <div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(ship_data_clean, <span class="fu">aes</span>(<span class="at">x =</span> Maintenance_Status, <span class="at">y =</span> Profit_USD, <span class="at">fill =</span> Profit_Status)) <span class="sc">+</span></span>
 <span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_violin</span>(<span class="fu">aes</span>(<span class="at">fill =</span> Profit_Status),</span>
 <span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>              <span class="at">adjust =</span> <span class="fl">1.2</span>, </span>
@@ -843,41 +955,42 @@ $ Average_Load_Percentage &lt;dbl&gt; 93.76925, 93.89537, 96.21824, 66.19370, 80
 <span id="cb21-28"><a href="#cb21-28" aria-hidden="true" tabindex="-1"></a>             <span class="at">vjust =</span> <span class="sc">-</span><span class="fl">0.2</span>, <span class="at">color =</span> <span class="st">"black"</span>, <span class="at">size =</span> <span class="dv">2</span>, </span>
 <span id="cb21-29"><a href="#cb21-29" aria-hidden="true" tabindex="-1"></a>             <span class="at">label.padding =</span> <span class="fu">unit</span>(<span class="fl">0.1</span>, <span class="st">"lines"</span>),             </span>
 <span id="cb21-30"><a href="#cb21-30" aria-hidden="true" tabindex="-1"></a>             <span class="at">alpha =</span> <span class="fl">0.6</span>,                         </span>
-<span id="cb21-31"><a href="#cb21-31" aria-hidden="true" tabindex="-1"></a>             <span class="at">label.size =</span> <span class="dv">0</span>)                  </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb21-31"><a href="#cb21-31" aria-hidden="true" tabindex="-1"></a>             <span class="at">label.size =</span> <span class="dv">0</span>)     </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="Take-home_Ex1_files/figure-html/unnamed-chunk-11-4.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="Take-home_Ex1_files/figure-html/unnamed-chunk-14-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
 </div>
-<p>This violin/box plot shows profit distribution across four ship types. Key insights:</p>
-<p>Risk Profile: All ship types show both profitable (blue) and loss-making (pink) periods, with potential profits generally outweighing losses. The median profit (center line) is consistently around $300,000-$350,000 across all types.</p>
-<p>Volatility Patterns: - Bulk Carriers show the widest profit distribution, indicating highest volatility - Container Ships have more concentrated profit ranges, suggesting more stable returns - Fish Carriers and Tankers show similar distribution patterns, with moderate volatility</p>
-<p>Loss Protection: The loss distributions (pink) are generally smaller than profit distributions (blue), suggesting the shipping industry has better upside potential than downside risk across all vessel types.</p>
-<p>Investment Implication: The data suggests Container Ships might be the safest choice for risk-averse investors, while Bulk Carriers offer higher profit potential with greater risk.</p>
-<p>This violin/box plot compares profit distributions across three engine types. Key insights:</p>
-<p>Performance Similarity: All three engine types (Diesel, HFO, Steam Turbine) show remarkably similar profit distributions, with median profits around $320,000-$370,000.</p>
-<p>Risk Profile: - All engine types have comparable profit potential, reaching up to $1,000,000 - Loss risks are also similar, with maximum losses around -$500,000 - The symmetrical distributions suggest balanced risk-reward ratios</p>
-<p>Operational Implications: - Steam Turbine shows slightly higher median profits ($370,777) - HFO engines demonstrate the most concentrated profit distribution - Diesel engines show marginally wider variation in profitable scenarios</p>
-<p>Decision Making: The similar distributions suggest engine choice might be better based on factors like fuel costs and maintenance requirements rather than profit potential alone.</p>
-<p>This violin/box plot compares profit distributions across four shipping routes. Key insights:</p>
-<p>Route Performance: - Long-haul routes show highest median profits ($379,042) - Transoceanic routes follow closely ($373,077) - Coastal and Short-haul routes show slightly lower medians ($337,844 and $364,042)</p>
-<p>Risk Assessment: - All routes share similar maximum profit potential (around $1,000,000) - Loss risks are comparable across routes (around -$500,000) - Profit distributions are more concentrated in Long-haul and Transoceanic routes</p>
-<p>Business Strategy: - Long-haul routes offer best risk-adjusted returns - Coastal routes show widest profit variation, suggesting higher operational uncertainty - Short-haul routes demonstrate balanced risk-reward profile</p>
-<p>Investment Recommendation: Focus on Long-haul and Transoceanic routes for optimal profit stability and potential.</p>
-<p>This violin/box plot illustrates profit distribution across three maintenance status categories. Key insights:</p>
-<p>Maintenance Impact: - ‘Good’ maintenance status shows lowest median profit ($336,322) - ‘Critical’ maintenance shows highest median ($365,267) - ‘Fair’ maintenance falls in between ($357,942)</p>
-<p>Counter-intuitive Pattern: - Surprisingly, ships in critical maintenance condition show higher profit potential - This might suggest aggressive operational strategies with deferred maintenance - Could indicate a short-term profit vs.&nbsp;long-term sustainability trade-off</p>
-<p>Risk Analysis: - All maintenance states show similar loss potentials (-$500,000) - Profit distributions are more concentrated in ‘Good’ maintenance status - ‘Critical’ status shows wider profit variation, indicating higher operational uncertainty</p>
-<p>Strategic Implications: While critical maintenance status shows higher profits, this might not be sustainable long-term and could lead to increased future costs or safety risks.</p>
+<div class="callout callout-style-simple callout-note">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-body-container">
+<ul>
+<li><p>‘Good’ maintenance status shows lowest median profit ($336,322). ‘Critical’ maintenance shows highest median ($365,267). ‘Fair’ maintenance falls in between ($357,942).</p></li>
+<li><p>Surprisingly, ships in critical maintenance condition show higher profit potential. This might suggest aggressive operational strategies with deferred maintenance. Could indicate a short-term profit vs.&nbsp;long-term sustainability trade-off.</p></li>
+<li><p>All maintenance states show similar loss potentials (-$500,000). Profit distributions are more concentrated in ‘Good’ maintenance status. ‘Critical’ status shows wider profit variation, indicating higher operational uncertainty.</p></li>
+<li><p>While critical maintenance status shows higher profits, this might not be sustainable long-term and could lead to increased future costs or safety risks.</p></li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
 </section>
 <section id="profit-analysis-under-different-combinations" class="level3">
-<h3 class="anchored" data-anchor-id="profit-analysis-under-different-combinations">5.4 Profit Analysis under Different Combinations</h3>
+<h3 class="anchored" data-anchor-id="profit-analysis-under-different-combinations">5.3.2 Profit Analysis under Different Combinations</h3>
 <p>Next, we will visualize the top 15 combinations with the highest profit in the dataset, further observing which combinations contribute the most to profit.</p>
 <p>The following code is used to calculate the combination details:</p>
 <div class="cell">
+<details class="code-fold">
+<summary>Show the code</summary>
 <div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>top_combinations <span class="ot">&lt;-</span> ship_data_clean <span class="sc">%&gt;%</span></span>
 <span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(Ship_Type), <span class="sc">!</span><span class="fu">is.na</span>(Engine_Type), <span class="sc">!</span><span class="fu">is.na</span>(Route_Type), <span class="sc">!</span><span class="fu">is.na</span>(Maintenance_Status), <span class="sc">!</span><span class="fu">is.na</span>(Profit_USD)) <span class="sc">%&gt;%</span></span>
 <span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(Ship_Type, Engine_Type, Route_Type, Maintenance_Status) <span class="sc">%&gt;%</span></span>
@@ -900,25 +1013,57 @@ $ Average_Load_Percentage &lt;dbl&gt; 93.76925, 93.89537, 96.21824, 66.19370, 80
 <span id="cb22-20"><a href="#cb22-20" aria-hidden="true" tabindex="-1"></a>    <span class="at">fill =</span> <span class="st">"Average Profit"</span></span>
 <span id="cb22-21"><a href="#cb22-21" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
 <span id="cb22-22"><a href="#cb22-22" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_continuous</span>(<span class="at">labels =</span> scales<span class="sc">::</span><span class="fu">dollar_format</span>())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="Take-home_Ex1_files/figure-html/unnamed-chunk-12-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="Take-home_Ex1_files/figure-html/unnamed-chunk-15-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
+<details class="code-fold">
+<summary>Show the code</summary>
 <div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>top_combinations_freq <span class="ot">&lt;-</span> top_combinations <span class="sc">%&gt;%</span></span>
 <span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">gather</span>(<span class="at">key =</span> <span class="st">"Variable"</span>, <span class="at">value =</span> <span class="st">"Value"</span>, Ship_Type, Engine_Type, Route_Type, Maintenance_Status) <span class="sc">%&gt;%</span></span>
 <span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(Variable, Value) <span class="sc">%&gt;%</span></span>
 <span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(n))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 </div>
-<p>This horizontal bar chart shows the top 15 most profitable combinations of ship, engine, route, and maintenance status. Key insights:</p>
-<p>Top Performers: - Tanker with HFO engine on short-haul routes with fair maintenance leads profitability ($480,000+) - Fish Carriers with HFO engines on long-haul routes rank second - Container Ships with Steam Turbines on long-haul routes rank third</p>
-<p>Pattern Analysis: - HFO engines appear frequently in top combinations - Critical and Fair maintenance statuses dominate the top spots - Short-haul and Long-haul routes are more common in top performers</p>
-<p>Key Combinations: - Fish Carriers show strong performance across different configurations - Container Ships appear in multiple top combinations - Fair maintenance status appears more often in highest-profit combinations</p>
-<p>Strategic Implications: The data suggests focusing on HFO engines, particularly for Tankers and Fish Carriers, while maintaining Fair maintenance standards rather than Good or Critical.</p>
+<p>This horizontal bar chart shows the top 15 most profitable combinations of ship, engine, route, and maintenance status.</p>
+<p>Top Performers:</p>
+<ul>
+<li><p>Tanker with HFO engine on short-haul routes with fair maintenance leads profitability ($480,000+)</p></li>
+<li><p>Fish Carriers with HFO engines on long-haul routes rank second</p></li>
+<li><p>Container Ships with Steam Turbines on long-haul routes rank third</p></li>
+</ul>
+<p>Pattern Analysis:</p>
+<ul>
+<li><p>HFO engines appear frequently in top combinations</p></li>
+<li><p>Critical and Fair maintenance statuses dominate the top spots</p></li>
+<li><p>Short-haul and Long-haul routes are more common in top performers</p></li>
+</ul>
+<p>Key Combinations:</p>
+<ul>
+<li><p>Fish Carriers show strong performance across different configurations</p></li>
+<li><p>Container Ships appear in multiple top combinations</p></li>
+<li><p>Fair maintenance status appears more often in highest-profit combinations</p></li>
+</ul>
+<div class="callout callout-style-default callout-caution callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Caution
+</div>
+</div>
+<div class="callout-body-container callout-body">
 <p>Next, we will explore the occurrences of these four categories in the top 15 profit-generating combinations. Since the data volumes for these four categories are not the same, we need to standardize the frequency counts.</p>
+</div>
+</div>
 <div class="cell">
+<details class="code-fold">
+<summary>Show the code</summary>
 <div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>top_combinations <span class="ot">&lt;-</span> ship_data_clean <span class="sc">%&gt;%</span></span>
 <span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(Ship_Type), <span class="sc">!</span><span class="fu">is.na</span>(Engine_Type), <span class="sc">!</span><span class="fu">is.na</span>(Route_Type), <span class="sc">!</span><span class="fu">is.na</span>(Maintenance_Status), <span class="sc">!</span><span class="fu">is.na</span>(Profit_USD)) <span class="sc">%&gt;%</span></span>
 <span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(Ship_Type, Engine_Type, Route_Type, Maintenance_Status) <span class="sc">%&gt;%</span></span>
@@ -952,9 +1097,12 @@ $ Average_Load_Percentage &lt;dbl&gt; 93.76925, 93.89537, 96.21824, 66.19370, 80
 <span id="cb24-31"><a href="#cb24-31" aria-hidden="true" tabindex="-1"></a>    Variable <span class="sc">==</span> <span class="st">"Maintenance_Status"</span> <span class="sc">~</span> top_15_after<span class="sc">$</span>freq_std[<span class="fu">match</span>(Value, top_15_after<span class="sc">$</span>Maintenance_Status)],</span>
 <span id="cb24-32"><a href="#cb24-32" aria-hidden="true" tabindex="-1"></a>    <span class="cn">TRUE</span> <span class="sc">~</span> <span class="cn">NA_real_</span></span>
 <span id="cb24-33"><a href="#cb24-33" aria-hidden="true" tabindex="-1"></a>  ))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 </div>
 <p>Next, we will visualize and compare the occurrences before and after standardization.</p>
 <div class="cell">
+<details class="code-fold">
+<summary>Show the code</summary>
 <div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>top_combinations_freq<span class="sc">$</span>type <span class="ot">&lt;-</span> <span class="st">"Frequency"</span></span>
 <span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>top_combinations_freq_after<span class="sc">$</span>type <span class="ot">&lt;-</span> <span class="st">"Standardized Frequency"</span></span>
 <span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -978,26 +1126,40 @@ $ Average_Load_Percentage &lt;dbl&gt; 93.76925, 93.89537, 96.21824, 66.19370, 80
 <span id="cb25-21"><a href="#cb25-21" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_text</span>(<span class="fu">aes</span>(<span class="at">label =</span> <span class="fu">round</span>(n, <span class="dv">2</span>)), <span class="at">vjust =</span> <span class="dv">1</span>, <span class="at">size =</span> <span class="dv">2</span>)</span>
 <span id="cb25-22"><a href="#cb25-22" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb25-23"><a href="#cb25-23" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(p)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="Take-home_Ex1_files/figure-html/unnamed-chunk-14-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="Take-home_Ex1_files/figure-html/unnamed-chunk-17-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
 </div>
-<p>This chart compares actual frequency (top) and standardized frequency (bottom) across different categories of shipping operations. Here’s a brief analysis (145 words):</p>
 <p>Heavy Fuel Oil (HFO) engines show the highest frequency (7) among engine types, while Steam Turbine has a higher standardized frequency (2.97) compared to Diesel (1.81).</p>
 <p>In maintenance status, Critical conditions have the highest frequency (8), though Good and Fair conditions show similar standardized frequencies (around 2.97 and 2.39 respectively).</p>
 <p>Route types show balanced actual frequencies (3-4 occurrences each), with Transoceanic routes having a slightly higher standardized frequency (2.97) compared to Coastal routes (1.81).</p>
 <p>For ship types, Container Ships and Fish Carriers both show high actual frequencies (5 each), and Fish Carriers maintain the highest standardized frequency (2.97) among all ship types.</p>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Tip
+</div>
+</div>
+<div class="callout-body-container callout-body">
 <p>The comparison between actual and standardized frequencies helps identify patterns that might not be immediately apparent from raw counts alone, particularly in highlighting the relative importance of different categories when normalized.</p>
+</div>
+</div>
 </section>
 </section>
 <section id="efficiency-analysis" class="level2">
 <h2 class="anchored" data-anchor-id="efficiency-analysis">5.5 Efficiency Analysis</h2>
 <p>Next, we will perform a visual analysis of the operational efficiency of different types of ships.</p>
 <div class="cell">
+<details class="code-fold">
+<summary>Show the code</summary>
 <div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(ship_data_clean, <span class="fu">aes</span>(<span class="at">x =</span> Efficiency_nm_per_kWh, <span class="at">y =</span> Profit_USD)) <span class="sc">+</span></span>
 <span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_density_2d_filled</span>(<span class="at">alpha =</span> <span class="fl">0.7</span>) <span class="sc">+</span></span>
 <span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">color =</span> <span class="st">"white"</span>, <span class="at">se =</span> <span class="cn">TRUE</span>) <span class="sc">+</span></span>
@@ -1012,40 +1174,60 @@ $ Average_Load_Percentage &lt;dbl&gt; 93.76925, 93.89537, 96.21824, 66.19370, 80
 <span id="cb26-12"><a href="#cb26-12" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
 <span id="cb26-13"><a href="#cb26-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">labels =</span> scales<span class="sc">::</span><span class="fu">dollar_format</span>()) <span class="sc">+</span></span>
 <span id="cb26-14"><a href="#cb26-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_viridis_d</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="Take-home_Ex1_files/figure-html/unnamed-chunk-15-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="Take-home_Ex1_files/figure-html/unnamed-chunk-18-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
 </div>
-<p>Here’s a concise analysis of the efficiency vs.&nbsp;profit density visualization for different ship types in under 150 words:</p>
-<p>The visualization shows the relationship between efficiency (nm/kWh) and profit (USD) across four ship types: Bulk Carrier, Container Ship, Fish Carrier, and Tanker. Key insights:</p>
-<p>Optimal Efficiency Zones: All ship types show clear “sweet spots” (yellow/light green areas) where profit is maximized at specific efficiency levels, typically between 0.6-1.0 nm/kWh.</p>
-<p>Fish Carriers demonstrate the most distinct profit optimization patterns, with multiple high-profit zones across different efficiency levels, suggesting more operational flexibility.</p>
-<p>Container Ships and Tankers show more concentrated profit peaks around 0.8 nm/kWh, indicating a narrower optimal operating range.</p>
-<p>The white lines (possibly representing average or trend lines) are relatively stable across efficiency ranges, suggesting that dramatic efficiency improvements may not always translate to proportional profit increases.</p>
-<p>Bulk Carriers show the most evenly distributed profit patterns, indicating they might be more resilient to efficiency variations. # 6. Conclusion Based on the comprehensive shipping fleet analysis, here’s a detailed logical conclusion:</p>
-<p>Operational Efficiency and Profitability Dynamics: - Each ship type has identified optimal efficiency zones (0.6-1.0 nm/kWh), suggesting that operational strategies should focus on maintaining vessels within these ranges - The non-linear relationship between efficiency and profit indicates that pursuing maximum efficiency at all costs may not be economically optimal - Fish Carriers show the most operational flexibility with multiple profit-maximizing efficiency zones, offering strategic advantages in varying market conditions</p>
-<p>Fleet Composition and Risk Management: - The current fleet shows remarkable balance across ship types, engine types, and maintenance status, indicating a well-diversified operational strategy - Different ship types offer distinct risk-return profiles: * Bulk Carriers: Highest profit potential but greatest volatility * Container Ships: More stable returns with concentrated profit ranges * Fish Carriers: Consistent performance with reliable returns * Tankers: Moderate volatility with good profit potential - This diversity creates natural hedging opportunities for fleet operators</p>
-<p>Route Optimization: - Long-haul and Transoceanic routes demonstrate superior profit potential and stability - While Coastal routes show wider profit variation, they remain essential for comprehensive market coverage - The balanced distribution across route types suggests a well-structured network that can adapt to market changes</p>
-<p>Maintenance and Sustainability Paradox: - The counter-intuitive finding that critical maintenance status correlates with higher short-term profits raises important strategic considerations - This likely represents an unsustainable trade-off between immediate returns and long-term fleet reliability - The similar profit distributions across engine types suggest that maintenance decisions should prioritize long-term sustainability over short-term cost savings</p>
-<p>Technology and Engine Strategy: - The similar profit distributions across engine types (Diesel, HFO, Steam Turbine) indicate that engine choice should be based on: * Fuel availability and costs * Maintenance requirements * Environmental regulations * Operational flexibility - HFO engines appear frequently in top-performing combinations, suggesting potential operational advantages</p>
-<p>Strategic Recommendations:</p>
-<p>Operational Focus: - Maintain vessels within proven efficiency ranges rather than pursuing maximum efficiency - Develop specific operational guidelines for each ship type based on their unique efficiency-profit relationships - Implement regular monitoring systems to ensure vessels operate within optimal zones</p>
-<p>Fleet Management: - Maintain a diversified fleet composition to balance risk and return - Consider increasing the proportion of Container Ships and Fish Carriers for stability - Develop specialized operational strategies for each ship type based on their profit patterns</p>
-<p>Route Planning: - Prioritize Long-haul and Transoceanic routes while maintaining sufficient Coastal presence - Develop route optimization strategies that consider both profit potential and operational stability - Consider seasonal patterns in route planning to maximize year-round profitability</p>
-<p>Maintenance Strategy: - Resist the temptation to defer maintenance for short-term profit gains - Implement predictive maintenance programs to optimize long-term vessel performance - Develop clear maintenance standards and schedules based on vessel type and route demands</p>
-<p>Investment Planning: - Focus investments on vessels and routes with proven profit stability - Consider environmental regulations and future fuel availability in fleet expansion decisions - Maintain a balanced approach to risk and return in fleet development</p>
-<p>Sustainability Considerations: - Develop long-term sustainability strategies that balance profit potential with environmental responsibility - Consider future regulatory requirements in fleet modernization plans - Invest in efficient technologies that offer sustainable competitive advantages</p>
-<p>This analysis suggests that successful fleet operations require a careful balance of efficiency, risk management, and long-term sustainability. While short-term profit opportunities exist in various operational strategies, sustainable success depends on maintaining well-maintained, efficiently operated vessels across a diversified fleet serving optimized routes.</p>
+<p>The visualization shows the relationship between efficiency (nm/kWh) and profit (USD) across four ship types: Bulk Carrier, Container Ship, Fish Carrier, and Tanker.</p>
+<p>All ship types show clear “sweet spots” (yellow/light green areas) where profit is maximized at specific efficiency levels, typically between 0.6-1.0 nm/kWh. Fish Carriers demonstrate the most distinct profit optimization patterns, with multiple high-profit zones across different efficiency levels, suggesting more operational flexibility. Container Ships and Tankers show more concentrated profit peaks around 0.8 nm/kWh, indicating a narrower optimal operating range.</p>
+<p>The white lines (possibly representing average or trend lines) are relatively stable across efficiency ranges, suggesting that dramatic efficiency improvements may not always translate to proportional profit increases. Bulk Carriers show the most evenly distributed profit patterns, indicating they might be more resilient to efficiency variations.</p>
+</section>
+</section>
+<section id="conclusion-the-art-of-balancing-efficiency-and-profit" class="level1">
+<h1>6. Conclusion: The Art of Balancing Efficiency and Profit</h1>
+<p>In the vast expanse of the maritime industry, every vessel tells a unique story. Our deep dive into ship performance data reveals an intriguing truth: optimal solutions often lie in balance rather than in the pursuit of extremes.</p>
+<section id="the-subtle-dance-of-efficiency-and-profit" class="level2">
+<h2 class="anchored" data-anchor-id="the-subtle-dance-of-efficiency-and-profit">6.1 The Subtle Dance of Efficiency and Profit</h2>
+<p>Conventional wisdom suggests that higher efficiency invariably leads to better returns. However, our data tells a more nuanced story. Ships operate best within specific efficiency zones (0.6-1.0 nautical miles per kilowatt-hour), much like how cars perform optimally at certain speeds on a highway. Pushing beyond these zones often yields diminishing returns, challenging the “more is better” mindset that dominates many operational strategies.</p>
+<p>Fish Carriers emerge as particularly fascinating examples of adaptability in this context. Their ability to maintain profitability across various efficiency ranges demonstrates that operational flexibility can be as valuable as peak performance. This insight transforms our understanding of maritime operations from a simple pursuit of maximum efficiency to a more sophisticated balancing act.</p>
+</section>
+<section id="the-symphony-of-fleet-composition" class="level2">
+<h2 class="anchored" data-anchor-id="the-symphony-of-fleet-composition">6.2 The Symphony of Fleet Composition</h2>
+<p>Think of different ship types as instruments in an orchestra, each playing its unique role in creating a harmonious performance. Bulk Carriers, with their high profit potential and volatility, act as the bold percussion section - capable of dramatic impact but requiring careful management. Container Ships provide the steady rhythm, offering more predictable returns that form the backbone of fleet operations. Fish Carriers and Tankers complete the ensemble, each contributing their distinct characteristics to create a well-rounded fleet performance.</p>
+<p>This diversity isn’t just about risk management - it’s about creating a resilient system capable of adapting to changing market conditions. The data suggests that successful fleet operations rely not on maximizing the performance of any single vessel type, but on orchestrating a balanced combination that can weather various market conditions.</p>
+</section>
+<section id="strategic-route-selection-beyond-simple-geography" class="level2">
+<h2 class="anchored" data-anchor-id="strategic-route-selection-beyond-simple-geography">6.3 Strategic Route Selection: Beyond Simple Geography</h2>
+<p>The relationship between routes and profitability reveals another layer of complexity in maritime operations. While long-haul and transoceanic routes show superior profit potential, coastal routes play an essential role in maintaining comprehensive market coverage. This distribution pattern suggests that successful route strategy isn’t simply about maximizing distance or profit per journey - it’s about weaving together a network that serves both immediate profitability and long-term market presence.</p>
+</section>
+<section id="the-maintenance-paradox" class="level2">
+<h2 class="anchored" data-anchor-id="the-maintenance-paradox">6.4 The Maintenance Paradox</h2>
+<p>Perhaps the most thought-provoking finding emerges from our maintenance analysis. Ships in critical maintenance status counterintuitively show higher short-term profits, presenting operators with a complex dilemma. This correlation likely represents a temporary trade-off between immediate returns and long-term reliability, much like how deferring maintenance on any complex system might temporarily reduce costs but ultimately lead to more significant issues.</p>
+<p>The similar profit distributions across engine types (Diesel, HFO, Steam Turbine) further complicate this picture, suggesting that maintenance decisions should prioritize long-term sustainability over short-term cost savings. This finding challenges fleet operators to think beyond quarterly profits and consider the broader implications of their maintenance strategies.</p>
+</section>
+<section id="looking-to-the-future" class="level2">
+<h2 class="anchored" data-anchor-id="looking-to-the-future">6.5 Looking to the Future</h2>
+<p>The maritime industry stands at a crossroads where traditional operational wisdom meets modern data-driven insights. Our analysis suggests that successful fleet operations require a delicate balance of efficiency, risk management, and long-term sustainability. The key lies not in pursuing extremes but in finding the sweet spots where various operational factors align optimally.</p>
+<p>As we look ahead, the most successful operators will likely be those who can maintain this balance while adapting to new challenges. Whether it’s environmental regulations, changing market conditions, or technological advances, the ability to maintain operational flexibility while ensuring sustainable practices will become increasingly crucial.</p>
+<p>This analysis not only provides insights into current maritime operations but also offers a framework for thinking about future challenges. In an industry as dynamic as maritime shipping, understanding these complex relationships between efficiency, profit, and sustainability isn’t just about optimizing current operations - it’s about preparing for the future of maritime commerce.</p>
 </section>
 </section>
 <section id="references" class="level1">
 <h1>7. References</h1>
-<p>Primary Dataset: - Ship Performance Dataset (Kaggle) - Link: https://www.kaggle.com/datasets/jeleeladekunlefijabi/ship-performance-clustering-dataset - License: CC BY 4.0</p>
-<p>R Packages Used: - ggplot2: https://ggplot2.tidyverse.org/ - tidyverse: https://www.tidyverse.org/ - dplyr: https://dplyr.tidyverse.org/ - scales: https://scales.r-lib.org/ - ggridges: https://cran.r-project.org/web/packages/ggridges/ - patchwork: https://patchwork.data-imaginist.com/ - tidyr: https://tidyr.tidyverse.org/</p>
+<ul>
+<li><strong>ggplot2</strong>: <a href="https://ggplot2.tidyverse.org/">ggplot2.tidyverse.org</a></li>
+<li><strong>tidyverse</strong>: <a href="https://www.tidyverse.org/">tidyverse.org</a></li>
+<li><strong>dplyr</strong>: <a href="https://dplyr.tidyverse.org/">dplyr.tidyverse.org</a></li>
+<li><strong>scales</strong>: <a href="https://scales.r-lib.org/">scales.r-lib.org</a></li>
+<li><strong>ggridges</strong>: <a href="https://cran.r-project.org/web/packages/ggridges/">CRAN link</a></li>
+<li><strong>patchwork</strong>: <a href="https://patchwork.data-imaginist.com/">patchwork.data-imaginist.com</a></li>
+<li><strong>tidyr</strong>: <a href="https://tidyr.tidyverse.org/">tidyr.tidyverse.org</a></li>
+</ul>
 
 
 </section>
