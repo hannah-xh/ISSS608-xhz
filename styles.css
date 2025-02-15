@@ -89,6 +89,13 @@ nav {
   border-bottom: 2px solid #6F00FF;
 }
 
+navbar {
+  background-color: #0077BE; /* 让导航栏变成水母蓝色 */
+  padding: 10px 0;
+  border-bottom: 2px solid #6F00FF;
+}
+
+
 nav a {
   color: white;
   text-decoration: none;
@@ -102,6 +109,11 @@ nav a:hover {
   color: #6F00FF;
   border-radius: 5px;
 }
+
+b, strong {
+  color: #6F00FF; /* 例如，把加粗的文字改成深紫色 */
+}
+
 
 /* 卡片式布局（类似水母漂浮的效果） */
 .card {
