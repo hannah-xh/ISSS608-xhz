@@ -47,7 +47,7 @@ library(tidyr)
 ```
 
 | **Category** | **Package** | **Description** |
-|-----------------|-----------------|---------------------------------------|
+|----|----|----|
 | **Data Manipulation** | **dplyr** | Provides a set of functions for data manipulation, including filtering (`filter()`), selecting columns (`select()`), creating new variables (`mutate()`), and summarizing data (`group_by()` + `summarize()`). |
 |  | **tidyr** | Helps reshape and clean data, offering functions like `pivot_longer()` and `pivot_wider()` for restructuring data, and `separate()` and `unite()` for splitting and merging columns. |
 | **Data Visualization** | **ggplot2** | One of the most powerful visualization packages in R, based on the "grammar of graphics" concept. It supports various chart types such as scatter plots, bar charts, line charts, and more. |

@@ -1398,8 +1398,16 @@ p {
   position: relative;
   padding-left: 20px;
 }
+p {
+  font-size: 18px;
+  line-height: 1.8;
+  color: #333;
+  margin: 20px;
+  position: relative;
+}
 
-p::before {
+/* Only add vertical line for paragraphs that are not inside callouts */
+p:not(.callout p)::before {
   content: '';
   position: absolute;
   left: 0;
