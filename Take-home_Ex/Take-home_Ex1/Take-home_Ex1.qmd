@@ -47,7 +47,7 @@ library(tidyr)
 ```
 
 | **Category** | **Package** | **Description** |
-|------------------|------------------|-----------------------------------------------------------------|
+|-----------------|-----------------|---------------------------------------|
 | **Data Manipulation** | **dplyr** | Provides a set of functions for data manipulation, including filtering (`filter()`), selecting columns (`select()`), creating new variables (`mutate()`), and summarizing data (`group_by()` + `summarize()`). |
 |  | **tidyr** | Helps reshape and clean data, offering functions like `pivot_longer()` and `pivot_wider()` for restructuring data, and `separate()` and `unite()` for splitting and merging columns. |
 | **Data Visualization** | **ggplot2** | One of the most powerful visualization packages in R, based on the "grammar of graphics" concept. It supports various chart types such as scatter plots, bar charts, line charts, and more. |
@@ -98,15 +98,12 @@ Use [glimpse()](https://dplyr.tidyverse.org/reference/glimpse.html) to get an in
 glimpse(ship_data)
 ```
 
-
 ## The Output
+
 ```{r echo=FALSE,eval=TRUE}
 glimpse(ship_data)
 ```
-
-
 :::
-
 
 The dataset contains shipping operations data with 2,736 rows and 18 columns. It tracks various ship metrics including dates (from June 2023), vessel characteristics (ship types like Container Ships and Fish Carriers), and operational parameters (route types ranging from short-haul to transoceanic). The data includes technical specifications such as engine types (HFO, Steam Turbine, Diesel) and maintenance status.
 
@@ -114,9 +111,30 @@ Performance metrics are recorded through speed (in knots), engine power (kW), di
 
 ## 3.3 Data Inspection
 
-Next, I will use the following code to check for missing values, duplicates, and outliers.
+::: callout-note
+## Data Quality Check Process
+
+We will perform a comprehensive data quality check including:
+
+Missing values detection
+
+Duplicate records identification
+
+Outlier analysis using z-scores
+
+Investigation of "None" values in categorical variables
+:::
+
+First, let's check for missing values, duplicates, and outliers in our dataset:
 
 ```{r}
+#| label: data-quality-check
+#| warning: false
+#| message: false
+#| code-fold: show
+#| code-summary: "Show/hide code for data quality checks"
+
+# Check for missing values and duplicates
 if (any(is.na(ship_data))) {
   print("There are missing values in the data")
 } else {
@@ -129,8 +147,15 @@ if (any(duplicated(ship_data))) {
   print("There are no duplicate values")
 }
 
-numeric_columns <- ship_data %>% select(where(is.numeric)) %>% names()
-z_scores <- ship_data %>% select(all_of(numeric_columns)) %>% scale() %>% as.data.frame()
+# Outlier detection using z-scores
+numeric_columns <- ship_data %>% 
+  select(where(is.numeric)) %>% 
+  names()
+
+z_scores <- ship_data %>% 
+  select(all_of(numeric_columns)) %>% 
+  scale() %>% 
+  as.data.frame()
 
 outliers <- data.frame()
 
@@ -153,26 +178,66 @@ for (i in 1:length(numeric_columns)) {
 
 if (nrow(outliers) > 0) {
   print("Outliers Detected:")
-  print(outliers %>% arrange(Column, desc(abs(Z_Score))) %>% group_by(Column) %>% slice_head(n = 5))
+  print(outliers %>% 
+        arrange(Column, desc(abs(Z_Score))) %>% 
+        group_by(Column) %>% 
+        slice_head(n = 5))
 } else {
   print("No Outliers Detected")
 }
 ```
 
-After checking, we found that the dataset has no missing values, duplicates, or outliers. However, from the previous step, we observed the presence of "None" in the dataset.
+::: callout-important
+## Initial Findings
 
-Therefore, we will further investigate the occurrences of "None."
+Our analysis shows that the dataset has:
+
+No missing values
+
+No duplicate records
+
+No significant outliers (using 3 standard deviations criterion)
+
+However, we observed the presence of "None" values in some categorical variables.
+:::
+
+Let's investigate the occurrence of "None" values in categorical variables:
 
 ```{r}
+#| label: none-value-check
+#| warning: false
+#| code-fold: show
+#| code-summary: "Show/hide code for 'None' value analysis"
+
+# Create a summary of 'None' counts
 none_counts <- ship_data %>%
   select(where(is.character)) %>%  
   summarise(across(everything(), ~ sum(. == "None", na.rm = TRUE))) %>%
-  pivot_longer(cols = everything(), names_to = "Variable", values_to = "Count") %>%
-  filter(Count > 0)  
+  pivot_longer(cols = everything(), 
+              names_to = "Variable", 
+              values_to = "Count") %>%
+  filter(Count > 0) %>%
+  arrange(desc(Count))
 
-print(none_counts)
-
+# Display as a simple formatted table
+knitr::kable(none_counts,
+             caption = "Count of 'None' Values in Categorical Variables",
+             format = "html",
+             col.names = c("Variable", "Number of 'None' Values"),
+             align = c("l", "r"))
 ```
+
+::: callout-tip
+## Recommendation
+
+Based on these findings, we should:
+
+Consider how to handle "None" values in our analysis
+
+Potentially create separate categories for these cases
+
+Document the meaning of "None" in each variable's context
+:::
 
 We found that 136 records contain `"None"` values in certain variables, suggesting that these might be misclassified ship data. Since the `"None"` values affect key variables, making these 136 records difficult to categorize, and correcting them is challenging, removing them can improve analytical accuracy.
 
@@ -398,13 +463,13 @@ ggplot(ship_data_clean, aes(x = Ship_Type, y = Profit_USD, fill = Profit_Status)
 ```
 
 ::: {.callout-note appearance="simple"}
--   All ship types show both profitable (blue) and loss-making (pink) periods, with potential profits generally outweighing losses. The median profit (center line) is consistently around \$300,000-\$350,000 across all types.
+All ship types show both profitable (blue) and loss-making (pink) periods, with potential profits generally outweighing losses. The median profit (center line) is consistently around \$300,000-\$350,000 across all types.
 
--   Bulk Carriers show the widest profit distribution, indicating highest volatility. Container Ships have more concentrated profit ranges, suggesting more stable returns. Fish Carriers and Tankers show similar distribution patterns, with moderate volatility.
+Bulk Carriers show the widest profit distribution, indicating highest volatility. Container Ships have more concentrated profit ranges, suggesting more stable returns. Fish Carriers and Tankers show similar distribution patterns, with moderate volatility.
 
--   The loss distributions (pink) are generally smaller than profit distributions (blue), suggesting the shipping industry has better upside potential than downside risk across all vessel types.
+The loss distributions (pink) are generally smaller than profit distributions (blue), suggesting the shipping industry has better upside potential than downside risk across all vessel types.
 
--   The data suggests Container Ships might be the safest choice for risk-averse investors, while Bulk Carriers offer higher profit potential with greater risk.
+The data suggests Container Ships might be the safest choice for risk-averse investors, while Bulk Carriers offer higher profit potential with greater risk.
 :::
 
 ## Engine Type
@@ -446,13 +511,13 @@ ggplot(ship_data_clean, aes(x = Engine_Type, y = Profit_USD, fill = Profit_Statu
 ```
 
 ::: {.callout-note appearance="simple"}
--   All three engine types (Diesel, HFO, Steam Turbine) show remarkably similar profit distributions, with median profits around \$320,000-\$370,000.
+All three engine types (Diesel, HFO, Steam Turbine) show remarkably similar profit distributions, with median profits around \$320,000-\$370,000.
 
--   All engine types have comparable profit potential, reaching up to \$1,000,000. Loss risks are also similar, with maximum losses around -\$500,000. The symmetrical distributions suggest balanced risk-reward ratios
+All engine types have comparable profit potential, reaching up to \$1,000,000. Loss risks are also similar, with maximum losses around -\$500,000. The symmetrical distributions suggest balanced risk-reward ratios
 
--   Steam Turbine shows slightly higher median profits (\$370,777). HFO engines demonstrate the most concentrated profit distribution. Diesel engines show marginally wider variation in profitable scenarios
+Steam Turbine shows slightly higher median profits (\$370,777). HFO engines demonstrate the most concentrated profit distribution. Diesel engines show marginally wider variation in profitable scenarios
 
--   The similar distributions suggest engine choice might be better based on factors like fuel costs and maintenance requirements rather than profit potential alone.
+The similar distributions suggest engine choice might be better based on factors like fuel costs and maintenance requirements rather than profit potential alone.
 :::
 
 ## Route Type
@@ -494,11 +559,11 @@ ggplot(ship_data_clean, aes(x = Route_Type, y = Profit_USD, fill = Profit_Status
 ```
 
 ::: {.callout-note appearance="simple"}
--   Long-haul routes show highest median profits (\$379,042). Transoceanic routes follow closely (\$373,077). Coastal and Short-haul routes show slightly lower medians (\$337,844 and \$364,042).
+Long-haul routes show highest median profits (\$379,042). Transoceanic routes follow closely (\$373,077). Coastal and Short-haul routes show slightly lower medians (\$337,844 and \$364,042).
 
--   All routes share similar maximum profit potential (around \$1,000,000). Loss risks are comparable across routes (around -\$500,000). Profit distributions are more concentrated in Long-haul and Transoceanic routes.
+All routes share similar maximum profit potential (around \$1,000,000). Loss risks are comparable across routes (around -\$500,000). Profit distributions are more concentrated in Long-haul and Transoceanic routes.
 
--   Long-haul routes offer best risk-adjusted returns. Coastal routes show widest profit variation, suggesting higher operational uncertainty. Short-haul routes demonstrate balanced risk-reward profile.
+Long-haul routes offer best risk-adjusted returns. Coastal routes show widest profit variation, suggesting higher operational uncertainty. Short-haul routes demonstrate balanced risk-reward profile.
 :::
 
 ## Maintenance Status
@@ -540,13 +605,13 @@ ggplot(ship_data_clean, aes(x = Maintenance_Status, y = Profit_USD, fill = Profi
 ```
 
 ::: {.callout-note appearance="simple"}
--   'Good' maintenance status shows lowest median profit (\$336,322). 'Critical' maintenance shows highest median (\$365,267). 'Fair' maintenance falls in between (\$357,942).
+'Good' maintenance status shows lowest median profit (\$336,322). 'Critical' maintenance shows highest median (\$365,267). 'Fair' maintenance falls in between (\$357,942).
 
--   Surprisingly, ships in critical maintenance condition show higher profit potential. This might suggest aggressive operational strategies with deferred maintenance. Could indicate a short-term profit vs. long-term sustainability trade-off.
+Surprisingly, ships in critical maintenance condition show higher profit potential. This might suggest aggressive operational strategies with deferred maintenance. Could indicate a short-term profit vs. long-term sustainability trade-off.
 
--   All maintenance states show similar loss potentials (-\$500,000). Profit distributions are more concentrated in 'Good' maintenance status. 'Critical' status shows wider profit variation, indicating higher operational uncertainty.
+All maintenance states show similar loss potentials (-\$500,000). Profit distributions are more concentrated in 'Good' maintenance status. 'Critical' status shows wider profit variation, indicating higher operational uncertainty.
 
--   While critical maintenance status shows higher profits, this might not be sustainable long-term and could lead to increased future costs or safety risks.
+While critical maintenance status shows higher profits, this might not be sustainable long-term and could lead to increased future costs or safety risks.
 :::
 :::::::
 
@@ -593,27 +658,27 @@ This horizontal bar chart shows the top 15 most profitable combinations of ship,
 
 Top Performers:
 
--   Tanker with HFO engine on short-haul routes with fair maintenance leads profitability (\$480,000+)
+Tanker with HFO engine on short-haul routes with fair maintenance leads profitability (\$480,000+)
 
--   Fish Carriers with HFO engines on long-haul routes rank second
+Fish Carriers with HFO engines on long-haul routes rank second
 
--   Container Ships with Steam Turbines on long-haul routes rank third
+Container Ships with Steam Turbines on long-haul routes rank third
 
 Pattern Analysis:
 
--   HFO engines appear frequently in top combinations
+HFO engines appear frequently in top combinations
 
--   Critical and Fair maintenance statuses dominate the top spots
+Critical and Fair maintenance statuses dominate the top spots
 
--   Short-haul and Long-haul routes are more common in top performers
+Short-haul and Long-haul routes are more common in top performers
 
 Key Combinations:
 
--   Fish Carriers show strong performance across different configurations
+Fish Carriers show strong performance across different configurations
 
--   Container Ships appear in multiple top combinations
+Container Ships appear in multiple top combinations
 
--   Fair maintenance status appears more often in highest-profit combinations
+Fair maintenance status appears more often in highest-profit combinations
 
 ::: callout-caution
 Next, we will explore the occurrences of these four categories in the top 15 profit-generating combinations. Since the data volumes for these four categories are not the same, we need to standardize the frequency counts.
@@ -767,10 +832,16 @@ This analysis not only provides insights into current maritime operations but al
 
 # 7. References
 
--   **ggplot2**: [ggplot2.tidyverse.org](https://ggplot2.tidyverse.org/)
--   **tidyverse**: [tidyverse.org](https://www.tidyverse.org/)
--   **dplyr**: [dplyr.tidyverse.org](https://dplyr.tidyverse.org/)
--   **scales**: [scales.r-lib.org](https://scales.r-lib.org/)
--   **ggridges**: [CRAN link](https://cran.r-project.org/web/packages/ggridges/)
--   **patchwork**: [patchwork.data-imaginist.com](https://patchwork.data-imaginist.com/)
--   **tidyr**: [tidyr.tidyverse.org](https://tidyr.tidyverse.org/)
+**ggplot2**: [ggplot2.tidyverse.org](https://ggplot2.tidyverse.org/)
+
+**tidyverse**: [tidyverse.org](https://www.tidyverse.org/)
+
+**dplyr**: [dplyr.tidyverse.org](https://dplyr.tidyverse.org/)
+
+**scales**: [scales.r-lib.org](https://scales.r-lib.org/)
+
+**ggridges**: [CRAN link](https://cran.r-project.org/web/packages/ggridges/)
+
+**patchwork**: [patchwork.data-imaginist.com](https://patchwork.data-imaginist.com/)
+
+**tidyr**: [tidyr.tidyverse.org](https://tidyr.tidyverse.org/)
