@@ -1,5 +1,5 @@
 ---
-title: "5d Visual Multivariate Analysis with Parallel Coordinates Plot"
+title: "Visual Multivariate Analysis with Parallel Coordinates Plot"
 
 author: "xh.zhang"
 date-modified: "last-modified"

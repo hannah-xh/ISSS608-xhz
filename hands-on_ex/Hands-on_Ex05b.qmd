@@ -1,5 +1,5 @@
 ---
-title: "5b Visual Correlation Analysis"
+title: "Visual Correlation Analysis"
 
 author: "xh.zhang"
 date-modified: "last-modified"

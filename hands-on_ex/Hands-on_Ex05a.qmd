@@ -1,5 +1,5 @@
 ---
-title: "5a Creating Ternary Plot with R"
+title: "Creating Ternary Plot with R"
 
 author: "xh.zhang"
 date-modified: "last-modified"

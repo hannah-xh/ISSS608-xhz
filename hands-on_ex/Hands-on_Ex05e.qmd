@@ -1,5 +1,5 @@
 ---
-title: "5e Treemap Visualisation with R"
+title: "Treemap Visualisation with R"
 
 author: "xh.zhang"
 date-modified: "last-modified"

@@ -1,5 +1,5 @@
 ---
-title: "4c Visualising Uncertainty"
+title: "Visualising Uncertainty"
 
 author: "xh.zhang"
 date-modified: "last-modified"

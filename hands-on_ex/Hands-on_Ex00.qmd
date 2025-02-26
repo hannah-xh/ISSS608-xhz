@@ -1,5 +1,5 @@
 ---
-title: "0 A Rough First Attempt"
+title: "A Rough First Attempt"
 author: "xh.zhang"
 date-modified: "last-modified"
 execute:

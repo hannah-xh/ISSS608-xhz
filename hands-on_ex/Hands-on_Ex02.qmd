@@ -1,5 +1,5 @@
 ---
-title: "2  Beyond ggplot2 Fundamentals"
+title: "Beyond ggplot2 Fundamentals"
 
 author: "xh.zhang"
 date-modified: "last-modified"

@@ -1,5 +1,5 @@
 ---
-title: "5c Heatmap for Visualising and Analysing Multivariate Data"
+title: "Heatmap for Visualising and Analysing Multivariate Data"
 
 author: "xh.zhang"
 date-modified: "last-modified"

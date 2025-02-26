@@ -1,5 +1,5 @@
 ---
-title: "3b Programming Animated Statistical Graphics with R"
+title: "Programming Animated Statistical Graphics with R"
 
 author: "xh.zhang"
 date-modified: "last-modified"
