@@ -11,7 +11,9 @@ listing:
     sort: "title desc"
 ---
 
-## ![](images/clipboard-1995377699.png)List of take-home exercises
+## ![](images/clipboard-1995377699.png)
+
+## List of take-home exercises
 
 ::: {#List_of_take-home_exercises}
 :::
