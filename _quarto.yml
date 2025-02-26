@@ -10,32 +10,34 @@ website:
         menu:
           - text: "A Rough First Attempt"
             href: Hands-on_Ex/Hands-on_Ex00.html
-          - text: "1 A Layered Grammar of Graphics: ggplot2 methods"
+          - text: "A Layered Grammar of Graphics: ggplot2 methods"
             href: Hands-on_Ex/Hands-on_Ex01.html
-          - text: "2 Beyond ggplot2 Fundamentals"
+          - text: "Beyond ggplot2 Fundamentals"
             href: Hands-on_Ex/Hands-on_Ex02.html
-          - text: "3a Programming Interactive Data Visualisation with R"
+          - text: "Programming Interactive Data Visualisation with R"
             href: Hands-on_Ex/Hands-on_Ex03a.html
-          - text: "3b Programming Animated Statistical Graphics with R"
+          - text: "Programming Animated Statistical Graphics with R"
             href: Hands-on_Ex/Hands-on_Ex03b.html
-          - text: "4a Visualising Distribution"
+          - text: "Visualising Distribution"
             href: Hands-on_Ex/Hands-on_Ex04a.html
-          - text: "4b Visual Statistical Analysis"
+          - text: "Visual Statistical Analysis"
             href: Hands-on_Ex/Hands-on_Ex04b.html
-          - text: "4c Visualising Uncertainty"
+          - text: "Visualising Uncertainty"
             href: Hands-on_Ex/Hands-on_Ex04c.html
-          - text: "4d Building Funnel Plot with R"
+          - text: "Building Funnel Plot with R"
             href: Hands-on_Ex/Hands-on_Ex04d.html
-          - text: "5a Creating Ternary Plot with R"
+          - text: "Creating Ternary Plot with R"
             href: Hands-on_Ex/Hands-on_Ex05a.html
-          - text: "5b Visual Correlation Analysis"
+          - text: "Visual Correlation Analysis"
             href: Hands-on_Ex/Hands-on_Ex05b.html
-          - text: "5c Heatmap for Visualising and Analysing Multivariate Data"
+          - text: "Heatmap for Visualising and Analysing Multivariate Data"
             href: Hands-on_Ex/Hands-on_Ex05c.html
-          - text: "5d Visual Multivariate Analysis with Parallel Coordinates Plot"
+          - text: "Visual Multivariate Analysis with Parallel Coordinates Plot"
             href: Hands-on_Ex/Hands-on_Ex05d.html
-          - text: "5e Treemap Visualisation with R"
+          - text: "Treemap Visualisation with R"
             href: Hands-on_Ex/Hands-on_Ex05e.html
+          - text: "Visualising and Analysing Time-oriented Data"
+            href: Hands-on_Ex/Hands-on_Ex07.html
       - text: "In-Class Exercise"
         menu:
           - text: "In-class Exercise 2025-2-8"
