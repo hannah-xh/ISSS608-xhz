@@ -42,6 +42,8 @@ website:
         menu:
           - text: "In-class Exercise 2025-2-8"
             href: In-class_Ex/In-class_exercise_4/In-class_ex4.html
+          - text: "In-class Exercise 2025-3-1"
+            href: In-class_Ex/In-class_exercise_7/In-class_ex7.html
       - text: "Take-home Exercise"
         menu:
           - text: "Ship Performance"
