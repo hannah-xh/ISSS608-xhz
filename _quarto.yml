@@ -48,6 +48,8 @@ website:
         menu:
           - text: "Ship Performance"
             href: Take-home_Ex/Take-home_Ex1/Take-home_Ex1.html
+          - text: "Singapore International Trade Analysis "
+            href: Take-home_Ex/Take-home_Ex2/Take-home_Ex2.html
       - text: "Team Project"
         menu:
           - text: "to be continue"
