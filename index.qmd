@@ -9,6 +9,7 @@ listing:
     type: default
   - id: List_of_hands-on_exercises
     contents: 
+    - "Hands-on_Ex09.qmd"
     - "Hands-on_Ex08c.qmd"
     - "Hands-on_Ex08b.qmd"
     - "Hands-on_Ex08a.qmd"
