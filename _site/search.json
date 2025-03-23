@@ -1489,5 +1489,54 @@
     "title": "Modelling, Visualising and Analysing Network Data with R",
     "section": "Building Interactive Network Graph with visNetwork",
     "text": "Building Interactive Network Graph with visNetwork\n\nData preparation\n\nGAStech_edges_aggregated &lt;- GAStech_edges %&gt;%\n  left_join(GAStech_nodes, by = c(\"sourceLabel\" = \"label\")) %&gt;%\n  rename(from = id) %&gt;%\n  left_join(GAStech_nodes, by = c(\"targetLabel\" = \"label\")) %&gt;%\n  rename(to = id) %&gt;%\n  filter(MainSubject == \"Work related\") %&gt;%\n  group_by(from, to) %&gt;%\n    summarise(weight = n()) %&gt;%\n  filter(from!=to) %&gt;%\n  filter(weight &gt; 1) %&gt;%\n  ungroup()\n\n\n\nPlotting the first interactive network graph\n\nvisNetwork(GAStech_nodes, \n           GAStech_edges_aggregated)\n\n\n\nWorking with layout\n\nvisNetwork(GAStech_nodes,\n           GAStech_edges_aggregated) %&gt;%\n  visIgraphLayout(layout = \"layout_with_fr\") \n\n\n\n\n\n\n\nWorking with visual attributes - Nodes\n\nGAStech_nodes &lt;- GAStech_nodes %&gt;%\n  rename(group = Department) \n\nvisNetwork(GAStech_nodes,\n           GAStech_edges_aggregated) %&gt;%\n  visIgraphLayout(layout = \"layout_with_fr\") %&gt;%\n  visLegend() %&gt;%\n  visLayout(randomSeed = 123)\n\n\n\n\n\n\n\nWorking with visual attributes - Edges\n\nvisNetwork(GAStech_nodes,\n           GAStech_edges_aggregated) %&gt;%\n  visIgraphLayout(layout = \"layout_with_fr\") %&gt;%\n  visEdges(arrows = \"to\", \n           smooth = list(enabled = TRUE, \n                         type = \"curvedCW\")) %&gt;%\n  visLegend() %&gt;%\n  visLayout(randomSeed = 123)\n\n\n\n\n\n\n\nInteractivity\n\nvisNetwork(GAStech_nodes,\n           GAStech_edges_aggregated) %&gt;%\n  visIgraphLayout(layout = \"layout_with_fr\") %&gt;%\n  visOptions(highlightNearest = TRUE,\n             nodesIdSelection = TRUE) %&gt;%\n  visLegend() %&gt;%\n  visLayout(randomSeed = 123)"
+  },
+  {
+    "objectID": "In-class_Ex/In-class_exercise_9/In-class_ex9.html",
+    "href": "In-class_Ex/In-class_exercise_9/In-class_ex9.html",
+    "title": "In-class Exercise 9",
+    "section": "",
+    "text": "pacman::p_load(tidygraph, ggraph,\n               visNetwork, lubridate, clock,\n               tidyverse, graphlayouts)\n\n\n\n\n\n# Import data\nGAStech_nodes = read_csv(\"data/GAStech_email_node.csv\") \nGAStech_edges = read_csv(\"data/GAStech_email_edge-v2.csv\")\n\n# Convert date format and add weekday\nGAStech_edges = GAStech_edges %&gt;%   \n  mutate(SendDate = dmy(SentDate)) %&gt;%   \n  mutate(Weekday = wday(SentDate, label = TRUE, abbr = FALSE))\n\n# Aggregate work-related emails\nGAStech_edges_aggregated &lt;- GAStech_edges %&gt;%   \n  filter(MainSubject == \"Work related\") %&gt;%   \n  group_by(source, target, Weekday) %&gt;%     \n  summarise(Weight = n()) %&gt;%   \n  filter(source!=target) %&gt;%   \n  filter(Weight &gt; 1) %&gt;%   \n  ungroup()"
+  },
+  {
+    "objectID": "In-class_Ex/In-class_exercise_9/In-class_ex9.html#getting-started",
+    "href": "In-class_Ex/In-class_exercise_9/In-class_ex9.html#getting-started",
+    "title": "In-class Exercise 9",
+    "section": "",
+    "text": "pacman::p_load(tidygraph, ggraph,\n               visNetwork, lubridate, clock,\n               tidyverse, graphlayouts)\n\n\n\n\n\n# Import data\nGAStech_nodes = read_csv(\"data/GAStech_email_node.csv\") \nGAStech_edges = read_csv(\"data/GAStech_email_edge-v2.csv\")\n\n# Convert date format and add weekday\nGAStech_edges = GAStech_edges %&gt;%   \n  mutate(SendDate = dmy(SentDate)) %&gt;%   \n  mutate(Weekday = wday(SentDate, label = TRUE, abbr = FALSE))\n\n# Aggregate work-related emails\nGAStech_edges_aggregated &lt;- GAStech_edges %&gt;%   \n  filter(MainSubject == \"Work related\") %&gt;%   \n  group_by(source, target, Weekday) %&gt;%     \n  summarise(Weight = n()) %&gt;%   \n  filter(source!=target) %&gt;%   \n  filter(Weight &gt; 1) %&gt;%   \n  ungroup()"
+  },
+  {
+    "objectID": "In-class_Ex/In-class_exercise_9/In-class_ex9.html#creating-network-objects-with-tidygraph",
+    "href": "In-class_Ex/In-class_exercise_9/In-class_ex9.html#creating-network-objects-with-tidygraph",
+    "title": "In-class Exercise 9",
+    "section": "Creating Network Objects with tidygraph",
+    "text": "Creating Network Objects with tidygraph\n\n# Create tbl_graph object\nGAStech_graph = tbl_graph(nodes = GAStech_nodes, \n                          edges = GAStech_edges_aggregated,\n                          directed = TRUE)\n\n# Change active tibble and sort edges by weight\nGAStech_graph %&gt;%   \n  activate(edges) %&gt;%   \n  arrange(desc(Weight))\n\n# A tbl_graph: 54 nodes and 1372 edges\n#\n# A directed multigraph with 1 component\n#\n# Edge Data: 1,372 × 4 (active)\n    from    to Weekday Weight\n   &lt;int&gt; &lt;int&gt; &lt;ord&gt;    &lt;int&gt;\n 1    40    41 星期六      13\n 2    41    43 星期一      11\n 3    35    31 星期二      10\n 4    40    41 星期一      10\n 5    40    43 星期一      10\n 6    36    32 星期日       9\n 7    40    43 星期六       9\n 8    41    40 星期一       9\n 9    19    15 星期三       8\n10    35    38 星期二       8\n# ℹ 1,362 more rows\n#\n# Node Data: 54 × 4\n     id label           Department     Title           \n  &lt;dbl&gt; &lt;chr&gt;           &lt;chr&gt;          &lt;chr&gt;           \n1     1 Mat.Bramar      Administration Assistant to CEO\n2     2 Anda.Ribera     Administration Assistant to CFO\n3     3 Rachel.Pantanal Administration Assistant to CIO\n# ℹ 51 more rows"
+  },
+  {
+    "objectID": "In-class_Ex/In-class_exercise_9/In-class_ex9.html#static-network-visualization-with-ggraph",
+    "href": "In-class_Ex/In-class_exercise_9/In-class_ex9.html#static-network-visualization-with-ggraph",
+    "title": "In-class Exercise 9",
+    "section": "Static Network Visualization with ggraph",
+    "text": "Static Network Visualization with ggraph\n\n# Basic network graph\nggraph(GAStech_graph) +   \n  geom_edge_link() +   \n  geom_node_point()\n\n\n\n\n\n\n\n# Apply graph theme\ng = ggraph(GAStech_graph) +    \n  geom_edge_link(aes()) +   \n  geom_node_point(aes())  \ng + theme_graph()\n\n\n\n\n\n\n\n# Use Fruchterman-Reingold layout\ng = ggraph(GAStech_graph, layout = \"fr\") +   \n  geom_edge_link(aes()) +   \n  geom_node_point(aes())  \ng + theme_graph()\n\n\n\n\n\n\n\n# Color nodes by department\ng = ggraph(GAStech_graph, layout = \"nicely\") +    \n  geom_edge_link(aes()) +   \n  geom_node_point(aes(colour = Department, size = 3))  \ng + theme_graph()\n\n\n\n\n\n\n\n# Edge thickness mapped to Weight\ng = ggraph(GAStech_graph, layout = \"nicely\") +   \n  geom_edge_link(aes(width=Weight), alpha=0.2) +   \n  scale_edge_width(range = c(0.1, 5)) +   \n  geom_node_point(aes(colour = Department), size = 3)  \ng + theme_graph()"
+  },
+  {
+    "objectID": "In-class_Ex/In-class_exercise_9/In-class_ex9.html#faceted-network-graphs",
+    "href": "In-class_Ex/In-class_exercise_9/In-class_ex9.html#faceted-network-graphs",
+    "title": "In-class Exercise 9",
+    "section": "Faceted Network Graphs",
+    "text": "Faceted Network Graphs\n\n# Facet by Weekday\nset_graph_style()  \ng = ggraph(GAStech_graph, layout = \"nicely\") +    \n  geom_edge_link(aes(width=Weight), alpha=0.2) +   \n  scale_edge_width(range = c(0.1, 5)) +   \n  geom_node_point(aes(colour = Department), size = 2)  \ng + facet_edges(~Weekday) +\n  th_foreground(foreground = \"grey80\", border = TRUE) +\n  theme(legend.position = 'bottom')\n\n\n\n\n\n\n\n# Facet by Department\ng + facet_nodes(~Department) +\n  th_foreground(foreground = \"grey80\", border = TRUE) +\n  theme(legend.position = 'bottom')"
+  },
+  {
+    "objectID": "In-class_Ex/In-class_exercise_9/In-class_ex9.html#network-metrics-analysis",
+    "href": "In-class_Ex/In-class_exercise_9/In-class_ex9.html#network-metrics-analysis",
+    "title": "In-class Exercise 9",
+    "section": "Network Metrics Analysis",
+    "text": "Network Metrics Analysis\n\n# Compute and visualize betweenness centrality\ng = GAStech_graph %&gt;%\n  mutate(betweenness_centrality = centrality_betweenness()) %&gt;%\n  ggraph(layout = \"fr\") + \n  geom_edge_link(aes(width=Weight), alpha=0.2) +\n  scale_edge_width(range = c(0.1, 5)) +\n  geom_node_point(aes(colour = Department, size=betweenness_centrality))\ng + theme_graph()\n\n\n\n\n\n\n\n# Direct access to centrality in ggraph\ng = GAStech_graph %&gt;%\n  ggraph(layout = \"fr\") + \n  geom_edge_link(aes(width=Weight), alpha=0.2) +\n  scale_edge_width(range = c(0.1, 5)) +\n  geom_node_point(aes(colour = Department, size = centrality_betweenness()))\ng + theme_graph()\n\n\n\n\n\n\n\n# Community detection\ng = GAStech_graph %&gt;%\n  mutate(community = as.factor(group_edge_betweenness(weights = Weight, directed = TRUE))) %&gt;%\n  ggraph(layout = \"fr\") + \n  geom_edge_link(aes(width=Weight), alpha=0.2) +\n  scale_edge_width(range = c(0.1, 5)) +\n  geom_node_point(aes(colour = community))  \ng + theme_graph()"
+  },
+  {
+    "objectID": "In-class_Ex/In-class_exercise_9/In-class_ex9.html#interactive-visualization-with-visnetwork",
+    "href": "In-class_Ex/In-class_exercise_9/In-class_ex9.html#interactive-visualization-with-visnetwork",
+    "title": "In-class Exercise 9",
+    "section": "Interactive Visualization with visNetwork",
+    "text": "Interactive Visualization with visNetwork\n\n# Prepare data for visNetwork\nGAStech_edges_aggregated = GAStech_edges %&gt;%\n  left_join(GAStech_nodes, by = c(\"sourceLabel\" = \"label\")) %&gt;%\n  rename(from = id) %&gt;%\n  left_join(GAStech_nodes, by = c(\"targetLabel\" = \"label\")) %&gt;%\n  rename(to = id) %&gt;%\n  filter(MainSubject == \"Work related\") %&gt;%\n  group_by(from, to) %&gt;%\n  summarise(weight = n()) %&gt;%\n  filter(from!=to) %&gt;%\n  filter(weight &gt; 1) %&gt;%\n  ungroup()\n\n# Basic interactive plot\nvisNetwork(GAStech_nodes, GAStech_edges_aggregated)\n\n\n\n\n# With layout and visual attributes\nGAStech_nodes = GAStech_nodes %&gt;% rename(group = Department)\n\nvisNetwork(GAStech_nodes, GAStech_edges_aggregated) %&gt;%   \n  visIgraphLayout(layout = \"layout_with_fr\") %&gt;%   \n  visEdges(arrows = \"to\", smooth = list(enabled = TRUE, type = \"curvedCW\")) %&gt;%   \n  visLegend() %&gt;%   \n  visOptions(highlightNearest = TRUE, nodesIdSelection = TRUE) %&gt;%\n  visLayout(randomSeed = 123)"
   }
 ]

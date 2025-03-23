@@ -1,0 +1,169 @@
+---
+title: "In-class Exercise 9"
+
+author: "xh.zhang"
+date-modified: "last-modified"
+execute:
+  echo: true
+  eval: true
+  warning: false
+  freeze: true
+---
+## Getting Started
+
+### Installing Required Packages
+
+```{r}
+pacman::p_load(tidygraph, ggraph,
+               visNetwork, lubridate, clock,
+               tidyverse, graphlayouts)
+```
+
+### Data Import and Preparation
+
+```{r}
+# Import data
+GAStech_nodes = read_csv("data/GAStech_email_node.csv") 
+GAStech_edges = read_csv("data/GAStech_email_edge-v2.csv")
+
+# Convert date format and add weekday
+GAStech_edges = GAStech_edges %>%   
+  mutate(SendDate = dmy(SentDate)) %>%   
+  mutate(Weekday = wday(SentDate, label = TRUE, abbr = FALSE))
+
+# Aggregate work-related emails
+GAStech_edges_aggregated <- GAStech_edges %>%   
+  filter(MainSubject == "Work related") %>%   
+  group_by(source, target, Weekday) %>%     
+  summarise(Weight = n()) %>%   
+  filter(source!=target) %>%   
+  filter(Weight > 1) %>%   
+  ungroup()
+```
+
+## Creating Network Objects with tidygraph
+
+```{r}
+# Create tbl_graph object
+GAStech_graph = tbl_graph(nodes = GAStech_nodes, 
+                          edges = GAStech_edges_aggregated,
+                          directed = TRUE)
+
+# Change active tibble and sort edges by weight
+GAStech_graph %>%   
+  activate(edges) %>%   
+  arrange(desc(Weight))
+```
+
+## Static Network Visualization with ggraph
+
+```{r}
+# Basic network graph
+ggraph(GAStech_graph) +   
+  geom_edge_link() +   
+  geom_node_point()
+
+# Apply graph theme
+g = ggraph(GAStech_graph) +    
+  geom_edge_link(aes()) +   
+  geom_node_point(aes())  
+g + theme_graph()
+
+# Use Fruchterman-Reingold layout
+g = ggraph(GAStech_graph, layout = "fr") +   
+  geom_edge_link(aes()) +   
+  geom_node_point(aes())  
+g + theme_graph()
+
+# Color nodes by department
+g = ggraph(GAStech_graph, layout = "nicely") +    
+  geom_edge_link(aes()) +   
+  geom_node_point(aes(colour = Department, size = 3))  
+g + theme_graph()
+
+# Edge thickness mapped to Weight
+g = ggraph(GAStech_graph, layout = "nicely") +   
+  geom_edge_link(aes(width=Weight), alpha=0.2) +   
+  scale_edge_width(range = c(0.1, 5)) +   
+  geom_node_point(aes(colour = Department), size = 3)  
+g + theme_graph()
+```
+
+## Faceted Network Graphs
+
+```{r}
+# Facet by Weekday
+set_graph_style()  
+g = ggraph(GAStech_graph, layout = "nicely") +    
+  geom_edge_link(aes(width=Weight), alpha=0.2) +   
+  scale_edge_width(range = c(0.1, 5)) +   
+  geom_node_point(aes(colour = Department), size = 2)  
+g + facet_edges(~Weekday) +
+  th_foreground(foreground = "grey80", border = TRUE) +
+  theme(legend.position = 'bottom')
+
+# Facet by Department
+g + facet_nodes(~Department) +
+  th_foreground(foreground = "grey80", border = TRUE) +
+  theme(legend.position = 'bottom')
+```
+
+## Network Metrics Analysis
+
+```{r}
+# Compute and visualize betweenness centrality
+g = GAStech_graph %>%
+  mutate(betweenness_centrality = centrality_betweenness()) %>%
+  ggraph(layout = "fr") + 
+  geom_edge_link(aes(width=Weight), alpha=0.2) +
+  scale_edge_width(range = c(0.1, 5)) +
+  geom_node_point(aes(colour = Department, size=betweenness_centrality))
+g + theme_graph()
+
+# Direct access to centrality in ggraph
+g = GAStech_graph %>%
+  ggraph(layout = "fr") + 
+  geom_edge_link(aes(width=Weight), alpha=0.2) +
+  scale_edge_width(range = c(0.1, 5)) +
+  geom_node_point(aes(colour = Department, size = centrality_betweenness()))
+g + theme_graph()
+
+# Community detection
+g = GAStech_graph %>%
+  mutate(community = as.factor(group_edge_betweenness(weights = Weight, directed = TRUE))) %>%
+  ggraph(layout = "fr") + 
+  geom_edge_link(aes(width=Weight), alpha=0.2) +
+  scale_edge_width(range = c(0.1, 5)) +
+  geom_node_point(aes(colour = community))  
+g + theme_graph()
+```
+
+## Interactive Visualization with visNetwork
+
+```{r}
+# Prepare data for visNetwork
+GAStech_edges_aggregated = GAStech_edges %>%
+  left_join(GAStech_nodes, by = c("sourceLabel" = "label")) %>%
+  rename(from = id) %>%
+  left_join(GAStech_nodes, by = c("targetLabel" = "label")) %>%
+  rename(to = id) %>%
+  filter(MainSubject == "Work related") %>%
+  group_by(from, to) %>%
+  summarise(weight = n()) %>%
+  filter(from!=to) %>%
+  filter(weight > 1) %>%
+  ungroup()
+
+# Basic interactive plot
+visNetwork(GAStech_nodes, GAStech_edges_aggregated)
+
+# With layout and visual attributes
+GAStech_nodes = GAStech_nodes %>% rename(group = Department)
+
+visNetwork(GAStech_nodes, GAStech_edges_aggregated) %>%   
+  visIgraphLayout(layout = "layout_with_fr") %>%   
+  visEdges(arrows = "to", smooth = list(enabled = TRUE, type = "curvedCW")) %>%   
+  visLegend() %>%   
+  visOptions(highlightNearest = TRUE, nodesIdSelection = TRUE) %>%
+  visLayout(randomSeed = 123)
+```
