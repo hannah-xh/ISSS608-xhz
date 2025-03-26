@@ -10,6 +10,8 @@ execute:
   freeze: true
 ---
 
+![](images/clipboard-267604963.png)
+
 # Information Dashboard Design with R
 
 ## Overview
@@ -430,4 +432,3 @@ reactable(
   )
 )
 ```
-
