@@ -4,6 +4,8 @@ title: "Xiaohan's visual analytics diary"
 listing: 
   - id: List_of_take-home_exercises
     contents: 
+    - "Take-home_Ex3b.qmd"
+    - "Take-home_Ex3a.qmd"
     - "Take-home_Ex2.qmd"
     - "Take-home_Ex1.qmd"
     type: default

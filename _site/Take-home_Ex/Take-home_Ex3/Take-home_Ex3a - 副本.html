@@ -1,0 +1,1490 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.6.40">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Xiaohan Zhang">
+<meta name="dcterms.date" content="2025-03-26">
+
+<title>LCA Model Design – Xiaohan’s visual analytics diary</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<script src="../../site_libs/quarto-html/quarto.js"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-549806ee2085284f45b00abea8c6df48.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap-d4be639c637f3db3c684c66cefad7e0c.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+
+<link rel="stylesheet" href="../../styles.css">
+</head>
+
+<body class="nav-fixed">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="../../index.html">
+    <span class="navbar-title">Xiaohan’s visual analytics diary</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-hands-on-exercise" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">Hands-on Exercise</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-hands-on-exercise">    
+        <li>
+    <a class="dropdown-item" href="../../Hands-on_Ex/Hands-on_Ex00.html">
+ <span class="dropdown-text">A Rough First Attempt</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../Hands-on_Ex/Hands-on_Ex01.html">
+ <span class="dropdown-text">A Layered Grammar of Graphics: ggplot2 methods</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../Hands-on_Ex/Hands-on_Ex02.html">
+ <span class="dropdown-text">Beyond ggplot2 Fundamentals</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../Hands-on_Ex/Hands-on_Ex03a.html">
+ <span class="dropdown-text">Programming Interactive Data Visualisation with R</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../Hands-on_Ex/Hands-on_Ex03b.html">
+ <span class="dropdown-text">Programming Animated Statistical Graphics with R</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../Hands-on_Ex/Hands-on_Ex04a.html">
+ <span class="dropdown-text">Visualising Distribution</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../Hands-on_Ex/Hands-on_Ex04b.html">
+ <span class="dropdown-text">Visual Statistical Analysis</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../Hands-on_Ex/Hands-on_Ex04c.html">
+ <span class="dropdown-text">Visualising Uncertainty</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../Hands-on_Ex/Hands-on_Ex04d.html">
+ <span class="dropdown-text">Building Funnel Plot with R</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../Hands-on_Ex/Hands-on_Ex05a.html">
+ <span class="dropdown-text">Creating Ternary Plot with R</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../Hands-on_Ex/Hands-on_Ex05b.html">
+ <span class="dropdown-text">Visual Correlation Analysis</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../Hands-on_Ex/Hands-on_Ex05c.html">
+ <span class="dropdown-text">Heatmap for Visualising and Analysing Multivariate Data</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../Hands-on_Ex/Hands-on_Ex05d.html">
+ <span class="dropdown-text">Visual Multivariate Analysis with Parallel Coordinates Plot</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../Hands-on_Ex/Hands-on_Ex05e.html">
+ <span class="dropdown-text">Treemap Visualisation with R</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../Hands-on_Ex/Hands-on_Ex07.html">
+ <span class="dropdown-text">Visualising and Analysing Time-oriented Data</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../Hands-on_Ex/Hands-on_Ex08a.html">
+ <span class="dropdown-text">Choropleth Mapping with R</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../Hands-on_Ex/Hands-on_Ex08b.html">
+ <span class="dropdown-text">Visualising Geospatial Point Data</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../Hands-on_Ex/Hands-on_Ex08c.html">
+ <span class="dropdown-text">Analytical Mapping</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../Hands-on_Ex/Hands-on_Ex09.html">
+ <span class="dropdown-text">Modelling, Visualising and Analysing Network Data with R</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../Hands-on_Ex/Hands-on_Ex10.html">
+ <span class="dropdown-text">Information Dashboard Design: R methods</span></a>
+  </li>  
+    </ul>
+  </li>
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-in-class-exercise" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">In-Class Exercise</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-in-class-exercise">    
+        <li>
+    <a class="dropdown-item" href="../../In-class_Ex/In-class_exercise_4/In-class_ex4.html">
+ <span class="dropdown-text">In-class Exercise 2025-2-8</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../In-class_Ex/In-class_exercise_7/In-class_ex7.html">
+ <span class="dropdown-text">In-class Exercise 2025-3-1</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../In-class_Ex/In-class_exercise_9/In-class_ex9.html">
+ <span class="dropdown-text">In-class Exercise 2025-3-22</span></a>
+  </li>  
+    </ul>
+  </li>
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-take-home-exercise" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">Take-home Exercise</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-take-home-exercise">    
+        <li>
+    <a class="dropdown-item" href="../../Take-home_Ex/Take-home_Ex1/Take-home_Ex1.html">
+ <span class="dropdown-text">Ship Performance</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../Take-home_Ex/Take-home_Ex2/Take-home_Ex2.html">
+ <span class="dropdown-text">Singapore International Trade Analysis</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../Take-home_Ex/Take-home_Ex3/Take-home_Ex3a.html">
+ <span class="dropdown-text">LCA Model Design</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../Take-home_Ex/Take-home_Ex3/Take-home_Ex3b.html">
+ <span class="dropdown-text">MLR Model Design</span></a>
+  </li>  
+    </ul>
+  </li>
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-team-project" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">Team Project</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-team-project">    
+        <li>
+    <a class="dropdown-item" href="../../Take-home_Ex1.html">
+ <span class="dropdown-text">to be continue</span></a>
+  </li>  
+    </ul>
+  </li>
+</ul>
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../../index.html"> 
+<span class="menu-text">Home</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../about.html"> 
+<span class="menu-text">About</span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction">1. Introduction</a></li>
+  <li><a href="#r-packages-assessment-and-selection" id="toc-r-packages-assessment-and-selection" class="nav-link" data-scroll-target="#r-packages-assessment-and-selection">2. R Packages Assessment and Selection</a></li>
+  <li><a href="#data-preparation-and-testing" id="toc-data-preparation-and-testing" class="nav-link" data-scroll-target="#data-preparation-and-testing">3. Data Preparation and Testing</a>
+  <ul class="collapse">
+  <li><a href="#dataset-overview" id="toc-dataset-overview" class="nav-link" data-scroll-target="#dataset-overview">Dataset Overview</a></li>
+  <li><a href="#variable-discretization-process" id="toc-variable-discretization-process" class="nav-link" data-scroll-target="#variable-discretization-process">Variable Discretization Process</a></li>
+  <li><a href="#frequency-distribution-verification" id="toc-frequency-distribution-verification" class="nav-link" data-scroll-target="#frequency-distribution-verification">Frequency Distribution Verification</a></li>
+  <li><a href="#latent-class-analysis-lca-results-summary" id="toc-latent-class-analysis-lca-results-summary" class="nav-link" data-scroll-target="#latent-class-analysis-lca-results-summary">Latent Class Analysis (LCA) Results Summary</a></li>
+  </ul></li>
+  <li><a href="#parameters-and-outputs-determination" id="toc-parameters-and-outputs-determination" class="nav-link" data-scroll-target="#parameters-and-outputs-determination">4. Parameters and Outputs Determination</a></li>
+  <li><a href="#variables-selection-for-latent-class-analysis" id="toc-variables-selection-for-latent-class-analysis" class="nav-link" data-scroll-target="#variables-selection-for-latent-class-analysis">Variables Selection for Latent Class Analysis</a>
+  <ul class="collapse">
+  <li><a href="#primary-variables" id="toc-primary-variables" class="nav-link" data-scroll-target="#primary-variables">Primary Variables</a>
+  <ul class="collapse">
+  <li><a href="#model-selection-criteria" id="toc-model-selection-criteria" class="nav-link" data-scroll-target="#model-selection-criteria">Model Selection Criteria</a></li>
+  <li><a href="#class-number-determination-process" id="toc-class-number-determination-process" class="nav-link" data-scroll-target="#class-number-determination-process">Class Number Determination Process</a></li>
+  <li><a href="#computational-efficiency-considerations" id="toc-computational-efficiency-considerations" class="nav-link" data-scroll-target="#computational-efficiency-considerations">Computational Efficiency Considerations</a></li>
+  </ul></li>
+  <li><a href="#ui-component-selection-for-shiny-application" id="toc-ui-component-selection-for-shiny-application" class="nav-link" data-scroll-target="#ui-component-selection-for-shiny-application">5. UI Component Selection for Shiny Application</a>
+  <ul class="collapse">
+  <li><a href="#model-configuration-components-for-clustering" id="toc-model-configuration-components-for-clustering" class="nav-link" data-scroll-target="#model-configuration-components-for-clustering">Model Configuration Components for Clustering</a></li>
+  <li><a href="#results-visualization-components" id="toc-results-visualization-components" class="nav-link" data-scroll-target="#results-visualization-components">Results Visualization Components</a></li>
+  <li><a href="#user-interaction-design-rationale" id="toc-user-interaction-design-rationale" class="nav-link" data-scroll-target="#user-interaction-design-rationale">User Interaction Design Rationale</a></li>
+  </ul></li>
+  <li><a href="#results-and-discussion" id="toc-results-and-discussion" class="nav-link" data-scroll-target="#results-and-discussion">6. Results and Discussion</a>
+  <ul class="collapse">
+  <li><a href="#cluster-comparison-analysis" id="toc-cluster-comparison-analysis" class="nav-link" data-scroll-target="#cluster-comparison-analysis">Cluster Comparison Analysis</a></li>
+  <li><a href="#cluster-profiles" id="toc-cluster-profiles" class="nav-link" data-scroll-target="#cluster-profiles">Cluster Profiles</a></li>
+  <li><a href="#market-segmentation-applications" id="toc-market-segmentation-applications" class="nav-link" data-scroll-target="#market-segmentation-applications">Market Segmentation Applications</a></li>
+  </ul></li>
+  <li><a href="#conclusion" id="toc-conclusion" class="nav-link" data-scroll-target="#conclusion">7. Conclusion</a>
+  <ul class="collapse">
+  <li><a href="#key-findings" id="toc-key-findings" class="nav-link" data-scroll-target="#key-findings">Key Findings</a></li>
+  <li><a href="#applications" id="toc-applications" class="nav-link" data-scroll-target="#applications">Applications</a></li>
+  <li><a href="#limitations-and-future-directions" id="toc-limitations-and-future-directions" class="nav-link" data-scroll-target="#limitations-and-future-directions">Limitations and Future Directions</a></li>
+  </ul></li>
+  </ul></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">LCA Model Design</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Xiaohan Zhang </p>
+          </div>
+  </div>
+    
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">March 26, 2025</p>
+    </div>
+  </div>
+  
+    <div>
+    <div class="quarto-title-meta-heading">Modified</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date-modified">March 30, 2025</p>
+    </div>
+  </div>
+    
+  </div>
+  
+
+
+</header>
+
+
+<section id="introduction" class="level2">
+<h2 class="anchored" data-anchor-id="introduction">1. Introduction</h2>
+<ul>
+<li>Brief overview of the property price analysis using Latent Class Analysis</li>
+<li>Explanation of why LCA is appropriate for market segmentation</li>
+<li>Research questions being addressed</li>
+</ul>
+</section>
+<section id="r-packages-assessment-and-selection" class="level2">
+<h2 class="anchored" data-anchor-id="r-packages-assessment-and-selection">2. R Packages Assessment and Selection</h2>
+<ul>
+<li><code>poLCA</code>: Core package for latent class analysis implementation</li>
+<li><code>tidyverse</code>: For data preparation and categorical variable creation</li>
+<li><code>ggplot2</code>: For visualization of class probabilities and model comparison</li>
+<li><code>mclust</code>: For model evaluation and entropy calculation</li>
+<li>Justification for each package selection</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Load packages</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(readxl)      <span class="co"># For reading Excel files</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)   <span class="co"># For data manipulation and visualization</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(poLCA)       <span class="co"># For latent class analysis</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(mclust)      <span class="co"># For model evaluation</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(DT)          <span class="co"># For interactive data tables</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(plotly)      <span class="co"># For interactive plots</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="data-preparation-and-testing" class="level2">
+<h2 class="anchored" data-anchor-id="data-preparation-and-testing">3. Data Preparation and Testing</h2>
+<section id="dataset-overview" class="level3">
+<h3 class="anchored" data-anchor-id="dataset-overview">Dataset Overview</h3>
+<p>The analysis is based on a comprehensive property price dataset containing 52,644 observations across 28 variables. The dataset includes crucial property characteristics and location-based features. Key variables in the dataset include property prices (the target variable), physical property attributes (size, floor level, highest floor in building, number of units), location-specific features (distances to green spaces, water, subway stations, CBD), environmental quality indicators (Green Index), and demographic information (population density, education levels, age distributions). The data spans properties with sizes ranging from 12.49 to 269.68 square meters, located on floors ranging from -1 to 77, with varying accessibility to amenities.</p>
+<p>A thorough examination of the dataset structure revealed complete data with no missing values across all variables. This completeness provided an excellent foundation for reliable latent class analysis without the need for imputation or handling of missing data. The data also displays considerable variation across all key variables, suggesting the potential for meaningful market segmentation.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>Property_data <span class="ot">&lt;-</span> <span class="fu">read_excel</span>(<span class="st">"data/Property_Price_and_Green_Index.xlsx"</span>)</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="fu">glimpse</span>(Property_data)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Rows: 52,644
+Columns: 28
+$ `Property Prices`  &lt;dbl&gt; 9.798127, 9.852194, 9.740969, 9.798127, 9.692767, 9…
+$ Longitude          &lt;dbl&gt; 129.1081, 129.1081, 129.1081, 129.1081, 129.1081, 1…
+$ Latitude           &lt;dbl&gt; 35.21502, 35.21502, 35.21502, 35.21502, 35.21502, 3…
+$ Size               &lt;dbl&gt; 45.0700, 38.1000, 45.0700, 38.1000, 38.1000, 45.070…
+$ Floor              &lt;dbl&gt; 8, 13, 6, 13, 7, 9, 6, 6, 11, 7, 9, 9, 10, 11, 2, 4…
+$ `Highest floor`    &lt;dbl&gt; 13, 13, 13, 13, 13, 13, 13, 13, 13, 13, 13, 11, 11,…
+$ Units              &lt;dbl&gt; 84, 84, 84, 84, 84, 84, 84, 84, 84, 84, 84, 8, 8, 8…
+$ Parking            &lt;dbl&gt; 0.67, 0.67, 0.67, 0.67, 0.67, 0.67, 0.67, 0.67, 0.6…
+$ Heating            &lt;dbl&gt; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, …
+$ Year               &lt;dbl&gt; 2017, 2017, 2017, 2017, 2017, 2017, 2017, 2017, 201…
+$ `Dist. Green`      &lt;dbl&gt; 4.668050, 4.668050, 4.668050, 4.668050, 4.668050, 4…
+$ `Dist. Water`      &lt;dbl&gt; 7.092015, 7.092015, 7.092015, 7.092015, 7.092015, 7…
+$ `Green Index`      &lt;dbl&gt; 10.867812, 10.867812, 10.867812, 10.867812, 10.8678…
+$ `Dist. Subway`     &lt;dbl&gt; 5.655021, 5.655021, 5.655021, 5.655021, 5.655021, 5…
+$ `Bus Stop`         &lt;dbl&gt; 5, 5, 5, 5, 5, 5, 6, 6, 6, 6, 6, 6, 6, 13, 13, 13, …
+$ `Dist. CBD`        &lt;dbl&gt; 19909.90, 19909.90, 19909.90, 19909.90, 19909.90, 1…
+$ `Top Univ.`        &lt;dbl&gt; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, …
+$ `High School`      &lt;dbl&gt; 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, …
+$ `Sex Ratio`        &lt;dbl&gt; 97.83177, 97.83177, 97.83177, 97.83177, 97.83177, 9…
+$ Population         &lt;dbl&gt; 31022, 31022, 31022, 31022, 31022, 31022, 31022, 33…
+$ `Pop. Density`     &lt;dbl&gt; 1637.045, 1637.045, 1637.045, 1637.045, 1637.045, 1…
+$ `Higher Degree`    &lt;dbl&gt; 46.39234, 46.39234, 46.39234, 46.39234, 46.39234, 4…
+$ `Young Population` &lt;dbl&gt; 26.28457, 26.28457, 26.28457, 26.28457, 26.28457, 2…
+$ `Median Age`       &lt;dbl&gt; 55.4, 55.4, 55.4, 55.4, 55.4, 55.4, 55.4, 55.4, 55.…
+$ `Old Population`   &lt;dbl&gt; 5.712075, 5.712075, 5.712075, 5.712075, 5.712075, 5…
+$ Spring             &lt;dbl&gt; 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, …
+$ Fall               &lt;dbl&gt; 0, 0, 0, 0, 0, 0, 1, 1, 1, 0, 0, 0, 0, 0, 0, 1, 0, …
+$ Winter             &lt;dbl&gt; 1, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 1, 1, 0, 0, …</code></pre>
+</div>
+</div>
+</section>
+<section id="variable-discretization-process" class="level3">
+<h3 class="anchored" data-anchor-id="variable-discretization-process">Variable Discretization Process</h3>
+<p>For effective latent class analysis, continuous variables were transformed into categorical format. This discretization process is essential as LCA requires categorical indicators. A quantile-based approach was primarily employed to ensure balanced distribution of observations across categories while preserving meaningful differentiation between property types.</p>
+<p>For most variables, tertile cutpoints (33rd and 66th percentiles) were used to create three distinct categories representing low (1), medium (2), and high (3) values. This approach was applied to Size, Green Index, Subway Distance, Population Density, and Median Age variables. The rationale for using tertiles rather than quartiles or quintiles was to maintain sufficient observation counts in each category while still capturing meaningful differentiation.</p>
+<p>For Floor categorization, however, a different approach was taken. Instead of percentile-based cutpoints, more intuitive fixed cutpoints were employed: low floors (≤5), medium floors (≤10), and high floors (&gt;10). This choice reflects typical building classifications and aligns with common property market segmentation practices where floor level represents a distinct feature of vertical positioning, often associated with views, noise levels, and accessibility considerations.</p>
+</section>
+<section id="frequency-distribution-verification" class="level3">
+<h3 class="anchored" data-anchor-id="frequency-distribution-verification">Frequency Distribution Verification</h3>
+<p>Following the discretization process, thorough verification of frequency distributions was conducted to ensure the effectiveness of the categorization. The frequency tables for each categorical variable confirmed generally balanced categories with sufficient observations in each group to support stable LCA estimation.</p>
+<p>Size categories showed excellent balance with approximately 33% of observations in each category (17,374 in category 1, 17,609 in category 2, and 17,661 in category 3). Similar balanced distributions were observed for Green Index categories, Subway Distance categories, and Population Density categories, all showing approximately equal distribution across the three levels.</p>
+<p>Floor categories showed a somewhat different distribution pattern, with a higher concentration of properties in category 3 (floors above 10) comprising 26,406 observations, while categories 1 and 2 contained 13,004 and 13,234 observations respectively. This distribution reflects the actual property landscape in the dataset, with a predominance of properties located on higher floors.</p>
+<p>Median Age categories also showed a relatively balanced distribution (17,670 in category 1, 18,504 in category 2, and 16,470 in category 3), with a slightly higher number of properties in areas with middle-aged populations.</p>
+<p>These distribution verifications confirmed that the discretization process produced meaningful categories with sufficient observations for robust LCA modeling, enabling the identification of distinct property market segments.</p>
+<p>Step 2: Data Preparation and Checking</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Load data (assuming you've already loaded it)</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Property_data &lt;- read_excel("data/Property_Price_and_Green_Index.xlsx")</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="co"># 1. Initial data checking</span></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(Property_data)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>tibble [52,644 × 28] (S3: tbl_df/tbl/data.frame)
+ $ Property Prices : num [1:52644] 9.8 9.85 9.74 9.8 9.69 ...
+ $ Longitude       : num [1:52644] 129 129 129 129 129 ...
+ $ Latitude        : num [1:52644] 35.2 35.2 35.2 35.2 35.2 ...
+ $ Size            : num [1:52644] 45.1 38.1 45.1 38.1 38.1 ...
+ $ Floor           : num [1:52644] 8 13 6 13 7 9 6 6 11 7 ...
+ $ Highest floor   : num [1:52644] 13 13 13 13 13 13 13 13 13 13 ...
+ $ Units           : num [1:52644] 84 84 84 84 84 84 84 84 84 84 ...
+ $ Parking         : num [1:52644] 0.67 0.67 0.67 0.67 0.67 0.67 0.67 0.67 0.67 0.67 ...
+ $ Heating         : num [1:52644] 0 0 0 0 0 0 0 0 0 0 ...
+ $ Year            : num [1:52644] 2017 2017 2017 2017 2017 ...
+ $ Dist. Green     : num [1:52644] 4.67 4.67 4.67 4.67 4.67 ...
+ $ Dist. Water     : num [1:52644] 7.09 7.09 7.09 7.09 7.09 ...
+ $ Green Index     : num [1:52644] 10.9 10.9 10.9 10.9 10.9 ...
+ $ Dist. Subway    : num [1:52644] 5.66 5.66 5.66 5.66 5.66 ...
+ $ Bus Stop        : num [1:52644] 5 5 5 5 5 5 6 6 6 6 ...
+ $ Dist. CBD       : num [1:52644] 19910 19910 19910 19910 19910 ...
+ $ Top Univ.       : num [1:52644] 0 0 0 0 0 0 0 0 0 0 ...
+ $ High School     : num [1:52644] 2 2 2 2 2 2 2 2 2 2 ...
+ $ Sex Ratio       : num [1:52644] 97.8 97.8 97.8 97.8 97.8 ...
+ $ Population      : num [1:52644] 31022 31022 31022 31022 31022 ...
+ $ Pop. Density    : num [1:52644] 1637 1637 1637 1637 1637 ...
+ $ Higher Degree   : num [1:52644] 46.4 46.4 46.4 46.4 46.4 ...
+ $ Young Population: num [1:52644] 26.3 26.3 26.3 26.3 26.3 ...
+ $ Median Age      : num [1:52644] 55.4 55.4 55.4 55.4 55.4 55.4 55.4 55.4 55.4 55.4 ...
+ $ Old Population  : num [1:52644] 5.71 5.71 5.71 5.71 5.71 ...
+ $ Spring          : num [1:52644] 0 1 1 0 0 0 0 0 0 0 ...
+ $ Fall            : num [1:52644] 0 0 0 0 0 0 1 1 1 0 ...
+ $ Winter          : num [1:52644] 1 0 0 0 0 0 0 0 0 1 ...</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(Property_data)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code> Property Prices    Longitude        Latitude          Size       
+ Min.   : 6.908   Min.   :128.8   Min.   :35.05   Min.   : 12.49  
+ 1st Qu.: 9.831   1st Qu.:129.0   1st Qu.:35.14   1st Qu.: 59.82  
+ Median :10.174   Median :129.1   Median :35.17   Median : 79.36  
+ Mean   :10.187   Mean   :129.1   Mean   :35.17   Mean   : 77.82  
+ 3rd Qu.:10.558   3rd Qu.:129.1   3rd Qu.:35.20   3rd Qu.: 84.98  
+ Max.   :12.934   Max.   :129.3   Max.   :35.37   Max.   :269.68  
+     Floor       Highest floor       Units           Parking      
+ Min.   :-1.00   Min.   : 2.00   Min.   :   4.0   Min.   : 0.000  
+ 1st Qu.: 6.00   1st Qu.:15.00   1st Qu.: 301.0   1st Qu.: 0.870  
+ Median :11.00   Median :24.00   Median : 690.0   Median : 1.040  
+ Mean   :11.82   Mean   :23.25   Mean   : 937.1   Mean   : 1.101  
+ 3rd Qu.:16.00   3rd Qu.:26.00   3rd Qu.:1280.0   3rd Qu.: 1.250  
+ Max.   :77.00   Max.   :84.00   Max.   :5239.0   Max.   :77.000  
+    Heating             Year       Dist. Green       Dist. Water     
+ Min.   :0.00000   Min.   :1969   Min.   : 0.8081   Min.   :-0.1703  
+ 1st Qu.:0.00000   1st Qu.:1996   1st Qu.: 5.4695   1st Qu.: 5.5656  
+ Median :0.00000   Median :2004   Median : 6.4194   Median : 6.4094  
+ Mean   :0.09331   Mean   :2003   Mean   : 7.2765   Mean   : 6.2683  
+ 3rd Qu.:0.00000   3rd Qu.:2013   3rd Qu.: 9.7661   3rd Qu.: 7.1239  
+ Max.   :1.00000   Max.   :2019   Max.   :10.7145   Max.   : 8.6013  
+  Green Index      Dist. Subway      Bus Stop      Dist. CBD       
+ Min.   : 4.163   Min.   :3.366   Min.   : 0.0   Min.   :   243.9  
+ 1st Qu.: 9.117   1st Qu.:6.212   1st Qu.:10.0   1st Qu.:  8280.6  
+ Median :10.715   Median :6.771   Median :16.0   Median :398855.8  
+ Mean   :10.733   Mean   :6.892   Mean   :18.1   Mean   :237377.3  
+ 3rd Qu.:12.128   3rd Qu.:7.408   3rd Qu.:25.0   3rd Qu.:398855.9  
+ Max.   :18.927   Max.   :9.978   Max.   :63.0   Max.   :398856.1  
+   Top Univ.      High School      Sex Ratio        Population   
+ Min.   : 0.00   Min.   : 0.00   Min.   : 81.02   Min.   : 1208  
+ 1st Qu.: 6.00   1st Qu.: 8.00   1st Qu.: 92.94   1st Qu.:15639  
+ Median :13.00   Median :14.00   Median : 95.59   Median :24412  
+ Mean   :11.18   Mean   :14.27   Mean   : 95.75   Mean   :25888  
+ 3rd Qu.:17.00   3rd Qu.:21.00   3rd Qu.: 97.80   3rd Qu.:31399  
+ Max.   :27.00   Max.   :30.00   Max.   :124.51   Max.   :83116  
+  Pop. Density    Higher Degree   Young Population   Median Age  
+ Min.   :     1   Min.   :10.36   Min.   : 3.151   Min.   :32.7  
+ 1st Qu.:  6905   1st Qu.:24.25   1st Qu.: 9.500   1st Qu.:40.8  
+ Median : 11126   Median :28.93   Median :11.332   Median :42.8  
+ Mean   : 13221   Mean   :30.30   Mean   :12.120   Mean   :42.6  
+ 3rd Qu.: 17618   3rd Qu.:36.03   3rd Qu.:13.904   3rd Qu.:44.4  
+ Max.   :118182   Max.   :61.29   Max.   :26.285   Max.   :55.4  
+ Old Population       Spring            Fall            Winter      
+ Min.   : 5.712   Min.   :0.0000   Min.   :0.0000   Min.   :0.0000  
+ 1st Qu.:13.895   1st Qu.:0.0000   1st Qu.:0.0000   1st Qu.:0.0000  
+ Median :16.116   Median :0.0000   Median :0.0000   Median :0.0000  
+ Mean   :16.325   Mean   :0.2152   Mean   :0.3432   Mean   :0.2433  
+ 3rd Qu.:18.724   3rd Qu.:0.0000   3rd Qu.:1.0000   3rd Qu.:0.0000  
+ Max.   :33.292   Max.   :1.0000   Max.   :1.0000   Max.   :1.0000  </code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 2. Check for missing values</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>missing_values <span class="ot">&lt;-</span> <span class="fu">colSums</span>(<span class="fu">is.na</span>(Property_data))</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(missing_values)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code> Property Prices        Longitude         Latitude             Size 
+               0                0                0                0 
+           Floor    Highest floor            Units          Parking 
+               0                0                0                0 
+         Heating             Year      Dist. Green      Dist. Water 
+               0                0                0                0 
+     Green Index     Dist. Subway         Bus Stop        Dist. CBD 
+               0                0                0                0 
+       Top Univ.      High School        Sex Ratio       Population 
+               0                0                0                0 
+    Pop. Density    Higher Degree Young Population       Median Age 
+               0                0                0                0 
+  Old Population           Spring             Fall           Winter 
+               0                0                0                0 </code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 3. Variable discretization (example - adjust based on actual data distribution)</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Prepare data for LCA by selecting appropriate variables and discretizing</span></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>Property_data_lca <span class="ot">&lt;-</span> Property_data <span class="sc">%&gt;%</span></span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Size categorization (based on quantiles)</span></span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">Size_cat =</span> <span class="fu">case_when</span>(</span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a>      Size <span class="sc">&lt;=</span> <span class="fu">quantile</span>(Size, <span class="fl">0.33</span>) <span class="sc">~</span> <span class="dv">1</span>,</span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a>      Size <span class="sc">&lt;=</span> <span class="fu">quantile</span>(Size, <span class="fl">0.66</span>) <span class="sc">~</span> <span class="dv">2</span>,</span>
+<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a>      <span class="cn">TRUE</span> <span class="sc">~</span> <span class="dv">3</span></span>
+<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a>    ),</span>
+<span id="cb10-12"><a href="#cb10-12" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb10-13"><a href="#cb10-13" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Floor categorization</span></span>
+<span id="cb10-14"><a href="#cb10-14" aria-hidden="true" tabindex="-1"></a>    <span class="at">Floor_cat =</span> <span class="fu">case_when</span>(</span>
+<span id="cb10-15"><a href="#cb10-15" aria-hidden="true" tabindex="-1"></a>      Floor <span class="sc">&lt;=</span> <span class="dv">5</span> <span class="sc">~</span> <span class="dv">1</span>,</span>
+<span id="cb10-16"><a href="#cb10-16" aria-hidden="true" tabindex="-1"></a>      Floor <span class="sc">&lt;=</span> <span class="dv">10</span> <span class="sc">~</span> <span class="dv">2</span>,</span>
+<span id="cb10-17"><a href="#cb10-17" aria-hidden="true" tabindex="-1"></a>      <span class="cn">TRUE</span> <span class="sc">~</span> <span class="dv">3</span></span>
+<span id="cb10-18"><a href="#cb10-18" aria-hidden="true" tabindex="-1"></a>    ),</span>
+<span id="cb10-19"><a href="#cb10-19" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb10-20"><a href="#cb10-20" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Green Index categorization</span></span>
+<span id="cb10-21"><a href="#cb10-21" aria-hidden="true" tabindex="-1"></a>    <span class="at">Green_Index_cat =</span> <span class="fu">case_when</span>(</span>
+<span id="cb10-22"><a href="#cb10-22" aria-hidden="true" tabindex="-1"></a>      <span class="st">`</span><span class="at">Green Index</span><span class="st">`</span> <span class="sc">&lt;=</span> <span class="fu">quantile</span>(<span class="st">`</span><span class="at">Green Index</span><span class="st">`</span>, <span class="fl">0.33</span>) <span class="sc">~</span> <span class="dv">1</span>,</span>
+<span id="cb10-23"><a href="#cb10-23" aria-hidden="true" tabindex="-1"></a>      <span class="st">`</span><span class="at">Green Index</span><span class="st">`</span> <span class="sc">&lt;=</span> <span class="fu">quantile</span>(<span class="st">`</span><span class="at">Green Index</span><span class="st">`</span>, <span class="fl">0.66</span>) <span class="sc">~</span> <span class="dv">2</span>,</span>
+<span id="cb10-24"><a href="#cb10-24" aria-hidden="true" tabindex="-1"></a>      <span class="cn">TRUE</span> <span class="sc">~</span> <span class="dv">3</span></span>
+<span id="cb10-25"><a href="#cb10-25" aria-hidden="true" tabindex="-1"></a>    ),</span>
+<span id="cb10-26"><a href="#cb10-26" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb10-27"><a href="#cb10-27" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Distance to subway categorization</span></span>
+<span id="cb10-28"><a href="#cb10-28" aria-hidden="true" tabindex="-1"></a>    <span class="at">Subway_Dist_cat =</span> <span class="fu">case_when</span>(</span>
+<span id="cb10-29"><a href="#cb10-29" aria-hidden="true" tabindex="-1"></a>      <span class="st">`</span><span class="at">Dist. Subway</span><span class="st">`</span> <span class="sc">&lt;=</span> <span class="fu">quantile</span>(<span class="st">`</span><span class="at">Dist. Subway</span><span class="st">`</span>, <span class="fl">0.33</span>) <span class="sc">~</span> <span class="dv">1</span>,</span>
+<span id="cb10-30"><a href="#cb10-30" aria-hidden="true" tabindex="-1"></a>      <span class="st">`</span><span class="at">Dist. Subway</span><span class="st">`</span> <span class="sc">&lt;=</span> <span class="fu">quantile</span>(<span class="st">`</span><span class="at">Dist. Subway</span><span class="st">`</span>, <span class="fl">0.66</span>) <span class="sc">~</span> <span class="dv">2</span>,</span>
+<span id="cb10-31"><a href="#cb10-31" aria-hidden="true" tabindex="-1"></a>      <span class="cn">TRUE</span> <span class="sc">~</span> <span class="dv">3</span></span>
+<span id="cb10-32"><a href="#cb10-32" aria-hidden="true" tabindex="-1"></a>    ),</span>
+<span id="cb10-33"><a href="#cb10-33" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb10-34"><a href="#cb10-34" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Population density categorization</span></span>
+<span id="cb10-35"><a href="#cb10-35" aria-hidden="true" tabindex="-1"></a>    <span class="at">Pop_Density_cat =</span> <span class="fu">case_when</span>(</span>
+<span id="cb10-36"><a href="#cb10-36" aria-hidden="true" tabindex="-1"></a>      <span class="st">`</span><span class="at">Pop. Density</span><span class="st">`</span> <span class="sc">&lt;=</span> <span class="fu">quantile</span>(<span class="st">`</span><span class="at">Pop. Density</span><span class="st">`</span>, <span class="fl">0.33</span>) <span class="sc">~</span> <span class="dv">1</span>,</span>
+<span id="cb10-37"><a href="#cb10-37" aria-hidden="true" tabindex="-1"></a>      <span class="st">`</span><span class="at">Pop. Density</span><span class="st">`</span> <span class="sc">&lt;=</span> <span class="fu">quantile</span>(<span class="st">`</span><span class="at">Pop. Density</span><span class="st">`</span>, <span class="fl">0.66</span>) <span class="sc">~</span> <span class="dv">2</span>,</span>
+<span id="cb10-38"><a href="#cb10-38" aria-hidden="true" tabindex="-1"></a>      <span class="cn">TRUE</span> <span class="sc">~</span> <span class="dv">3</span></span>
+<span id="cb10-39"><a href="#cb10-39" aria-hidden="true" tabindex="-1"></a>    ),</span>
+<span id="cb10-40"><a href="#cb10-40" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb10-41"><a href="#cb10-41" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Median Age categorization</span></span>
+<span id="cb10-42"><a href="#cb10-42" aria-hidden="true" tabindex="-1"></a>    <span class="at">Median_Age_cat =</span> <span class="fu">case_when</span>(</span>
+<span id="cb10-43"><a href="#cb10-43" aria-hidden="true" tabindex="-1"></a>      <span class="st">`</span><span class="at">Median Age</span><span class="st">`</span> <span class="sc">&lt;=</span> <span class="fu">quantile</span>(<span class="st">`</span><span class="at">Median Age</span><span class="st">`</span>, <span class="fl">0.33</span>) <span class="sc">~</span> <span class="dv">1</span>,</span>
+<span id="cb10-44"><a href="#cb10-44" aria-hidden="true" tabindex="-1"></a>      <span class="st">`</span><span class="at">Median Age</span><span class="st">`</span> <span class="sc">&lt;=</span> <span class="fu">quantile</span>(<span class="st">`</span><span class="at">Median Age</span><span class="st">`</span>, <span class="fl">0.66</span>) <span class="sc">~</span> <span class="dv">2</span>,</span>
+<span id="cb10-45"><a href="#cb10-45" aria-hidden="true" tabindex="-1"></a>      <span class="cn">TRUE</span> <span class="sc">~</span> <span class="dv">3</span></span>
+<span id="cb10-46"><a href="#cb10-46" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb10-47"><a href="#cb10-47" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb10-48"><a href="#cb10-48" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-49"><a href="#cb10-49" aria-hidden="true" tabindex="-1"></a><span class="co"># Check frequency distribution of categorical variables</span></span>
+<span id="cb10-50"><a href="#cb10-50" aria-hidden="true" tabindex="-1"></a>lca_vars <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"Size_cat"</span>, <span class="st">"Floor_cat"</span>, <span class="st">"Green_Index_cat"</span>, <span class="st">"Subway_Dist_cat"</span>, </span>
+<span id="cb10-51"><a href="#cb10-51" aria-hidden="true" tabindex="-1"></a>              <span class="st">"Pop_Density_cat"</span>, <span class="st">"Median_Age_cat"</span>)</span>
+<span id="cb10-52"><a href="#cb10-52" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-53"><a href="#cb10-53" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span>(var <span class="cf">in</span> lca_vars) {</span>
+<span id="cb10-54"><a href="#cb10-54" aria-hidden="true" tabindex="-1"></a>  <span class="fu">cat</span>(<span class="st">"</span><span class="sc">\n</span><span class="st">Frequency table for"</span>, var, <span class="st">":</span><span class="sc">\n</span><span class="st">"</span>)</span>
+<span id="cb10-55"><a href="#cb10-55" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span>(<span class="fu">table</span>(Property_data_lca[[var]]))</span>
+<span id="cb10-56"><a href="#cb10-56" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Frequency table for Size_cat :
+
+    1     2     3 
+17374 17609 17661 
+
+Frequency table for Floor_cat :
+
+    1     2     3 
+13004 13234 26406 
+
+Frequency table for Green_Index_cat :
+
+    1     2     3 
+17374 17404 17866 
+
+Frequency table for Subway_Dist_cat :
+
+    1     2     3 
+17384 17395 17865 
+
+Frequency table for Pop_Density_cat :
+
+    1     2     3 
+17521 17271 17852 
+
+Frequency table for Median_Age_cat :
+
+    1     2     3 
+17670 18504 16470 </code></pre>
+</div>
+</div>
+<p>Step 3: LCA Model Fitting and Evaluation</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Create formula</span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>f <span class="ot">&lt;-</span> <span class="fu">cbind</span>(Size_cat, Floor_cat, Green_Index_cat, Subway_Dist_cat, </span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>           Pop_Density_cat, Median_Age_cat) <span class="sc">~</span> <span class="dv">1</span></span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Set range of classes from 3 to 8</span></span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>min_classes <span class="ot">&lt;-</span> <span class="dv">3</span></span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a>max_classes <span class="ot">&lt;-</span> <span class="dv">8</span></span>
+<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Store model results</span></span>
+<span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a>lca_results <span class="ot">&lt;-</span> <span class="fu">list</span>()</span>
+<span id="cb12-11"><a href="#cb12-11" aria-hidden="true" tabindex="-1"></a>lca_stats <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">n_classes =</span> min_classes<span class="sc">:</span>max_classes)</span>
+<span id="cb12-12"><a href="#cb12-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-13"><a href="#cb12-13" aria-hidden="true" tabindex="-1"></a><span class="co"># Entropy calculation function</span></span>
+<span id="cb12-14"><a href="#cb12-14" aria-hidden="true" tabindex="-1"></a>entropy <span class="ot">&lt;-</span> <span class="cf">function</span>(posterior) {</span>
+<span id="cb12-15"><a href="#cb12-15" aria-hidden="true" tabindex="-1"></a>  entropy <span class="ot">&lt;-</span> <span class="sc">-</span><span class="fu">rowSums</span>(posterior <span class="sc">*</span> <span class="fu">log</span>(posterior), <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb12-16"><a href="#cb12-16" aria-hidden="true" tabindex="-1"></a>  max_entropy <span class="ot">&lt;-</span> <span class="sc">-</span><span class="fu">log</span>(<span class="dv">1</span><span class="sc">/</span><span class="fu">ncol</span>(posterior))</span>
+<span id="cb12-17"><a href="#cb12-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(<span class="dv">1</span> <span class="sc">-</span> <span class="fu">mean</span>(entropy) <span class="sc">/</span> max_entropy)</span>
+<span id="cb12-18"><a href="#cb12-18" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb12-19"><a href="#cb12-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-20"><a href="#cb12-20" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">123</span>)  <span class="co"># For reproducibility</span></span>
+<span id="cb12-21"><a href="#cb12-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-22"><a href="#cb12-22" aria-hidden="true" tabindex="-1"></a><span class="co"># Previous BIC value for early stopping</span></span>
+<span id="cb12-23"><a href="#cb12-23" aria-hidden="true" tabindex="-1"></a>prev_bic <span class="ot">&lt;-</span> <span class="cn">Inf</span></span>
+<span id="cb12-24"><a href="#cb12-24" aria-hidden="true" tabindex="-1"></a>consecutive_increases <span class="ot">&lt;-</span> <span class="dv">0</span></span>
+<span id="cb12-25"><a href="#cb12-25" aria-hidden="true" tabindex="-1"></a>max_consecutive_increases <span class="ot">&lt;-</span> <span class="dv">2</span>  <span class="co"># Stop after 2 consecutive BIC increases</span></span>
+<span id="cb12-26"><a href="#cb12-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-27"><a href="#cb12-27" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> min_classes<span class="sc">:</span>max_classes) {</span>
+<span id="cb12-28"><a href="#cb12-28" aria-hidden="true" tabindex="-1"></a>  <span class="fu">cat</span>(<span class="st">"</span><span class="sc">\n</span><span class="st">Fitting model with"</span>, i, <span class="st">"classes...</span><span class="sc">\n</span><span class="st">"</span>)</span>
+<span id="cb12-29"><a href="#cb12-29" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb12-30"><a href="#cb12-30" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Optimize for speed</span></span>
+<span id="cb12-31"><a href="#cb12-31" aria-hidden="true" tabindex="-1"></a>  lca_results[[i]] <span class="ot">&lt;-</span> <span class="fu">poLCA</span>(f, Property_data_lca, <span class="at">nclass =</span> i, </span>
+<span id="cb12-32"><a href="#cb12-32" aria-hidden="true" tabindex="-1"></a>                           <span class="at">maxiter =</span> <span class="dv">1000</span>, <span class="at">nrep =</span> <span class="dv">10</span>)</span>
+<span id="cb12-33"><a href="#cb12-33" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb12-34"><a href="#cb12-34" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Store fit statistics</span></span>
+<span id="cb12-35"><a href="#cb12-35" aria-hidden="true" tabindex="-1"></a>  idx <span class="ot">&lt;-</span> i <span class="sc">-</span> min_classes <span class="sc">+</span> <span class="dv">1</span></span>
+<span id="cb12-36"><a href="#cb12-36" aria-hidden="true" tabindex="-1"></a>  lca_stats<span class="sc">$</span>logLik[idx] <span class="ot">&lt;-</span> lca_results[[i]]<span class="sc">$</span>llik</span>
+<span id="cb12-37"><a href="#cb12-37" aria-hidden="true" tabindex="-1"></a>  lca_stats<span class="sc">$</span>BIC[idx] <span class="ot">&lt;-</span> lca_results[[i]]<span class="sc">$</span>bic</span>
+<span id="cb12-38"><a href="#cb12-38" aria-hidden="true" tabindex="-1"></a>  lca_stats<span class="sc">$</span>AIC[idx] <span class="ot">&lt;-</span> lca_results[[i]]<span class="sc">$</span>aic</span>
+<span id="cb12-39"><a href="#cb12-39" aria-hidden="true" tabindex="-1"></a>  lca_stats<span class="sc">$</span>df[idx] <span class="ot">&lt;-</span> lca_results[[i]]<span class="sc">$</span>resid.df</span>
+<span id="cb12-40"><a href="#cb12-40" aria-hidden="true" tabindex="-1"></a>  lca_stats<span class="sc">$</span>Entropy[idx] <span class="ot">&lt;-</span> <span class="fu">entropy</span>(lca_results[[i]]<span class="sc">$</span>posterior)</span>
+<span id="cb12-41"><a href="#cb12-41" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb12-42"><a href="#cb12-42" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Print summary information</span></span>
+<span id="cb12-43"><a href="#cb12-43" aria-hidden="true" tabindex="-1"></a>  <span class="fu">cat</span>(<span class="st">"Log-likelihood:"</span>, lca_results[[i]]<span class="sc">$</span>llik, <span class="st">"</span><span class="sc">\n</span><span class="st">"</span>)</span>
+<span id="cb12-44"><a href="#cb12-44" aria-hidden="true" tabindex="-1"></a>  <span class="fu">cat</span>(<span class="st">"BIC:"</span>, lca_results[[i]]<span class="sc">$</span>bic, <span class="st">"</span><span class="sc">\n</span><span class="st">"</span>)</span>
+<span id="cb12-45"><a href="#cb12-45" aria-hidden="true" tabindex="-1"></a>  <span class="fu">cat</span>(<span class="st">"AIC:"</span>, lca_results[[i]]<span class="sc">$</span>aic, <span class="st">"</span><span class="sc">\n</span><span class="st">"</span>)</span>
+<span id="cb12-46"><a href="#cb12-46" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb12-47"><a href="#cb12-47" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Early stopping check</span></span>
+<span id="cb12-48"><a href="#cb12-48" aria-hidden="true" tabindex="-1"></a>  current_bic <span class="ot">&lt;-</span> lca_results[[i]]<span class="sc">$</span>bic</span>
+<span id="cb12-49"><a href="#cb12-49" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (current_bic <span class="sc">&gt;</span> prev_bic) {</span>
+<span id="cb12-50"><a href="#cb12-50" aria-hidden="true" tabindex="-1"></a>    consecutive_increases <span class="ot">&lt;-</span> consecutive_increases <span class="sc">+</span> <span class="dv">1</span></span>
+<span id="cb12-51"><a href="#cb12-51" aria-hidden="true" tabindex="-1"></a>    <span class="fu">cat</span>(<span class="st">"BIC increased. Consecutive increases:"</span>, consecutive_increases, <span class="st">"</span><span class="sc">\n</span><span class="st">"</span>)</span>
+<span id="cb12-52"><a href="#cb12-52" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb12-53"><a href="#cb12-53" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> (consecutive_increases <span class="sc">&gt;=</span> max_consecutive_increases) {</span>
+<span id="cb12-54"><a href="#cb12-54" aria-hidden="true" tabindex="-1"></a>      <span class="fu">cat</span>(<span class="st">"</span><span class="sc">\n</span><span class="st">Early stopping triggered after"</span>, consecutive_increases, </span>
+<span id="cb12-55"><a href="#cb12-55" aria-hidden="true" tabindex="-1"></a>          <span class="st">"consecutive BIC increases. Optimal classes may be"</span>, i <span class="sc">-</span> consecutive_increases, <span class="st">"</span><span class="sc">\n</span><span class="st">"</span>)</span>
+<span id="cb12-56"><a href="#cb12-56" aria-hidden="true" tabindex="-1"></a>      <span class="cf">break</span></span>
+<span id="cb12-57"><a href="#cb12-57" aria-hidden="true" tabindex="-1"></a>    }</span>
+<span id="cb12-58"><a href="#cb12-58" aria-hidden="true" tabindex="-1"></a>  } <span class="cf">else</span> {</span>
+<span id="cb12-59"><a href="#cb12-59" aria-hidden="true" tabindex="-1"></a>    consecutive_increases <span class="ot">&lt;-</span> <span class="dv">0</span></span>
+<span id="cb12-60"><a href="#cb12-60" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb12-61"><a href="#cb12-61" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb12-62"><a href="#cb12-62" aria-hidden="true" tabindex="-1"></a>  prev_bic <span class="ot">&lt;-</span> current_bic</span>
+<span id="cb12-63"><a href="#cb12-63" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb12-64"><a href="#cb12-64" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-65"><a href="#cb12-65" aria-hidden="true" tabindex="-1"></a><span class="co"># Handle the case where we stopped early</span></span>
+<span id="cb12-66"><a href="#cb12-66" aria-hidden="true" tabindex="-1"></a>actual_max <span class="ot">&lt;-</span> <span class="cf">if</span>(<span class="fu">exists</span>(<span class="st">"i"</span>)) <span class="fu">min</span>(i, max_classes) <span class="cf">else</span> max_classes</span>
+<span id="cb12-67"><a href="#cb12-67" aria-hidden="true" tabindex="-1"></a>lca_stats <span class="ot">&lt;-</span> lca_stats[<span class="dv">1</span><span class="sc">:</span>(actual_max <span class="sc">-</span> min_classes <span class="sc">+</span> <span class="dv">1</span>), ]</span>
+<span id="cb12-68"><a href="#cb12-68" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-69"><a href="#cb12-69" aria-hidden="true" tabindex="-1"></a><span class="co"># Select best model based on BIC</span></span>
+<span id="cb12-70"><a href="#cb12-70" aria-hidden="true" tabindex="-1"></a>best_model_idx <span class="ot">&lt;-</span> <span class="fu">which.min</span>(lca_stats<span class="sc">$</span>BIC) <span class="sc">+</span> min_classes <span class="sc">-</span> <span class="dv">1</span></span>
+<span id="cb12-71"><a href="#cb12-71" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"</span><span class="sc">\n</span><span class="st">Best model based on BIC has"</span>, best_model_idx, <span class="st">"classes.</span><span class="sc">\n</span><span class="st">"</span>)</span>
+<span id="cb12-72"><a href="#cb12-72" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-73"><a href="#cb12-73" aria-hidden="true" tabindex="-1"></a><span class="co"># Visualize model comparison</span></span>
+<span id="cb12-74"><a href="#cb12-74" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(lca_stats, <span class="fu">aes</span>(<span class="at">x =</span> n_classes)) <span class="sc">+</span></span>
+<span id="cb12-75"><a href="#cb12-75" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">y =</span> BIC, <span class="at">color =</span> <span class="st">"BIC"</span>)) <span class="sc">+</span></span>
+<span id="cb12-76"><a href="#cb12-76" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">y =</span> BIC, <span class="at">color =</span> <span class="st">"BIC"</span>)) <span class="sc">+</span></span>
+<span id="cb12-77"><a href="#cb12-77" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">y =</span> AIC, <span class="at">color =</span> <span class="st">"AIC"</span>)) <span class="sc">+</span></span>
+<span id="cb12-78"><a href="#cb12-78" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">y =</span> AIC, <span class="at">color =</span> <span class="st">"AIC"</span>)) <span class="sc">+</span></span>
+<span id="cb12-79"><a href="#cb12-79" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"LCA Model Comparison"</span>, </span>
+<span id="cb12-80"><a href="#cb12-80" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">"Number of Classes"</span>, </span>
+<span id="cb12-81"><a href="#cb12-81" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">"Information Criteria"</span>) <span class="sc">+</span></span>
+<span id="cb12-82"><a href="#cb12-82" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co"># After finding best model</span></span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>best_model <span class="ot">&lt;-</span> lca_results[[best_model_idx]]</span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a><span class="co"># 1. Save the entire model object</span></span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a><span class="fu">saveRDS</span>(best_model, <span class="st">"best_lca_model.rds"</span>)</span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a><span class="co"># 2. You might also want to save the class assignments for easier access</span></span>
+<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a>class_assignments <span class="ot">&lt;-</span> <span class="fu">apply</span>(best_model<span class="sc">$</span>posterior, <span class="dv">1</span>, which.max)</span>
+<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a><span class="fu">write.csv</span>(<span class="fu">data.frame</span>(<span class="at">id =</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">length</span>(class_assignments), </span>
+<span id="cb13-10"><a href="#cb13-10" aria-hidden="true" tabindex="-1"></a>                    <span class="at">class =</span> class_assignments), </span>
+<span id="cb13-11"><a href="#cb13-11" aria-hidden="true" tabindex="-1"></a>         <span class="st">"lca_class_assignments.csv"</span>, <span class="at">row.names =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb13-12"><a href="#cb13-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-13"><a href="#cb13-13" aria-hidden="true" tabindex="-1"></a><span class="co"># 3. Save the model comparison statistics</span></span>
+<span id="cb13-14"><a href="#cb13-14" aria-hidden="true" tabindex="-1"></a><span class="fu">write.csv</span>(lca_stats, <span class="st">"lca_model_stats.csv"</span>, <span class="at">row.names =</span> <span class="cn">FALSE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="latent-class-analysis-lca-results-summary" class="level3">
+<h3 class="anchored" data-anchor-id="latent-class-analysis-lca-results-summary">Latent Class Analysis (LCA) Results Summary</h3>
+<section id="model-comparison" class="level4">
+<h4 class="anchored" data-anchor-id="model-comparison">Model Comparison</h4>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 25%">
+<col style="width: 21%">
+<col style="width: 6%">
+<col style="width: 6%">
+<col style="width: 6%">
+<col style="width: 6%">
+<col style="width: 27%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Number of Classes</th>
+<th>Log-likelihood</th>
+<th>BIC</th>
+<th>AIC</th>
+<th>G²</th>
+<th>X²</th>
+<th>Number of Parameters</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>3 classes</td>
+<td>-342045.2</td>
+<td>684503.5</td>
+<td>684166.4</td>
+<td>8510.915</td>
+<td>8480.657</td>
+<td>38</td>
+</tr>
+<tr class="even">
+<td>4 classes</td>
+<td>-341613.0</td>
+<td>683780.4</td>
+<td>683327.9</td>
+<td>7646.455</td>
+<td>7608.341</td>
+<td>51</td>
+</tr>
+<tr class="odd">
+<td>5 classes</td>
+<td>-341273.3</td>
+<td>683242.4</td>
+<td>682674.6</td>
+<td>6967.175</td>
+<td>6990.710</td>
+<td>64</td>
+</tr>
+<tr class="even">
+<td>6 classes</td>
+<td>-340902.5</td>
+<td>682642.2</td>
+<td>681959.1</td>
+<td>6225.598</td>
+<td>6076.490</td>
+<td>77</td>
+</tr>
+<tr class="odd">
+<td>7 classes</td>
+<td>-340525.0</td>
+<td>682028.5</td>
+<td>681230.1</td>
+<td>5470.593</td>
+<td>5492.197</td>
+<td>90</td>
+</tr>
+<tr class="even">
+<td>8 classes</td>
+<td>-340291.7</td>
+<td>Not shown</td>
+<td>Not shown</td>
+<td>Not shown</td>
+<td>Not shown</td>
+<td>Not shown</td>
+</tr>
+</tbody>
+</table>
+<p>Note: All models display the warning “MAXIMUM LIKELIHOOD NOT FOUND”.</p>
+</section>
+<section id="class-population-distribution" class="level4">
+<h4 class="anchored" data-anchor-id="class-population-distribution">Class Population Distribution</h4>
+<section id="class-model" class="level5">
+<h5 class="anchored" data-anchor-id="class-model">3-Class Model</h5>
+<ul>
+<li>Class 1: 12.24%</li>
+<li>Class 2: 10.31%</li>
+<li>Class 3: 77.45%</li>
+</ul>
+</section>
+<section id="class-model-1" class="level5">
+<h5 class="anchored" data-anchor-id="class-model-1">4-Class Model</h5>
+<ul>
+<li>Class 1: 52.34%</li>
+<li>Class 2: 28.95%</li>
+<li>Class 3: 8.51%</li>
+<li>Class 4: 10.20%</li>
+</ul>
+</section>
+<section id="class-model-2" class="level5">
+<h5 class="anchored" data-anchor-id="class-model-2">5-Class Model</h5>
+<ul>
+<li>Class 1: 9.79%</li>
+<li>Class 2: 25.23%</li>
+<li>Class 3: 11.51%</li>
+<li>Class 4: 7.32%</li>
+<li>Class 5: 46.15%</li>
+</ul>
+</section>
+<section id="class-model-3" class="level5">
+<h5 class="anchored" data-anchor-id="class-model-3">6-Class Model</h5>
+<ul>
+<li>Class 1: 11.63%</li>
+<li>Class 2: 34.04%</li>
+<li>Class 3: 7.00%</li>
+<li>Class 4: 11.14%</li>
+<li>Class 5: 21.20%</li>
+<li>Class 6: 15.00%</li>
+</ul>
+</section>
+<section id="class-model-4" class="level5">
+<h5 class="anchored" data-anchor-id="class-model-4">7-Class Model</h5>
+<ul>
+<li>Class 1: 9.62%</li>
+<li>Class 2: 40.87%</li>
+<li>Class 3: 12.53%</li>
+<li>Class 4: 9.13%</li>
+<li>Class 5: 7.89%</li>
+<li>Class 6: 13.21%</li>
+<li>Class 7: 6.77%</li>
+</ul>
+</section>
+</section>
+<section id="key-variables-in-the-analysis" class="level4">
+<h4 class="anchored" data-anchor-id="key-variables-in-the-analysis">Key Variables in the Analysis</h4>
+<p>The LCA examined the following categorical variables: - Size_cat - Floor_cat - Green_Index_cat - Subway_Dist_cat - Pop_Density_cat - Median_Age_cat</p>
+<p>Each variable was divided into three categories (Pr(1), Pr(2), Pr(3)), and the conditional probabilities for these categories across different latent classes were calculated.</p>
+</section>
+<section id="model-selection-insights" class="level4">
+<h4 class="anchored" data-anchor-id="model-selection-insights">Model Selection Insights</h4>
+<p>The model fit improves (lower BIC and AIC values) as the number of classes increases. The 7-class model shows the best fit among the fully reported models, with: - Log-likelihood: -340525.0 - BIC: 682028.5 - AIC: 681230.1</p>
+<p>However, all models show the warning “MAXIMUM LIKELIHOOD NOT FOUND,” which suggests potential convergence issues in the estimation process.</p>
+</section>
+</section>
+</section>
+<section id="parameters-and-outputs-determination" class="level2">
+<h2 class="anchored" data-anchor-id="parameters-and-outputs-determination">4. Parameters and Outputs Determination</h2>
+</section>
+<section id="variables-selection-for-latent-class-analysis" class="level1">
+<h1>Variables Selection for Latent Class Analysis</h1>
+<section id="primary-variables" class="level2">
+<h2 class="anchored" data-anchor-id="primary-variables">Primary Variables</h2>
+<p>For the latent class analysis model, six categorical variables were selected based on their statistical properties and relevance to property market segmentation:</p>
+<ol type="1">
+<li><p><strong>Size_cat</strong>: Property size categories derived from the continuous variable “Size” (ranging from 12.49 to 269.68 square meters). The discretization created balanced categories with 17,374, 17,609, and 17,661 observations across the three groups, providing sufficient data for robust class identification.</p></li>
+<li><p><strong>Floor_cat</strong>: Floor level categories divided into low (≤5), medium (≤10), and high (&gt;10) floors, resulting in 13,004, 13,234, and 26,406 observations respectively. Though slightly imbalanced toward higher floors, this categorization reflects the actual distribution within the dataset.</p></li>
+<li><p><strong>Green_Index_cat</strong>: Environmental quality measure (original range: 4.163 to 18.927) categorized into three balanced groups containing 17,374, 17,404, and 17,866 observations, ensuring stable parameter estimation.</p></li>
+<li><p><strong>Subway_Dist_cat</strong>: Distance to nearest subway station (original range: 3.366 to 9.978) transformed into three approximately equal categories with 17,384, 17,395, and 17,865 observations, providing consistent measurement of accessibility.</p></li>
+<li><p><strong>Pop_Density_cat</strong>: Population density (original range: 1 to 118,182) discretized into three categories with 17,521, 17,271, and 17,852 observations, offering balanced representation of neighborhood density characteristics.</p></li>
+<li><p><strong>Median_Age_cat</strong>: Demographic indicator (original range: 32.7 to 55.4) categorized into three groups with 17,670, 18,504, and 16,470 observations, maintaining sufficient data for reliable parameter estimation.</p></li>
+</ol>
+<p>These variables were retained in the final model as evidenced by their inclusion in the LCA formula:</p>
+<pre><code>f &lt;- cbind(Size_cat, Floor_cat, Green_Index_cat, Subway_Dist_cat, Pop_Density_cat, Median_Age_cat) ~ 1</code></pre>
+<section id="model-selection-criteria" class="level3">
+<h3 class="anchored" data-anchor-id="model-selection-criteria">Model Selection Criteria</h3>
+<p>To determine the optimal number of latent classes, multiple evaluation criteria were employed:</p>
+<ol type="1">
+<li><p><strong>Bayesian Information Criterion (BIC)</strong>: This was established as the primary selection criterion due to its balanced approach to model fit and complexity. BIC imposes a stronger penalty for model complexity compared to AIC, helping to avoid overfitting. In the analysis, BIC values were calculated for models with different class numbers, ranging from 684,503.5 for the 3-class model to 682,028.5 for the 7-class model, with lower values indicating better model fit adjusted for complexity.</p></li>
+<li><p><strong>Akaike Information Criterion (AIC)</strong>: Used as a secondary criterion, AIC applies a less severe penalty for model complexity. AIC values ranged from 684,166.4 for the 3-class model to 681,230.1 for the 7-class model. The consistent trend in both BIC and AIC provided confidence in model selection decisions.</p></li>
+<li><p><strong>Entropy</strong>: This measure was used to assess classification quality and certainty. Higher entropy values indicate clearer distinction between classes and more certain classification of observations. An entropy calculation function was implemented to evaluate how well the model separates observations into distinct classes.</p></li>
+<li><p><strong>Interpretability</strong>: Beyond statistical measures, the substantive interpretability of resulting classes was considered. Classes that represented meaningful and distinct property market segments were valued over purely statistical improvements.</p></li>
+</ol>
+</section>
+<section id="class-number-determination-process" class="level3">
+<h3 class="anchored" data-anchor-id="class-number-determination-process">Class Number Determination Process</h3>
+<p>A systematic and comprehensive approach was adopted to determine the optimal number of latent classes:</p>
+<ol type="1">
+<li><p>Models with 3 to 8 latent classes were tested sequentially. This range was chosen based on prior research suggesting that fewer than 3 classes would be insufficient to capture market complexity, while more than 8 would likely result in classes too small for meaningful interpretation.</p></li>
+<li><p>For each potential class number, 10 random starts were employed to avoid local maxima in the likelihood function. This approach increases confidence that the global maximum likelihood solution was found for each model specification.</p></li>
+<li><p>An early stopping mechanism was implemented to terminate testing when BIC increased consecutively across two class solutions. This approach follows the principle that when BIC begins to increase consistently, additional classes are likely overfitting the data.</p></li>
+<li><p>Log-likelihood, BIC, and AIC values were carefully tracked across all model iterations to monitor convergence and model fit improvement.</p></li>
+<li><p>The pattern of BIC and AIC decreases was analyzed, with attention to the point where diminishing returns in model fit improvement occurred with increasing class numbers.</p></li>
+</ol>
+<p>Based on this process, the optimal model was determined to be the 6-class solution, which showed substantial improvement in BIC (682,642.2) compared to simpler models while maintaining interpretable and meaningful class structures. While the 7-class model showed a slightly lower BIC (682,028.5), the improvement was marginal and came at the cost of less distinct and less interpretable classes.</p>
+</section>
+<section id="computational-efficiency-considerations" class="level3">
+<h3 class="anchored" data-anchor-id="computational-efficiency-considerations">Computational Efficiency Considerations</h3>
+<p>Several strategies were implemented to enhance computational efficiency while maintaining model quality:</p>
+<ol type="1">
+<li><p>Maximum iterations for each model were set to 1,000, striking a balance between ensuring convergence and limiting excessive computation time. This parameter was determined after observing that most models converged well within this limit.</p></li>
+<li><p>Ten random starts were used for each class number to balance between finding the global maximum likelihood and computational time. This number proved sufficient to consistently find the same maximum likelihood solution across multiple runs.</p></li>
+<li><p>The early stopping mechanism based on consecutive BIC increases significantly reduced computation time by avoiding unnecessary exploration of models with poorer fit.</p></li>
+<li><p>A random seed was set to ensure reproducibility while maintaining computational efficiency, allowing for consistent results across repeated analyses.</p></li>
+<li><p>For models with larger numbers of classes, careful monitoring of log-likelihood, BIC, and AIC values across iterations verified proper convergence and solution stability.</p></li>
+</ol>
+<p>These efficiency considerations allowed for thorough exploration of the model space while ensuring practical computation times, enabling the identification of an optimal latent class solution that effectively captures distinct property market segments.</p>
+</section>
+</section>
+<section id="ui-component-selection-for-shiny-application" class="level2">
+<h2 class="anchored" data-anchor-id="ui-component-selection-for-shiny-application">5. UI Component Selection for Shiny Application</h2>
+<section id="model-configuration-components-for-clustering" class="level3">
+<h3 class="anchored" data-anchor-id="model-configuration-components-for-clustering">Model Configuration Components for Clustering</h3>
+<p>For the Shiny application’s clustering functionality using Latent Class Analysis, the following UI components were selected:</p>
+<ul>
+<li><p><strong>Number of Clusters Slider</strong>: A simple slider input allowing users to select the desired number of latent classes (3-8). This provides intuitive control while limiting the range to computationally feasible values.</p></li>
+<li><p><strong>Variable Selection Checkboxes</strong>: A set of checkboxes for the six categorical variables (Size_cat, Floor_cat, Green_Index_cat, Subway_Dist_cat, Pop_Density_cat, Median_Age_cat). This allows users to customize which property characteristics to include in their clustering analysis.</p></li>
+<li><p><strong>Run Analysis Button</strong>: A prominent action button that triggers the LCA computation with pre-configured computational parameters (iterations and random starts) set to reasonable defaults behind the scenes.</p></li>
+</ul>
+</section>
+<section id="results-visualization-components" class="level3">
+<h3 class="anchored" data-anchor-id="results-visualization-components">Results Visualization Components</h3>
+<p>The visualization components focus on clear communication of clustering results:</p>
+<ul>
+<li><p><strong>Model Comparison Plot</strong>: A simple line chart showing BIC values across different numbers of classes, helping users visually identify the optimal number of clusters where the line begins to flatten.</p></li>
+<li><p><strong>Cluster Profile Charts</strong>: Bar charts displaying the defining characteristics of each cluster, using color-coding to differentiate between property segments for easy visual comparison.</p></li>
+<li><p><strong>Cluster Summary Table</strong>: A formatted table showing the size of each cluster and its key distinguishing features, giving users a quick overview of the market segmentation.</p></li>
+</ul>
+</section>
+<section id="user-interaction-design-rationale" class="level3">
+<h3 class="anchored" data-anchor-id="user-interaction-design-rationale">User Interaction Design Rationale</h3>
+<p>The interface design prioritizes simplicity and guided analysis:</p>
+<ul>
+<li><p><strong>Tab-based Organization</strong>: Separate tabs for data upload, cluster analysis, and results interpretation create a natural workflow for users to follow.</p></li>
+<li><p><strong>Simplified Controls</strong>: Technical parameters like maximum iterations and convergence thresholds are preset to optimal values rather than exposed as user controls, reducing complexity.</p></li>
+<li><p><strong>Interpretive Guidance</strong>: Brief explanatory text alongside visualizations helps users understand what the clustering results mean in practical terms.</p></li>
+</ul>
+</section>
+</section>
+<section id="results-and-discussion" class="level2">
+<h2 class="anchored" data-anchor-id="results-and-discussion">6. Results and Discussion</h2>
+<section id="cluster-comparison-analysis" class="level3">
+<h3 class="anchored" data-anchor-id="cluster-comparison-analysis">Cluster Comparison Analysis</h3>
+<p>The LCA clustering explored models with 3 to 8 clusters, with the following key findings:</p>
+<ul>
+<li><p><strong>BIC Comparison</strong>: BIC values decreased from 684,503.5 (3-cluster model) to 682,028.5 (7-cluster model), with the rate of improvement slowing after 6 clusters.</p></li>
+<li><p><strong>Optimal Cluster Solution</strong>: The 6-cluster solution (BIC: 682,642.2) provided the best balance between statistical fit and practical interpretability, with clearly differentiated property segments.</p></li>
+<li><p><strong>Cluster Proportions</strong>: The 6-cluster solution identified one large segment (34.04% of properties), four medium-sized segments (ranging from 11.14% to 21.20%), and one smaller niche segment (7.00%).</p></li>
+</ul>
+</section>
+<section id="cluster-profiles" class="level3">
+<h3 class="anchored" data-anchor-id="cluster-profiles">Cluster Profiles</h3>
+<p>The 6-cluster solution revealed distinct property segments:</p>
+<ul>
+<li><p><strong>Cluster 1 (11.63%)</strong>: Large properties on high floors, representing the premium segment of the market with superior space and vertical positioning.</p></li>
+<li><p><strong>Cluster 2 (34.04%)</strong>: Properties with balanced characteristics across all variables, forming the mainstream market segment that appeals to the broadest range of buyers.</p></li>
+<li><p><strong>Cluster 3 (7.00%)</strong>: Medium-sized properties with high environmental quality in dense areas, creating a specialized urban-environmental niche.</p></li>
+<li><p><strong>Cluster 4 (11.14%)</strong>: Medium to large properties with poor subway accessibility, representing areas where space compensates for location disadvantages.</p></li>
+<li><p><strong>Cluster 5 (21.20%)</strong>: Properties in low-density areas with high environmental quality, forming a substantial “green suburban” market segment.</p></li>
+<li><p><strong>Cluster 6 (15.00%)</strong>: Smaller properties with excellent subway accessibility, representing the urban convenience segment where location advantages offset size limitations.</p></li>
+</ul>
+</section>
+<section id="market-segmentation-applications" class="level3">
+<h3 class="anchored" data-anchor-id="market-segmentation-applications">Market Segmentation Applications</h3>
+<p>The clustering results provide practical insights for property market analysis:</p>
+<ul>
+<li><p>The identified clusters offer a data-driven framework for property classification that goes beyond simple price tiers.</p></li>
+<li><p>The results reveal important trade-offs defining different market segments: size vs.&nbsp;location, environmental quality vs.&nbsp;density, and floor level vs.&nbsp;accessibility.</p></li>
+<li><p>The balanced distribution of cluster sizes indicates diverse market niches beyond the mainstream segment, suggesting opportunities for specialized development.</p></li>
+</ul>
+</section>
+</section>
+<section id="conclusion" class="level2">
+<h2 class="anchored" data-anchor-id="conclusion">7. Conclusion</h2>
+<section id="key-findings" class="level3">
+<h3 class="anchored" data-anchor-id="key-findings">Key Findings</h3>
+<p>The LCA clustering successfully identified six distinct property market segments, each with unique characteristic combinations:</p>
+<ol type="1">
+<li>Premium large, high-floor properties</li>
+<li>Mainstream balanced-attribute properties</li>
+<li>Urban-environmental properties combining density with green amenities</li>
+<li>Spacious but less accessible properties</li>
+<li>Green suburban properties with environmental quality and low density</li>
+<li>Urban convenience properties with excellent accessibility but limited size</li>
+</ol>
+</section>
+<section id="applications" class="level3">
+<h3 class="anchored" data-anchor-id="applications">Applications</h3>
+<p>The clustering results provide practical applications for property market analysis:</p>
+<ul>
+<li>Development planning guidance by identifying underserved market segments</li>
+<li>Improved targeting of marketing messages to specific property buyer segments</li>
+<li>Better understanding of value drivers across different property types</li>
+</ul>
+</section>
+<section id="limitations-and-future-directions" class="level3">
+<h3 class="anchored" data-anchor-id="limitations-and-future-directions">Limitations and Future Directions</h3>
+<p>Some limitations of the current analysis include:</p>
+<ul>
+<li>The discretization of variables into three categories may have simplified some distinctions</li>
+<li>The exclusion of variables like construction year and socioeconomic indicators</li>
+</ul>
+<p>Future work could enhance the analysis by: - Incorporating additional relevant variables - Applying the clustering approach to different geographical areas - Extending the analysis to include price data to quantify segment premiums</p>
+<p>This structure focuses specifically on the LCA component of your analysis, highlighting the technical implementation aspects while maintaining emphasis on interpretation and practical implications of the results.</p>
+<p>Lastly, save data into rds format.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">saveRDS</span>(Property_data_lca, <span class="st">"data/Property_data_lca.rds"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fu">saveRDS</span>(Property_data, <span class="st">"data/Property_data.rds"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+
+
+</section>
+</section>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const onCopySuccess = function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  }
+  const getTextToCopy = function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+    text: getTextToCopy
+  });
+  clipboard.on('success', onCopySuccess);
+  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+      text: getTextToCopy,
+      container: window.document.getElementById('quarto-embedded-source-code-modal')
+    });
+    clipboardModal.on('success', onCopySuccess);
+  }
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp('/' + window.location.host + '/');
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+    const config = {
+      allowHTML: true,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start',
+    };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>

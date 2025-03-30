@@ -46,6 +46,8 @@ website:
             href: Hands-on_Ex/Hands-on_Ex08c.html
           - text: "Modelling, Visualising and Analysing Network Data with R"
             href: Hands-on_Ex/Hands-on_Ex09.html
+          - text: "Information Dashboard Design: R methods"
+            href: Hands-on_Ex/Hands-on_Ex10.html
       - text: "In-Class Exercise"
         menu:
           - text: "In-class Exercise 2025-2-8"
@@ -60,8 +62,10 @@ website:
             href: Take-home_Ex/Take-home_Ex1/Take-home_Ex1.html
           - text: "Singapore International Trade Analysis"
             href: Take-home_Ex/Take-home_Ex2/Take-home_Ex2.html
-          - text: "take home 3 try"
-            href: Take-home_Ex/Take-home_Ex3/Take-home_Ex3.html
+          - text: "LCA Model Design"
+            href: Take-home_Ex/Take-home_Ex3/Take-home_Ex3a.html
+          - text: "MLR Model Design"
+            href: Take-home_Ex/Take-home_Ex3/Take-home_Ex3b.html
       - text: "Team Project"
         menu:
           - text: "to be continue"
