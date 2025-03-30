@@ -359,7 +359,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <div>
     <div class="quarto-title-meta-heading">Modified</div>
     <div class="quarto-title-meta-contents">
-      <p class="date-modified">March 30, 2025</p>
+      <p class="date-modified">March 31, 2025</p>
     </div>
   </div>
     
@@ -370,6 +370,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
+<p><img src="images/clipboard-3863587372.png" class="img-fluid"></p>
 <section id="introduction" class="level2">
 <h2 class="anchored" data-anchor-id="introduction">1. Introduction</h2>
 <p>Latent Class Analysis (LCA) offers an effective methodology for segmenting the property market by identifying unobserved subgroups within the data. This approach enables us to discover distinct property types based on multiple categorical variables rather than relying solely on price ranges. The analysis will help understand the different market segments that exist and the key characteristics that define each segment.</p>
@@ -610,13 +611,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h4 class="anchored" data-anchor-id="model-comparison">Model Comparison</h4>
 <table class="caption-top table">
 <colgroup>
-<col style="width: 13%">
-<col style="width: 13%">
-<col style="width: 13%">
-<col style="width: 13%">
-<col style="width: 13%">
-<col style="width: 13%">
-<col style="width: 16%">
+<col style="width: 14%">
+<col style="width: 14%">
+<col style="width: 14%">
+<col style="width: 14%">
+<col style="width: 14%">
+<col style="width: 14%">
+<col style="width: 14%">
 </colgroup>
 <thead>
 <tr class="header">
@@ -822,8 +823,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li><p><strong>Data Sample Size Slider</strong>: A slider allowing users to select the percentage of data to use for analysis, ranging from 10% to 100% with a current selection at 50%. This enables users to perform exploratory analysis on smaller subsets before running the full analysis.</p></li>
 <li><p><strong>Variable Selection Panel</strong>: A panel displaying pre-tested variables (Size_cat, Floor_cat, Green_Index_cat) that provide effective clustering results. The panel includes explanatory text informing users that these variables have been validated through preliminary experiments.</p></li>
 <li><p><strong>Run Cluster Button</strong>: A prominently displayed green button that initiates the clustering process with the selected parameters.</p></li>
+<li><p><img src="images/160237fb2da2e971ef819cd033f758b.png" class="img-fluid"></p></li>
 </ul>
-<p><img src="images/clipboard-2453257816.png" class="img-fluid"></p>
 <div class="cell">
 <details class="code-fold">
 <summary>Code</summary>
@@ -872,20 +873,23 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>The visualization components are organized into tabbed panels for clear presentation:</p>
 <ul>
 <li><strong>Cluster Proportion Tab</strong>: Displays a horizontal bar chart showing the percentage of data in each cluster, with clear labels for each cluster’s proportion (e.g., “Cluster 1: 27.8%”). Below the chart, key model fit statistics are displayed (AIC, BIC, Likelihood Ratio, Silhouette Score) in separate green panels.</li>
+<li><img src="images/d6fc28048ebae50315e82164fe27d3f.png" class="img-fluid"></li>
 </ul>
-<p><img src="images/d6fc28048ebae50315e82164fe27d3f.png" class="img-fluid"></p>
+<!-- -->
 <ul>
 <li><strong>Cluster Characteristics Tab</strong>: Shows a grouped bar chart depicting variable means for each cluster, allowing users to visually compare how different clusters score on key variables like Floor_cat, Green_Index_cat, and Size_cat. Each cluster is represented by a different shade of green.</li>
 </ul>
-<p><img src="images/a2308bd0bf2fca05864041c023b46f4.png" class="img-fluid"></p>
+<!-- -->
 <ul>
+<li><img src="images/a2308bd0bf2fca05864041c023b46f4.png" class="img-fluid"></li>
 <li><strong>Data Explorer Tab</strong>: Provides a tabular view of the raw data with filtering options, allowing users to filter by cluster, search for specific records, and control the number of rows displayed. The table shows detailed property information including prices, coordinates, size, floor, and other attributes.</li>
 </ul>
-<p><img src="images/e84c1fdd979cb5e96ac7dd1693ce6a6.png" class="img-fluid"></p>
+<!-- -->
 <ul>
+<li><img src="images/e84c1fdd979cb5e96ac7dd1693ce6a6.png" class="img-fluid"></li>
 <li><strong>Parallel Coordinates Tab</strong>: Presents a parallel coordinates plot visualizing the relationships between variables across different clusters. Each line represents a property profile, and colors differentiate between clusters, enabling users to understand typical value combinations across each segment.</li>
+<li><img src="images/8286d13fc0dfff1851333025ce2b6ba.png" class="img-fluid"></li>
 </ul>
-<p><img src="images/8286d13fc0dfff1851333025ce2b6ba.png" class="img-fluid"></p>
 <div class="cell">
 <details class="code-fold">
 <summary>Code</summary>
