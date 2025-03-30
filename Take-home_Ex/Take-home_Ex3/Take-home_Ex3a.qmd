@@ -16,6 +16,8 @@ editor:
     wrap: 72
 ---
 
+![](images/clipboard-3863587372.png)
+
 ## 1. Introduction
 
 Latent Class Analysis (LCA) offers an effective methodology for
@@ -322,7 +324,7 @@ write.csv(lca_stats, "lca_model_stats.csv", row.names = FALSE)
 #### Model Comparison
 
 | Number of Classes | Log-likelihood | BIC | AIC | G² | X² | Number of Parameters |
-|----------|----------|----------|----------|----------|----------|------------|
+|-----------|-----------|-----------|-----------|-----------|-----------|-----------|
 | 3 classes | -342045.2 | 684503.5 | 684166.4 | 8510.915 | 8480.657 | 38 |
 | 4 classes | -341613.0 | 683780.4 | 683327.9 | 7646.455 | 7608.341 | 51 |
 | 5 classes | -341273.3 | 683242.4 | 682674.6 | 6967.175 | 6990.710 | 64 |
@@ -570,7 +572,7 @@ for the Shiny application's clustering functionality:
 -   **Run Cluster Button**: A prominently displayed green button that
     initiates the clustering process with the selected parameters.
 
-![](images/clipboard-2453257816.png)
+-   ![](images/160237fb2da2e971ef819cd033f758b.png)
 
 ```{r eval=FALSE}
 #| code-fold: true
@@ -623,8 +625,9 @@ presentation:
     cluster's proportion (e.g., "Cluster 1: 27.8%"). Below the chart,
     key model fit statistics are displayed (AIC, BIC, Likelihood Ratio,
     Silhouette Score) in separate green panels.
+-   ![](images/d6fc28048ebae50315e82164fe27d3f.png)
 
-![](images/d6fc28048ebae50315e82164fe27d3f.png)
+<!-- -->
 
 -   **Cluster Characteristics Tab**: Shows a grouped bar chart depicting
     variable means for each cluster, allowing users to visually compare
@@ -632,23 +635,24 @@ presentation:
     Green_Index_cat, and Size_cat. Each cluster is represented by a
     different shade of green.
 
-![](images/a2308bd0bf2fca05864041c023b46f4.png)
+<!-- -->
 
+-   ![](images/a2308bd0bf2fca05864041c023b46f4.png)
 -   **Data Explorer Tab**: Provides a tabular view of the raw data with
     filtering options, allowing users to filter by cluster, search for
     specific records, and control the number of rows displayed. The
     table shows detailed property information including prices,
     coordinates, size, floor, and other attributes.
 
-![](images/e84c1fdd979cb5e96ac7dd1693ce6a6.png)
+<!-- -->
 
+-   ![](images/e84c1fdd979cb5e96ac7dd1693ce6a6.png)
 -   **Parallel Coordinates Tab**: Presents a parallel coordinates plot
     visualizing the relationships between variables across different
     clusters. Each line represents a property profile, and colors
     differentiate between clusters, enabling users to understand typical
     value combinations across each segment.
-
-![](images/8286d13fc0dfff1851333025ce2b6ba.png)
+-   ![](images/8286d13fc0dfff1851333025ce2b6ba.png)
 
 ```{r eval=FALSE}
 #| code-fold: true

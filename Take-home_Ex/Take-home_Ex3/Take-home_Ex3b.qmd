@@ -10,6 +10,8 @@ execute:
   freeze: true
 ---
 
+![](images/clipboard-3248582391.png)
+
 ## 1. Introduction
 
 This document presents a Multiple Linear Regression (MLR) analysis of property prices, examining various factors that influence real estate values. The analysis aims to identify key determinants of property prices and develop a predictive model.
@@ -199,11 +201,11 @@ for(var in numeric_vars[1:5]) {  # Show first 5 variables as example
 }
 ```
 
-![](images/aee5e2d28b82a12a114d104c628a6c2.png)
+![](images/34f7cc10a5eae65d9dd26d5602c9785.png)
 
 ![](images/deab234c8043d6b65a0fea554e31990.png)
 
-![](images/15931d5562440400372de4f46292fbe.png)
+## ![](images/15931d5562440400372de4f46292fbe.png)
 
 ![](images/331a954da23174d0058da04e279daf8.png)
 
@@ -573,7 +575,7 @@ if(nrow(mc_result$high_correlation_pairs) == 0) {
 }
 ```
 
-![](images/0e175ac3f1deaa77a8f88f6ec3e0f38-01.png)
+![](images/0e175ac3f1deaa77a8f88f6ec3e0f38.png)
 
 ### 6.2 VIF Analysis
 
@@ -628,7 +630,7 @@ if(length(high_vif_vars) > 0) {
 }
 ```
 
-![](images/9ac028dfc208c5438866414599a99b8-01.png)
+### ![](images/9ac028dfc208c5438866414599a99b8.png)
 
 ### 6.3 Outlier Detection
 
@@ -656,7 +658,7 @@ for(var in key_vars) {
 }
 ```
 
-![](images/e2e99ea520c32d17cc8e72a5300ef9c-01.png)
+### ![](images/e2e99ea520c32d17cc8e72a5300ef9c.png)
 
 ### 6.4 Linearity Checks
 
@@ -718,15 +720,7 @@ print(pairs_plot)
 cat("\nMLR pre-check analysis complete!\n")
 ```
 
-![](images/7ce8778167780c0c966ee60d71bcd54.png){width="461" height="249"}
-
-![](images/7e1011efb1d1d3f83cf22bf2d0f82dc.png)
-
-![](images/3bb35e5dfa48b02684bb02c87eb1dda.png)
-
-![](images/ff6282e4485f261ee9570c68d68f8cf.png)
-
-![](images/2aae8a78d65d0180ffc1dc9551fde02.png)
+![](images/clipboard-122698399.png)
 
 ## 7. Final Model Fitting
 
@@ -940,8 +934,6 @@ Based on the provided screenshots, the Shiny Dashboard application has been desi
     -   "Run MLR Analysis" button
     -   "Use Recommended Model" button
 
-![](images/clipboard-2064316447.png)
-
 ### 12.3 Main Panel Tabs
 
 -   **Model Summary**: Displays regression equation, coefficients table, and model fit statistics
@@ -957,17 +949,17 @@ Based on the provided screenshots, the Shiny Dashboard application has been desi
     -   Scale-Location plot for checking homoscedasticity
     -   Residuals histogram
     -   Diagnostic test results for normality and heteroscedasticity
-    -   ![](images/73c27cf105cf36006a36cafd792f3a8.png)
+    -   ![](images/clipboard-1907801116.png)
 2.  **Multicollinearity Tab**:
     -   Correlation matrix heatmap with coefficient values
     -   Variance Inflation Factors bar chart
     -   Table of highly correlated variable pairs
-    -   ![](images/clipboard-1994303880.png)
+    -   ![](images/clipboard-2427009886.png)
 3.  **Variable Importance Tab**:
     -   Bar chart of standardized coefficients
     -   Interpretation panel explaining relative variable importance
     -   Key findings summary
-    -   ![](images/clipboard-404584525.png)
+    -   ![](images/clipboard-3331705758.png)
 4.  **Model Summary Tab**:
     -   Scrollable regression equation
     -   Detailed coefficient table with estimates, standard errors, t-values and p-values
